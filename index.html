@@ -978,10 +978,10 @@ const DATA = {
       start: "20261205T072000", end: "20261206T162000", location: "國立東華大學 壽豐校區",
       show: ["12/5 07:20 臺鐵 408 出發、晚上選手之夜", "12/6 05:30 報到、07:30 全馬起跑", "12/6 13:53 臺鐵 419 返回臺北"],
       details: "第14屆 全國EMBA校園馬拉松接力賽\n\n【12/5（六）】\n07:20 臺鐵 408 臺北→花蓮（09:35 到）\n17:00 選手之夜報到、18:00 開桌（東大門夜市旁・日出大道）\n住宿：理想大地渡假飯店\n\n【12/6（日）東華大學】\n05:30 選手集結報到\n07:30 全馬起跑\n13:53 臺鐵 419 花蓮→臺北（16:20 到）\n\n集合時間、分車等細節以隊員手冊為準，時間以大會公告為準。" },
-    { title: "全國E馬 慶功宴（時間待通知）", when: "預計 12/21（一）晚上",
-      start: "20261221", end: "20261222", location: "神旺潮品集 忠孝店，台北市大安區忠孝東路四段166號2樓",
-      show: ["神旺潮品集・忠孝店（忠孝敦化站 5 號出口）", "時間訂位確認中，請先預留晚上"],
-      details: "全國E馬 台大EMBA代表隊 慶功宴\n預計 12/21（一）晚上，確切時間訂位確認中，請先預留時間。\n\n地點：神旺潮品集・忠孝店\n台北市大安區忠孝東路四段166號2樓（捷運忠孝敦化站 5 號出口旁）\n電話：02-2772-2699" }
+    { title: "全國E馬 慶功宴", when: "12/21（一）18:30",
+      start: "20261221T183000", end: "20261221T210000", location: "神旺潮品集 忠孝店，台北市大安區忠孝東路四段166號2樓",
+      show: ["18:30 神旺潮品集・忠孝店（忠孝敦化站 5 號出口）", "預計五桌（暫定）"],
+      details: "全國E馬 台大EMBA代表隊 慶功宴\n12/21（一）晚上 18:30（台北馬翌日）\n\n地點：神旺潮品集・忠孝店\n台北市大安區忠孝東路四段166號2樓（捷運忠孝敦化站 5 號出口旁）\n電話：02-2772-2699\n預計桌數：五桌（暫定）" }
   ],
   /* 本週課表：領隊雅文每週用 Google 表單貼上整段課表訊息，網頁顯示試算表最新一筆。
      csvUrl＝回覆試算表「發布到網路 → CSV」網址；還沒設定或讀不到時，顯示下面 text 的課表 */
@@ -1095,11 +1095,12 @@ r=休息時間 P.s（r200m=動態恢復）
 FR(free run) = 不看配速，輕鬆慢跑，主要是體感保持很放鬆
 Rest = 完全休息` },
   /* 慶功宴預告 */
-  party: { title: "預計 12/21（一）晚上・台北馬翌日", items: [
-    `時間 <span class="tbd">${TBD}</span>（訂位確認中）`,
+  party: { title: "12/21（一）晚上・台北馬翌日", items: [
+    "時間：<b>18:30</b>（晚上 6:30）",
     `地點：<b>神旺潮品集・忠孝店</b><br>台北市大安區忠孝東路四段166號2樓`,
     "交通：捷運忠孝敦化站 5 號出口旁，步行約 3 分鐘",
     `電話：<a href="tel:0227722699">02-2772-2699</a>・<a href="${"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("神旺潮品集 忠孝店 台北市大安區忠孝東路四段166號")}" target="_blank" rel="noopener">地圖導航 ↗</a>`,
+    "預計桌數：五桌（暫定）",
     "邀請全體代表隊隊員與贊助的學長姐",
     "請各位學長姐先預留時間"
   ] },
@@ -1494,7 +1495,7 @@ function renderPlan(text, label) {
     box.querySelector(".days").innerHTML = L.days.map(x => `<div class="day${/^rest$/i.test(x.t) ? " rest" : ""}${x.d === "二" ? " tue" : ""}"><b>週${x.d}</b>${escHTML(x.t)}</div>`).join("");
     box.querySelectorAll(".lv button").forEach((b, i) => b.setAttribute("aria-pressed", i === pick));
   };
-  box.innerHTML = `<div class="plan-head"><h3>本週課表</h3><span>${escHTML(title)}・光頭教練提供</span></div>
+  box.innerHTML = `<div class="plan-head"><h3>本週課表</h3><span>${escHTML(title)}・<a href="https://akebono-sports.com/" target="_blank" rel="noopener">曙光跑步學校 ↗</a> 光頭教練（李翰暄）提供</span></div>
     ${P.core ? `<p class="core"><b>核心訓練</b>　${escHTML(P.core)}</p>` : ""}
     <div class="pick">選你的 5K 目標成績：</div>
     <div class="lv">${P.levels.map(v => `<button type="button">${escHTML(v.name.replace("5K ", ""))}</button>`).join("")}</div>
