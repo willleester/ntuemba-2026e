@@ -193,6 +193,10 @@ h3.sub{font-size:19px;font-weight:900;margin:40px 0 14px}
 .legs li{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:3px 12px 3px 3px;border:1px solid var(--line);border-radius:999px;background:var(--bg)}
 .legs li i{font-style:normal;font-family:var(--f-num);font-size:13px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;flex:none}
 .legs li.first i{background:var(--flame)}
+.story{display:flex;gap:18px;align-items:flex-start;margin-top:12px;padding:14px;border-radius:12px;background:var(--bg2,rgba(127,127,127,.08));font-size:15px;line-height:1.75}
+.story img{width:150px;height:auto;border-radius:10px;flex:none}
+.story p{margin:0 0 .6em}.story p:last-child{margin:0}
+@media (max-width:600px){.story{flex-direction:column}.story img{width:100%;max-width:260px}}
 .role-tag{display:inline-block;font-size:.72em;font-weight:700;line-height:1.6;padding:0 .6em;border-radius:999px;border:1px solid var(--line);color:var(--muted);vertical-align:.1em;white-space:nowrap}
 .team .alt{margin-top:6px;font-size:14px;color:var(--muted)}
 .cap{display:inline-block;font-size:.72em;font-weight:900;line-height:1.6;padding:0 .6em;border-radius:999px;background:var(--flame);color:#fff;vertical-align:.1em;white-space:nowrap}
@@ -938,7 +942,13 @@ const DATA = {
       { t: "第3隊", legs: ["廖苡嘉", "徐樹潭", "王光銳", "梁乃夫", "廖順彬"] } ] },
     /* 許雅文兼全馬、盧靜足兼樂齡選手：工作人員列 4 人，但合計扣掉重複的 2 人（dup） */
     /* F 組共融組（2026/10/30 Will 確認）：今年台大沒有組歡樂組，改參加共融組 */
-    { g: "共融", n: 2, names: '高介仲、高紫萱　<span class="role-tag">F 組・共行・無礙戰隊</span><br><span style="font-size:14px;color:var(--muted)">推動運動平權與共融：一人跑步、一人以輔具共同完成約 4.2 公里，一起出發，一起到達。</span> <a href="https://ah-h.org/news/news_detail/238?news_cat=2" target="_blank" rel="noopener">認識高介仲與紫萱的故事 ↗</a>' },
+    { g: "共融", n: 2, names: `高介仲、高紫萱　<span class="role-tag">F 組・共行・無礙戰隊</span><br><span style="font-size:14px;color:var(--muted)">推動運動平權與共融：一人跑步、一人以輔具共同完成約 4.2 公里，一起出發，一起到達。</span>
+      <div class="story"><img src="img/gao.jpg" alt="高介仲與高紫萱" loading="lazy"><div>
+        <p>大家好，我是高紫萱～</p>
+        <p>我原本是健康出生在這個世界上，卻在出生12天受病毒感染罹患腦膜炎，癒後診斷為腦性麻痺、發展遲緩並常發癲癇，領有中度肢體障礙手冊。</p>
+        <p>我的成長過程就是不斷的復健，7歲終於學會走路，有很多不方便的地方需要旁人協助。我很喜歡跟人聊天，但說話有一點構音不全，你們聽不懂的話，我會不放棄的講給你聽懂，或是寫給你看，雖然我的生命歷程在別人看來是如此的不幸，但是我仍然樂觀開朗，我很幸運有愛我的爸媽、教會朋友、天使心家族的志工，其實我過得很幸福呢！</p>
+        <p>爸爸在唸了EMBA後，我常聽到他跑馬拉松，這次終於有機會我也可以參加體驗，我好期待喔！</p>
+      </div></div>` },
     { g: "工作人員", n: 4, dup: 2, names: '許雅文 <span class="role-tag">兼全馬選手</span>、李明倫、盧靜足 <span class="role-tag">兼樂齡選手</span>、林芊吟' }
   ],
   /* 各隊隊長：名單表格裡的「隊長」標籤（CAP）也要同步 */
@@ -1107,7 +1117,7 @@ Rest = 完全休息` },
   prep: [
     { title: "重要提醒", items: ["12/5 請準時到臺北車站集合，搭乘 408 車次", "408 車次為花東民眾實名優先購票班次，乘車請攜帶有身分證字號的證件", "比賽日需早起，前一晚請提早休息", "攜帶個人水壺與能量補給品", `臺北車站集合時間與地點 <span class="tbd">${TBD}</span>`] },
     { title: "隨身物品", check: true, items: ["身分證件、健保卡", "運動服裝與跑鞋", "藍色 T 恤＋藍白外套（選手之夜）", "賽衣E馬背心、號碼布（競賽組）", "個人盥洗用品", "手機充電器與行動電源"] },
-    { title: "戈友會補助", items: ["報名費 NT$3,000 全額補助（含選手之夜 NT$1,000）", "團進團出者，臺鐵＋花蓮當地遊覽車交通費由戈友會補助", `住宿及其他費用 <span class="tbd">${TBD}</span>`] }
+    { title: "戈友會補助", items: ["報名費 NT$3,000 全額補助（含選手之夜 NT$1,000）", "團進團出者，臺鐵＋花蓮當地遊覽車交通費由戈友會補助", "住宿自費，可選單人房或雙人房"] }
   ],
   /* 歷屆回顧：年份、主辦、屆數取自戈友會 pCloud 相簿資料夾名稱；img 選好後填路徑，例如 "img/history/2012.jpg" */
   history: [
