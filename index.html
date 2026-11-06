@@ -171,6 +171,21 @@ h3.sub{font-size:19px;font-weight:900;margin:40px 0 14px}
 .plan summary{cursor:pointer;font-weight:700;color:var(--blue)}
 .plan .raw{white-space:pre-wrap;margin:8px 0 0;font:inherit;line-height:1.7}
 @media (max-width:900px){.plan .days{grid-template-columns:1fr}.plan .day{display:grid;grid-template-columns:3.5em 1fr;gap:8px}.plan .day b{margin:0}}
+/* 團練合照：最新一次大圖，更早的收在「更早的團練」裡 */
+.tp-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin:0 0 12px}
+.tp-head .new{font-size:12px;font-weight:700;color:#fff;background:var(--flame);border-radius:999px;padding:1px 10px}
+.tp-head b{font-size:17px}
+.tp-head span{font-size:13px;color:var(--muted)}
+.tp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.tp-grid .pic a{display:block;border-radius:12px;overflow:hidden}
+.tp-grid .pic img{aspect-ratio:16/9;object-fit:cover;transition:transform .2s}
+.tp-grid .pic a:hover img,.tp-grid .pic a:focus-visible img{transform:scale(1.02)}
+.tp-old{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.tp-old summary{cursor:pointer;font-weight:700;color:var(--blue);font-size:15px}
+.tp-old .tp-session{margin-top:18px}
+.tp-old .tp-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tp-old .tp-head b{font-size:15px}
+@media (max-width:760px){.tp-grid{grid-template-columns:minmax(0,1fr)}.tp-old .tp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* 加入 Google 行事曆：浮動按鈕＋資訊卡 */
 .cal-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:8px;padding:12px 18px 12px 14px;border:0;border-radius:999px;background:var(--flame);color:#fff;font:inherit;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 6px 20px rgba(10,28,63,.3)}
 .cal-fab:hover{filter:brightness(1.06)}
@@ -674,10 +689,8 @@ body::before{background:var(--flame)}
     </div>
     <div class="panel" id="trainBox" style="margin-top:0"></div>
     <div class="plan" id="planBox"></div>
-    <div class="duo">
-      <figure class="pic"><img src="img/train-1.jpg" alt="台大EMBA代表隊週二晚上團練，拉著全國EMBA校園馬拉松接力賽布條合照" loading="lazy" width="1200" height="675"><figcaption>週二團練：台大EMBA代表隊</figcaption></figure>
-      <figure class="pic"><img src="img/train-2.jpg" alt="門外社週二晚上團練全體大合照" loading="lazy" width="1200" height="675"><figcaption>週二團練：門外社大合照</figcaption></figure>
-    </div>
+    <h3 class="sub">團練合照</h3>
+    <div id="trainPhotos"></div>
   </section>
 
   <section class="block wrap" id="prep">
@@ -981,6 +994,16 @@ const DATA = {
     "服裝：可穿有「台大EMBA」的上衣，或「門外社社服」",
     "全國E馬隊員歡迎一起來練"
   ] },
+  /* 團練合照：每次團練後，照片放進 img/，在最上面加一筆（最新的放第一個）。
+     第一筆顯示大圖，其餘收在「更早的團練」裡。kind 寫「週二團練」或「週末團練」 */
+  trainPhotos: [
+    { date: "11/3（二）", kind: "週二團練", photos: [
+      { img: "img/train-1103-1.jpg", cap: "台大EMBA代表隊", alt: "11/3 週二團練，台大EMBA代表隊拉著全國EMBA校園馬拉松接力賽布條合照" },
+      { img: "img/train-1103-2.jpg", cap: "團練大合照", alt: "11/3 週二晚上團練大合照" } ] },
+    { date: "10 月", kind: "週二團練", photos: [
+      { img: "img/train-1.jpg", cap: "台大EMBA代表隊", alt: "台大EMBA代表隊週二晚上團練，拉著全國EMBA校園馬拉松接力賽布條合照" },
+      { img: "img/train-2.jpg", cap: "門外社大合照", alt: "門外社週二晚上團練全體大合照" } ] }
+  ],
   /* 加入 Google 行事曆（右下角按鈕）：start/end 為台灣時間 YYYYMMDDTHHMMSS；只有日期（時間未定）就寫 YYYYMMDD 當全天活動。
      show＝卡片上的重點；details＝寫進行事曆的說明（網頁上線後會自動附上手冊網址） */
   calendar: [
@@ -1374,6 +1397,15 @@ document.getElementById("sponsors").innerHTML =DATA.sponsors.map(s => `<div clas
 document.getElementById("sponsorNote").innerHTML = DATA.sponsorNote;
 document.getElementById("partyBox").innerHTML = list(DATA.party);
 document.getElementById("trainBox").innerHTML = list(DATA.training);
+{
+  const session = (s, latest) => `<div class="tp-session">
+    <div class="tp-head">${latest ? '<span class="new">最新</span>' : ""}<b>${s.date}</b><span>${s.kind}・${s.photos.length} 張</span></div>
+    <div class="tp-grid">${s.photos.map(p => `<figure class="pic"><a href="${p.img}" target="_blank" rel="noopener" aria-label="開啟原圖：${p.alt}"><img src="${p.img}" alt="${p.alt}" loading="lazy" width="1200" height="675"></a><figcaption>${p.cap}</figcaption></figure>`).join("")}</div>
+  </div>`;
+  const [latest, ...older] = DATA.trainPhotos;
+  document.getElementById("trainPhotos").innerHTML = (latest ? session(latest, true) : "") +
+    (older.length ? `<details class="tp-old"><summary>更早的團練（${older.length} 次）</summary>${older.map(s => session(s, false)).join("")}</details>` : "");
+}
 // ---- 首頁倒數：以 12/6 A 組（全馬）07:30 起跑為目標，台灣時間 ----
 (function countdown() {
   const box = document.getElementById("countdown");
