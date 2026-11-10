@@ -266,15 +266,16 @@ h3.sub{font-size:19px;font-weight:900;margin:40px 0 14px}
 .sponsors .face{width:96px;height:96px;border-radius:50%;object-fit:cover;display:block}
 .sponsors .face.ph{display:grid;place-items:center;background:var(--surface);border:1px dashed var(--line);color:var(--muted);font-size:12px}
 .sp-note{margin:14px 0 0;color:var(--muted);font-size:15px}
-.gift{display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:14px}
-.gift .shot{width:100%;height:auto;border-radius:10px;display:block}
-.gift .who{font-size:18px;margin-bottom:12px}
+.gift{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px}
+.gift .shot{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 50%;border-radius:10px;display:block}
+.gift .who{font-size:18px;margin-bottom:8px}
+.gift .head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .gift .who b{font-weight:900;font-size:20px}
 .gift .who span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
 .gift .tag{display:inline-block;font-size:12px;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
-.gift .logo{display:block;width:140px;height:auto;margin:12px 0 10px}
-.gift p{margin:0;font-size:16px;line-height:1.8}
-@media (max-width:600px){.gift{grid-template-columns:1fr}.gift .shot{max-width:280px}}
+.gift .logo{display:block;width:84px;height:auto}
+.gift p{margin:8px 0 0;font-size:15px;line-height:1.7}
+@media (max-width:600px){.gift{grid-template-columns:96px 1fr;gap:14px;align-items:start}}
 .info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}
 .info-grid .panel{margin-top:0}
 .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:32px}
@@ -1409,7 +1410,7 @@ document.getElementById("routeBox").innerHTML = (DATA.route.video
 document.getElementById("crew").innerHTML = DATA.crew.map(c => `<div class="m">${c.img ? `<img class="face" loading="lazy" src="${c.img}" alt="${c.nm.replace(/<br>/g, " ")}">` : ""}<div class="r">${c.r}</div><div class="nm">${tbd(c.nm)}</div></div>`).join("");
 document.getElementById("captains").innerHTML = DATA.captains.map(s => `<div class="m">${s.img ? `<img class="face" loading="lazy" src="${s.img}" alt="${s.nm.replace(/<br>/g, "")}">` : `<div class="face ph">照片待補</div>`}<div class="r">${s.r}</div><div class="nm">${s.nm}</div></div>`).join("");
 document.getElementById("sponsors").innerHTML =DATA.sponsors.map(s => `<div class="m">${s.img ? `<img class="face" loading="lazy" src="${s.img}" alt="${s.nm.replace(/<br>/g, "")}">` : `<div class="face ph">照片待補</div>`}<div class="r">${s.r}</div><div class="nm">${s.nm}</div></div>`).join("");
-document.getElementById("gifts").innerHTML = DATA.gifts.map(g => `<div class="gift"><img class="shot" loading="lazy" src="${g.img}" alt="${g.alt}"><div><div class="who">感謝 <b>${g.who}</b> 贊助<span>${g.whoSub}</span></div><span class="tag">${g.tag}</span><img class="logo" loading="lazy" src="${g.logo}" alt="RÉFEN"><p>${g.text}</p></div></div>`).join("");
+document.getElementById("gifts").innerHTML = DATA.gifts.map(g => `<div class="gift"><img class="shot" loading="lazy" src="${g.img}" alt="${g.alt}"><div><div class="head"><div class="who">感謝 <b>${g.who}</b> 贊助<span>${g.whoSub}</span></div><img class="logo" loading="lazy" src="${g.logo}" alt="RÉFEN"></div><span class="tag">${g.tag}</span><p>${g.text}</p></div></div>`).join("");
 document.getElementById("sponsorNote").innerHTML = DATA.sponsorNote;
 document.getElementById("partyBox").innerHTML = list(DATA.party);
 document.getElementById("trainBox").innerHTML = list(DATA.training);
