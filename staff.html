@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>2026 全國E馬｜工作人員手冊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Oswald:wght@500;600;700&display=swap">
+<style>
+:root{
+  --navy:#0A1C3F; --blue:#1446A0; --flame:#FF5A1F; --flame-ink:#D2400A; --yellow:#FFD23F;
+  --bg:#FFFFFF; --surface:#F1F3F6; --fg:#14213A; --muted:#5A6A84; --line:#DCE2EA; --sky:#E8EEF7;
+  --f-body:"Noto Sans TC",system-ui,sans-serif; --f-num:"Oswald","Noto Sans TC",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1426; --surface:#121D33; --fg:#E7EDF7; --muted:#9AAAC4; --line:#24324D; --sky:#16264A; --blue:#7EAAF5; --flame-ink:#FF8A5C}}
+:root[data-theme="dark"]{--bg:#0A1426; --surface:#121D33; --fg:#E7EDF7; --muted:#9AAAC4; --line:#24324D; --sky:#16264A; --blue:#7EAAF5; --flame-ink:#FF8A5C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.75}
+a{color:var(--blue)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+header{background:var(--navy);color:#fff;padding:40px 0 32px}
+header .eyebrow{font-family:var(--f-num);letter-spacing:.18em;color:var(--yellow);font-size:14px;margin:0}
+header h1{margin:6px 0 4px;font-size:30px;font-weight:900;line-height:1.3}
+header p{margin:10px 0 0;color:#C9D4E8;max-width:760px}
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:22px}
+.team div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px 14px}
+.team b{display:block;font-size:17px}
+.team small{color:#C9D4E8;font-size:13px;line-height:1.5;display:block}
+main{padding:12px 0 40px}
+section{padding:28px 0;border-bottom:1px solid var(--line)}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.sh .k{flex:none;width:44px;height:44px;border-radius:12px;background:var(--flame);color:#fff;font-family:var(--f-num);font-size:24px;display:grid;place-items:center}
+.sh h2{margin:0;font-size:22px;font-weight:900}
+.who{display:inline-block;font-size:13px;font-weight:700;color:var(--flame-ink);background:var(--sky);border-radius:999px;padding:2px 12px;margin:2px 0 12px}
+.lead{color:var(--muted);margin:0 0 14px}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0}
+ol.steps>li{counter-increment:s;position:relative;padding:12px 0 12px 46px;border-top:1px solid var(--line)}
+ol.steps>li:first-child{border-top:0}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--f-num);display:grid;place-items:center;font-size:15px}
+:root[data-theme="dark"] ol.steps>li::before{background:var(--blue);color:#0A1426}
+ol.steps b{display:block;font-size:17px}
+ol.steps p{margin:2px 0 0;color:var(--muted)}
+code,.cell{font-family:var(--f-num);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:0 6px;font-size:.92em;color:var(--fg)}
+.go{display:inline-block;margin-top:8px;background:var(--flame);color:#fff;text-decoration:none;font-weight:700;font-size:14px;border-radius:999px;padding:6px 16px}
+.go:hover{background:var(--flame-ink)}
+.go.alt{background:transparent;color:var(--flame-ink);border:1.5px solid var(--flame)}
+.lock{font-size:12px;color:var(--muted);margin-left:6px}
+.ex{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.ex span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:14px;color:var(--fg)}
+.note{background:var(--surface);border-left:4px solid var(--flame);padding:12px 16px;margin-top:14px;font-size:15px}
+.note b{color:var(--flame-ink)}
+.chk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;margin:8px 0 0;padding:0;list-style:none}
+.chk li{padding-left:24px;position:relative;font-size:15px}
+.chk li::before{content:"";position:absolute;left:0;top:7px;width:13px;height:13px;border:2px solid var(--flame);border-radius:3px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-top:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--muted);font-weight:500;border-top:0}
+td:first-child{font-weight:700;white-space:nowrap}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 10px;font-weight:700;white-space:nowrap}
+.p-todo{background:#FFF2A8;color:#6B5200}.p-done{background:#DDF3E4;color:#1E6B3A}.p-no{background:#FCE3DC;color:#9A2D0F}
+.tw{overflow-x:auto}
+table.spon{min-width:720px}
+table.spon td{white-space:nowrap}
+table.spon td small,table.spon th small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+table.spon th small{color:var(--flame-ink);font-weight:700}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.links a{display:block;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.links a b{display:block}
+.links a small{color:var(--muted);font-size:13px}
+.links a:hover{border-color:var(--flame)}
+ul.rules{margin:6px 0 0;padding-left:20px}
+ul.rules li{margin:4px 0}
+footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
+@media (max-width:760px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}.chk,.links{grid-template-columns:1fr}header h1{font-size:24px}
+  table:not(.spon) thead{display:none}table:not(.spon),table:not(.spon) tbody,table:not(.spon) tr,table:not(.spon) td{display:block}
+  table:not(.spon) tr{border-top:1px solid var(--line);padding:8px 0}table:not(.spon) td{border:0;padding:2px 0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">STAFF ONLY・2026/12/5–6 花蓮東華</p>
+    <h1>2026 全國E馬・工作人員手冊</h1>
+    <p>A–C 是交通、住宿、餐食的異動與對外待辦；D–F 是網站留言牆、每週課表、贊助的處理方式；G 是個資規則。每個步驟都附連結，點了直接開；有鎖權限的檔案只有負責的人打得開。</p>
+    <div class="team">
+      <div><b>晴天 Will</b><small>會長・資料與網站・大會窗口・贊助</small></div>
+      <div><b>玉蝴蝶 雅文</b><small>總召・異動登記・遊覽車・留言審核・課表</small></div>
+      <div><b>芊芊</b><small>副領隊・異動登記・隊員聯絡</small></div>
+      <div><b>Grace</b><small>財務・台鐵・住宿・收退費</small></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="a">
+    <div class="sh"><span class="k">A</span><h2>隊員異動登記</h2></div>
+    <span class="who">雅文・芊芊</span>
+    <p class="lead">隊員找你們改交通、餐食、住宿、室友，或臨時不去時，照下面登記就好，不用自己改資料。</p>
+    <ol class="steps">
+      <li><b>打開雲端總表，到「總表」找到那位隊員那一列</b><p>眷屬也有自己的一列。找不到人，用 Ctrl＋F 搜尋姓名。</p>
+        <a class="go" href="https://docs.google.com/spreadsheets/d/15FwlsGfaR_P99yfXAM04LmkNV2QbzhuS/edit" target="_blank" rel="noopener">開啟交通住宿餐食總表 ↗</a></li>
+      <li><b>在黃色的 <span class="cell">U 異動內容</span> 寫要改什麼</b><p>一格寫一件事，寫清楚「哪一天、哪一項、改成什麼」。</p>
+        <div class="ex"><span>12/5 午餐改不參加</span><span>12/6 回程改自行前往</span><span>室友改成 王集祥（兩人都同意）</span><span>臨時不去，全部取消</span><span>加一位眷屬：大人 1 位，要台鐵、午餐、便當，同房</span></div></li>
+      <li><b>在 <span class="cell">V 登記</span> 寫自己的名字和日期</b><p>例：「芊芊 11/18」。</p></li>
+      <li><b>左邊的資料欄先不要動</b><p>餐食、交通、住宿、房號、室友欄，以及「統計」「分車」「房間分配」分頁都不要直接改。</p></li>
+      <li><b>在四人群組說一聲「總表有新異動」</b><p>Will 處理完會在 <span class="cell">W 處理狀態</span> 填結果，網站也會一起更新。</p></li>
+    </ol>
+    <div class="note"><b>為什麼不直接改？</b>一個異動常常連動好幾處：換室友要改兩個人、房間數和分車人數會變，可能還要通知旅行社或大會。統一處理比較不會漏。</div>
+  </section>
+
+  <section id="b">
+    <div class="sh"><span class="k">B</span><h2>確認與更新</h2></div>
+    <span class="who">Will（與 Claude）</span>
+    <ol class="steps">
+      <li><b>看還沒處理的異動</b><p>篩選 <span class="cell">W 處理狀態</span> 是空白的列，逐筆確認。</p>
+        <a class="go" href="https://docs.google.com/spreadsheets/d/15FwlsGfaR_P99yfXAM04LmkNV2QbzhuS/edit" target="_blank" rel="noopener">開啟交通住宿餐食總表 ↗</a></li>
+      <li><b>檢查連動的地方</b>
+        <ul class="chk">
+          <li>同房的另一位（室友欄、房號）</li>
+          <li>「統計」的餐食、交通人數</li>
+          <li>「分車」1 號車／2 號車人數</li>
+          <li>「房間分配」間數，多出或不足</li>
+          <li>要不要通知旅行社（台鐵、遊覽車、房間、餐廳、便當）</li>
+          <li>要不要通知大會、要不要收退費（告訴 Grace）</li>
+        </ul></li>
+      <li><b>改總表資料，重新產生網站「我的安排」，上傳 GitHub</b><p>網站只放公開範圍的欄位，資料更新日期會一起換。</p></li>
+      <li><b>填 <span class="cell">W 處理狀態</span>，在群組回覆</b>
+        <table style="margin-top:6px"><tbody>
+          <tr><td><span class="pill p-todo">空白</span></td><td>待處理</td></tr>
+          <tr><td><span class="pill p-done">已更新 11/19</span></td><td>總表與網站都改好了</td></tr>
+          <tr><td><span class="pill p-no">不處理：原因</span></td><td>例：旅行社已無法退票，維持原安排</td></tr>
+        </tbody></table></li>
+    </ol>
+  </section>
+
+  <section id="c">
+    <div class="sh"><span class="k">C</span><h2>對外待辦（旅行社・大會）</h2></div>
+    <span class="who">分工如下表</span>
+    <table>
+      <thead><tr><th>項目</th><th>要處理的事</th><th>建議負責</th></tr></thead>
+      <tbody>
+        <tr><td>台鐵</td><td>依名單人數請旅行社退多訂的票；敬老、幼兒等優待票要提早到車站換票</td><td>Grace</td></tr>
+        <tr><td>遊覽車</td><td>2 台：1 號車 全馬、半馬、工作人員；2 號車 樂齡、新生、共融。確認 2 號車可上下輪椅、放輪椅</td><td>雅文</td></tr>
+        <tr><td>住宿</td><td>確認實際房數，多訂的房間請旅行社確認怎麼退；單獨入住雙人房的差價由公費補</td><td>Grace</td></tr>
+        <tr><td>12/5 午餐</td><td>和旅行社確認餐廳、桌數</td><td>雅文・Will</td></tr>
+        <tr><td>12/6 便當</td><td>和旅行社確認數量</td><td>雅文・Will</td></tr>
+        <tr><td>選手之夜</td><td>報名競賽的每人都送選手之夜，位置多出來是正常的；眷屬是否加購再確認</td><td>Will</td></tr>
+        <tr><td>報名異動</td><td>大會報名資料的修改、候補替換</td><td>Will</td></tr>
+        <tr><td>收退費</td><td>眷屬費用、取消者退費、公費補差價</td><td>Grace</td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin-top:12px">詳細的待確認事項在雲端總表的「待確認」分頁。</p>
+    <a class="go" href="https://docs.google.com/spreadsheets/d/15FwlsGfaR_P99yfXAM04LmkNV2QbzhuS/edit" target="_blank" rel="noopener">開啟總表（看「待確認」分頁）↗</a>
+  </section>
+
+  <section id="e">
+    <div class="sh"><span class="k">D</span><h2>加油留言牆審核</h2></div>
+    <span class="who">雅文・Will</span>
+    <p class="lead">網站上的加油留言要審核後才會出現，避免不適當的內容直接上架。</p>
+    <ol class="steps">
+      <li><b>打開留言牆後台試算表</b><p>每一列是一則留言（名稱、屆數、留言內容）。</p>
+        <a class="go" href="https://docs.google.com/spreadsheets/d/1ntWdijm5v5y_6vZQcpgjFD96IYHUXS3KKzeyASMv3II/edit?gid=1907253911#gid=1907253911" target="_blank" rel="noopener">開啟留言牆後台 ↗</a><span class="lock">需權限</span></li>
+      <li><b>內容沒問題，在 <span class="cell">顯示</span> 欄打 V</b><p>填 V、是、TRUE 或打勾都可以。不想上架就留空白。</p></li>
+      <li><b>大約 5 分鐘內出現在網站</b><p>Google 發布的資料有幾分鐘延遲，重新整理網頁就會看到。要撤下，把 V 刪掉即可。</p>
+        <a class="go alt" href="./#wall" target="_blank" rel="noopener">看網站留言牆 ↗</a></li>
+    </ol>
+    <div class="note"><b>不要刪列、不要改欄名。</b>網站是靠「名稱」「屆」「留言」「顯示」這幾個欄名讀資料的，改了會讀不到。</div>
+  </section>
+
+  <section id="f">
+    <div class="sh"><span class="k">E</span><h2>每週課表上傳</h2></div>
+    <span class="who">雅文 或 Will</span>
+    <p class="lead">網站「本週課表」會自動顯示最新一次上傳的課表，不用改網站。</p>
+    <ol class="steps">
+      <li><b>打開課表上傳表單</b>
+        <a class="go" href="https://docs.google.com/forms/d/e/1FAIpQLSeaWP_kPNKNbdd2Pi7sbd14v8uLPVDMb1G0-D0I5EG1Qj-VQw/viewform?usp=header" target="_blank" rel="noopener">開啟課表上傳表單 ↗</a></li>
+      <li><b>把 LINE 上的整段課表訊息原封不動貼上，送出</b><p>格式照平常的「5K SUB xx」各組 × 週一到週日；網站會自動拆成表格。格式不同時會原文顯示。</p></li>
+      <li><b>幾分鐘後到網站確認</b><p>網站只顯示最新一筆；貼錯了，重新送一次正確的就會蓋過去。</p>
+        <a class="go alt" href="./#training" target="_blank" rel="noopener">看網站本週課表 ↗</a></li>
+    </ol>
+  </section>
+
+  <section id="g">
+    <div class="sh"><span class="k">F</span><h2>贊助者表單與確認</h2></div>
+    <span class="who">Will・Grace</span>
+    <ol class="steps">
+      <li><b>贊助者填贊助表單</b><p>網站「贊助夥伴」區有表單連結，也可以直接傳給有意贊助的學長姐。</p>
+        <a class="go" href="https://forms.gle/3hHDK6gZJ1BGfTan6" target="_blank" rel="noopener">開啟 14th 全國E馬贊助表單 ↗</a></li>
+      <li><b>Will 與贊助者確認內容</b><p>金額或物資品項、網站上的稱呼（例：姓名、級別、公司職稱）、要不要放照片或 logo，以及 30 字內的介紹文字。</p></li>
+      <li><b>現金贊助：Grace 確認入帳</b><p>入帳後回報 Will；物資贊助則確認數量與交貨時間。</p></li>
+      <li><b>Will 更新網站「贊助夥伴」</b><p>人物放照片卡片，品牌物資放產品照＋logo＋介紹文字；上架後請贊助者看過。</p>
+        <a class="go alt" href="./#team" target="_blank" rel="noopener">看網站贊助夥伴 ↗</a></li>
+      <li><b>12/21 慶功宴邀請贊助者</b><p>一起感謝贊助者。</p></li>
+    </ol>
+    <h3 style="margin:22px 0 4px;font-size:18px">贊助款確認清單</h3>
+    <p class="lead" style="margin:0 0 8px">狀態直接在「贊助者確認清單」試算表用下拉選單選，這裡幾分鐘內會自動更新。欄名後面的名字是負責確認的人。</p>
+    <a class="go" href="https://docs.google.com/spreadsheets/d/1lD5taGsiT0aBKHrvoVI7cK9_1NBC7_nxth_7wB2JFAc/edit" target="_blank" rel="noopener">開啟贊助者確認清單，更新狀態 ↗</a><span class="lock">需權限</span>
+    <div class="tw" id="spCash" style="margin-top:10px"></div>
+    <p class="lead" style="margin-top:8px;font-size:14px">不需要抵稅憑證的，「憑證已開立」填「不需要」。網頁曝光要先跟贊助者確認稱呼與照片（見上面第 2 步）。這張表不寫金額。</p>
+
+    <h3 style="margin:22px 0 4px;font-size:18px">物資贊助確認清單</h3>
+    <p class="lead" style="margin:0 0 8px">物資不用入帳和憑證，要確認的是：品項與數量、什麼時候交貨、網頁曝光（logo＋產品照＋30 字介紹）、慶功宴邀請。</p>
+    <div class="tw" id="spGoods"></div>
+    <p class="lead" id="spSrc" style="margin-top:8px;font-size:13px"></p>
+  </section>
+
+  <section id="links">
+    <div class="sh"><span class="k">↗</span><h2>常用網址</h2></div>
+    <p class="lead">隊員網站是公開的；雲端總表只有我們四個人能開，其他人點了會顯示「需要存取權」。</p>
+    <div class="links">
+      <a href="./" target="_blank" rel="noopener"><b>隊員手冊網站（公開）</b><small>隊員查「我的安排」、行程、服裝</small></a>
+      <a href="https://docs.google.com/spreadsheets/d/15FwlsGfaR_P99yfXAM04LmkNV2QbzhuS/edit" target="_blank" rel="noopener"><b>交通住宿餐食 雲端總表</b><small>僅限四位工作人員</small></a>
+      <a href="https://bao-ming.com/eb/content/7117#33620" target="_blank" rel="noopener"><b>大會活動網站</b><small>賽程、注意事項、大會公告</small></a>
+      <a href="./#mine" target="_blank" rel="noopener"><b>我的安排（隊員查詢頁）</b><small>更新後可在這裡確認</small></a>
+      <a href="https://docs.google.com/spreadsheets/d/1ntWdijm5v5y_6vZQcpgjFD96IYHUXS3KKzeyASMv3II/edit?gid=1907253911#gid=1907253911" target="_blank" rel="noopener"><b>留言牆後台</b><small>雅文・Will 審核打 V</small></a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaWP_kPNKNbdd2Pi7sbd14v8uLPVDMb1G0-D0I5EG1Qj-VQw/viewform?usp=header" target="_blank" rel="noopener"><b>每週課表上傳表單</b><small>雅文・Will</small></a>
+      <a href="https://forms.gle/3hHDK6gZJ1BGfTan6" target="_blank" rel="noopener"><b>贊助表單</b><small>給有意贊助的學長姐</small></a>
+      <a href="https://docs.google.com/spreadsheets/d/1lD5taGsiT0aBKHrvoVI7cK9_1NBC7_nxth_7wB2JFAc/edit" target="_blank" rel="noopener"><b>贊助者確認清單</b><small>Grace・芊芊・Will 更新狀態</small></a>
+    </div>
+  </section>
+
+  <section id="d">
+    <div class="sh"><span class="k">G</span><h2>個資與公開範圍</h2></div>
+    <ul class="rules">
+      <li><b>網站只放：</b>姓名、隊別、台鐵／遊覽車／餐食是否參加、幾號車、房型與室友姓名。家屬只寫人數或「與家人同住」。</li>
+      <li><b>只留在雲端總表：</b>內部房號、自行住宿地點、家屬姓名與小孩年齡、敬老／幼兒優待票、表單備註、費用與匯款、退票退房。</li>
+      <li><b>不轉傳整份總表</b>到大群組或其他人；需要給旅行社的名單，由 Will 匯出必要欄位。</li>
+      <li><b>身分證、生日、電話</b>只用在大會報名匯入檔，由 Will 處理，不放雲端總表、不傳 LINE。</li>
+      <li>完整對照表在雲端總表的「公開範圍」分頁。</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+/* 贊助者確認清單：讀 Google 試算表「發布到網路」的 CSV。
+   cash／goods 填各分頁的 CSV 網址（檔案 → 共用 → 發布到網路 → 選分頁 → 逗號分隔值）；
+   還沒填或讀不到時，顯示下面 fallback 的狀態（2026/11/16）。 */
+const SPONSOR = {
+  cash: "", goods: "",
+  fallback: {
+    cash: [["贊助者", "稱呼補充", "要開抵稅憑證？（Grace）", "贊助款入帳（Grace）", "憑證已開立（Grace）", "網頁曝光（Will）", "慶功宴邀請（Will）", "是否出席（Will）", "備註"],
+      ["Coco姐（堅持）", "校友基金會董事長", "待確認", "待確認", "待確認", "已上架", "待邀請", "待回覆", ""],
+      ["蔡晉暉（安執）", "", "待確認", "待確認", "待確認", "已上架", "待邀請", "待回覆", ""],
+      ["瑟宜學姐", "戈20", "待確認", "待確認", "待確認", "未上架", "待邀請", "待回覆", ""],
+      ["正大學長", "", "待確認", "待確認", "待確認", "未上架", "待邀請", "待回覆", ""]],
+    goods: [["贊助者", "稱呼補充", "品項", "物品確認（芊芊）", "網頁曝光（Will）", "慶功宴邀請（Will）", "是否出席（Will）", "備註"],
+      ["葉小瑜學姐", "113 EiMBA・瑞方生醫", "RÉFEN 金泌修護防曬安瓶", "待確認", "已上架", "已邀請", "待回覆", ""],
+      ["Lindy學姐", "", "王大夫一條根", "洽談中", "未上架", "待邀請", "待回覆", ""]]
+  }
+};
+function parseCSV(t) {
+  const rows = [[]]; let f = "", q = false;
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (q) { if (c === '"' && t[i + 1] === '"') { f += '"'; i++; } else if (c === '"') q = false; else f += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { rows[rows.length - 1].push(f); f = ""; }
+    else if (c === "\n") { rows[rows.length - 1].push(f); rows.push([]); f = ""; }
+    else if (c !== "\r") f += c;
+  }
+  rows[rows.length - 1].push(f);
+  return rows.filter(r => r.some(x => x.trim()));
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const DONE = /^(要|不要|已入帳|已開立|不需要|已上架|已邀請|出席|已確認|已收到)$/, NO = /^(未上架|不出席)$/;
+function spTable(rows) {
+  const [head, ...body] = rows, sub = head.findIndex(h => h.includes("稱呼")), note = head.findIndex(h => h.includes("備註"));
+  const cols = head.map((h, i) => i).filter(i => i !== sub && !(i === note && body.every(r => !(r[i] || "").trim())));
+  const plain = i => i === 0 || /品項|備註/.test(head[i]);
+  const th = i => { const m = head[i].match(/^(.*?)（(.+)）$/); return m ? `${esc(m[1])}<small>${esc(m[2])}</small>` : esc(head[i]); };
+  return `<table class="spon"><thead><tr>${cols.map(i => `<th>${th(i)}</th>`).join("")}</tr></thead><tbody>${
+    body.filter(r => (r[0] || "").trim()).map(r => `<tr>${cols.map(i => {
+      const v = (r[i] || "").trim();
+      if (i === 0) return `<td>${esc(v)}${sub >= 0 && r[sub] ? `<small>${esc(r[sub])}</small>` : ""}</td>`;
+      if (plain(i)) return `<td>${esc(v)}</td>`;
+      return `<td><span class="pill ${DONE.test(v) ? "p-done" : NO.test(v) ? "p-no" : "p-todo"}">${esc(v || "待確認")}</span></td>`;
+    }).join("")}</tr>`).join("")}</tbody></table>`;
+}
+async function spLoad(key) {
+  const url = SPONSOR[key];
+  if (url) {
+    try { const r = await fetch(url, { cache: "no-store" }); if (r.ok) { const rows = parseCSV(await r.text()); if (rows.length > 1 && rows[0][0].includes("贊助者")) return [rows, true]; } } catch (e) {}
+  }
+  return [SPONSOR.fallback[key], false];
+}
+Promise.all([spLoad("cash"), spLoad("goods")]).then(([[c, liveC], [g, liveG]]) => {
+  document.getElementById("spCash").innerHTML = spTable(c);
+  document.getElementById("spGoods").innerHTML = spTable(g);
+  document.getElementById("spSrc").textContent = liveC && liveG ? "狀態來自贊助者確認清單試算表（即時）。" : "目前顯示 2026/11/16 的狀態；試算表發布到網路後會改成即時讀取。";
+});
+</script>
+
+<footer class="wrap">網站或總表有問題（打不開、名單不對、網站沒更新）請找 Will。最後更新：2026/11/16。</footer>
+</body>
+</html>
