@@ -584,6 +584,7 @@ body::before{background:var(--flame)}
     <p>兩天一夜，從臺北搭 408 出發，晚上選手之夜，隔天東華大學開跑，搭 419 回臺北。這份手冊整理了行程、交通、服裝和路線，出發前請看過一遍。</p>
   </div>
   <ul class="ilinks">
+    <li><a href="#mine">我的安排<span>車次・餐食・住宿</span></a></li>
     <li><a href="#dress">團隊服裝<span>選手之夜・比賽日</span></a></li>
     <li><a href="#route">競賽路線<span>單圈約 4.2 公里</span></a></li>
     <li><a href="#raceinfo">競賽資訊<span>大會流程</span></a></li>
@@ -597,6 +598,7 @@ body::before{background:var(--flame)}
     <a class="brand" href="#top">台大EMBA <em>2026 全國E馬</em></a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">選單</button>
     <ul id="menu">
+      <li><a href="#mine">我的安排</a></li>
       <li><a href="#schedule">兩天行程</a></li>
       <li><a href="#raceinfo">競賽資訊</a></li>
       <li><a href="#travel">交通住宿</a></li>
@@ -612,6 +614,16 @@ body::before{background:var(--flame)}
 <div class="facts"><div class="wrap" id="facts"></div></div>
 
 <main>
+  <section class="block wrap" id="mine">
+    <div class="sec-head">
+      <div class="no">SECTION 01</div>
+      <h2>我的安排</h2>
+      <p>選你的名字，看自己的臺鐵、遊覽車、餐食和住宿。</p>
+    </div>
+    <div class="plan-sum" id="planSum"></div>
+    <div class="plan" id="plan"></div>
+  </section>
+
   <section class="block wrap" id="schedule">
     <div class="sec-head">
       <div class="no">SECTION 02</div>
@@ -648,9 +660,7 @@ body::before{background:var(--flame)}
     <div class="trains" id="trains"></div>
     <h3 class="sub">花蓮當地接駁</h3>
     <div class="panel" id="bus"></div>
-    <h3 class="sub">我的安排</h3>
-    <div class="plan-sum" id="planSum"></div>
-    <div class="plan" id="plan"></div>
+    <p class="sp-note">個人的車次、餐食、房型與室友，請見最上方 <a href="#mine">我的安排</a>。</p>
   </section>
 
   <section class="block wrap" id="dress">
