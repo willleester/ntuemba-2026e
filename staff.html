@@ -60,6 +60,25 @@ th{font-size:13px;color:var(--muted);font-weight:500;border-top:0}
 td:first-child{font-weight:700;white-space:nowrap}
 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 10px;font-weight:700;white-space:nowrap}
 .p-todo{background:#FFF2A8;color:#6B5200}.p-done{background:#DDF3E4;color:#1E6B3A}.p-no{background:#FCE3DC;color:#9A2D0F}
+.board{border:2px solid var(--navy);border-radius:16px;padding:20px;margin-top:24px}
+:root[data-theme="dark"] .board{border-color:var(--blue)}
+.bh{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 16px}
+.bh h2{margin:0;font-size:22px;font-weight:900}
+.bh span{font-size:14px;color:var(--muted)}
+.flow{background:var(--surface);border-radius:12px;padding:12px 16px;margin:12px 0 16px;font-size:15px}
+.flow b{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:0 12px}
+.flow p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.col h3{margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:8px}
+.col h3 i{font-style:normal;font-size:12px;background:var(--navy);color:#fff;border-radius:6px;padding:1px 8px}
+:root[data-theme="dark"] .col h3 i{background:var(--blue);color:#0A1426}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.card .ct{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.card .ct b{font-size:15px;line-height:1.5}
+.card p{margin:6px 0 0;font-size:14px;color:var(--muted);line-height:1.7}
+.p-doing{background:#FFE3CC;color:#8A3B00}.p-plan{background:var(--surface);color:var(--muted);border:1px solid var(--line)}
+@media (max-width:1000px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.cols{grid-template-columns:1fr}}
 .tw{overflow-x:auto}
 table.spon{min-width:720px}
 table.spon td{white-space:nowrap}
@@ -94,6 +113,13 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 </header>
 
 <main class="wrap">
+  <section id="board" class="board">
+    <div class="bh"><h2>四方同步看板</h2><span>Grace・雅文・芊芊・Will｜最後更新 <b id="boardDate"></b></span></div>
+    <div class="flow"><span>LINE 上的資訊</span> → <b>Will 整理進看板</b> → <span>各自照下面流程處理</span>
+      <p>以這個看板為準。看板上沒有的，代表還沒整理進來，請在 LINE 告訴 Will。</p></div>
+    <div class="cols" id="boardCols"></div>
+  </section>
+
   <section id="a">
     <div class="sh"><span class="k">A</span><h2>隊員異動登記</h2></div>
     <span class="who">雅文・芊芊</span>
@@ -295,6 +321,43 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 </main>
 
 <script>
+/* 四方同步看板：Will 把 LINE 上的資訊整理成卡片。s＝狀態（待確認／處理中／已回覆／已完成／備案），
+   不寫病情、金額、證件等個資。 */
+const BOARD = {
+  date: "2026/11/17",
+  cols: [
+    { who: "Grace", title: "交通住宿統計", cards: [
+      { t: "誰去、誰不去（Grace 11/17 提問）", s: "已回覆",
+        d: "Will 11/17 回覆：不去的只有祥哥（王禎祥）和強哥（王嘉昇，緊急候補）；膽哥（黃張維）會去，自己前往；孟郎（杜孟郎）也會去。統計時王禎祥、王嘉昇不計，其他照總表。" },
+      { t: "台鐵：多訂的票退票、優待票提早換票", s: "處理中", d: "照名單人數請旅行社退票；敬老、幼兒等優待票要提早到車站換。" },
+      { t: "住宿：多訂的房間怎麼退", s: "待確認", d: "旅行社訂 15 單＋20 雙；實際用量以總表「房間分配」為準，多的請旅行社確認退訂方式。" }
+    ] },
+    { who: "雅文", title: "隊員與候補", cards: [
+      { t: "孟郎是否確定要去", s: "待確認", d: "雅文已留言給孟郎確認，等他回覆。Will 這邊的消息是他會去。" },
+      { t: "祥哥（王禎祥）確定不能參加", s: "已完成", d: "個人因素確定不能參加；總表與網站已標「本次不同行」。" },
+      { t: "膽哥（黃張維）會去", s: "已完成", d: "自己前往；總表已是 12/5 去程自行前往、回程團體搭乘。" },
+      { t: "緊急候補：強哥（王嘉昇，樂齡）", s: "備案", d: "只有樂齡有人受傷無法出賽時才會去，目前不訂交通住宿。雅文 11/15 河濱跟他跑，配速 4:45 沒問題；他可以跟老闆商量能否改晚班機出差來支援。希望用不到。" },
+      { t: "在校生記功：問 E 辦雅惠", s: "待確認", d: "申請方式、截止日、檔案格式（見 H）。" }
+    ] },
+    { who: "芊芊", title: "背心與異動", cards: [
+      { t: "男生背心 11/25 前到", s: "處理中", d: "Will 拿到後交給芊芊，發給還沒領的 5 位男生（見 I）。" },
+      { t: "洪芝晨女 XS、芊芊自己的尺寸", s: "待確認", d: "女生背心能否先發給洪芝晨；芊芊的尺寸要補在總表「背心」分頁。" },
+      { t: "隊員異動登記", s: "待確認", d: "總表 v3（有 U、V、W 三欄）上傳後就可以開始登記（見 A）。" }
+    ] },
+    { who: "Will", title: "處理進度", cards: [
+      { t: "強哥、膽哥、祥哥對應本名", s: "已完成", d: "強哥＝王嘉昇、膽哥＝黃張維、祥哥＝王禎祥；總表與「我的安排」原本就一致，不用改。" },
+      { t: "總表 v3 上傳雲端", s: "待確認", d: "用「管理版本 → 上傳新版本」，連結不變。" },
+      { t: "贊助者確認清單：分享＋發布 CSV", s: "待確認", d: "分享給三位，兩個分頁發布成 CSV 網址交給 Claude，F 的狀態就會即時更新。" },
+      { t: "工作人員手冊上線", s: "已完成", d: "11/16 上線，含異動、對外待辦、留言、課表、贊助、慶功宴、記功、背心。" }
+    ] }
+  ]
+};
+(function () {
+  const cls = s => ({ "已完成": "p-done", "已回覆": "p-done", "已上線": "p-done", "處理中": "p-doing", "備案": "p-plan" })[s] || "p-todo";
+  document.getElementById("boardDate").textContent = BOARD.date;
+  document.getElementById("boardCols").innerHTML = BOARD.cols.map(c => `<div class="col"><h3><i>${c.who}</i>${c.title}</h3>${
+    c.cards.map(k => `<div class="card"><div class="ct"><b>${k.t}</b><span class="pill ${cls(k.s)}">${k.s}</span></div><p>${k.d}</p></div>`).join("")}</div>`).join("");
+})();
 /* 贊助者確認清單：讀 Google 試算表「發布到網路」的 CSV。
    cash／goods 填各分頁的 CSV 網址（檔案 → 共用 → 發布到網路 → 選分頁 → 逗號分隔值）；
    還沒填或讀不到時，顯示下面 fallback 的狀態（2026/11/16）。 */
