@@ -248,7 +248,25 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
   <section id="party">
     <div class="sh"><span class="k">G</span><h2>慶功宴來賓確認</h2></div>
     <span class="who">Will</span>
-    <p class="lead">12/21（一）18:30・神旺潮品集 忠孝店（忠孝敦化站 5 號出口），預計五桌（暫定）。來賓出席人數確認後，再跟餐廳確認桌數。</p>
+    <p class="lead">12/21（一）18:30・神旺潮品集 忠孝店（忠孝敦化站 5 號出口），預計五桌（暫定）。<b>11/30（一）報名截止</b>，為了先跟餐廳確認桌次。</p>
+    <h3 style="margin:18px 0 4px;font-size:18px">報名（對外）與統計</h3>
+    <ol class="steps">
+      <li><b>對外報名頁：貼到大群，大家自己填</b><p>選名字 → 出席／還不確定／不克出席 → 飲食、忌口、備註。師長與贊助者也在名單裡；名單上沒有的可以自行填寫。</p>
+        <a class="go" href="./party.html" target="_blank" rel="noopener">開啟慶功宴報名頁（對外）↗</a></li>
+      <li><b>看報名結果</b><p>資料進 Google 表單「全國E馬慶功宴報名」的「回覆」分頁；摘要頁可以直接看出席、飲食的人數。按「連結至試算表」可轉成試算表整理。</p>
+        <a class="go" href="https://docs.google.com/forms/d/1dujjf9UkY_GgAx5YG75SWlLdR-6E99ng3Atf__PrskY/edit#responses" target="_blank" rel="noopener">開啟報名結果 ↗</a><span class="lock">需權限</span></li>
+      <li><b>統計時注意</b>
+        <ul class="chk">
+          <li>同一人送多次，以最後一次為準</li>
+          <li>「還不確定」的人，截止前私訊確認</li>
+          <li>「名單上沒有我」的人，確認身分（家屬或來賓）</li>
+          <li>素食、忌口與過敏，整理後交給餐廳</li>
+          <li>出席人數＋來賓 → 跟餐廳確認桌數</li>
+          <li>還沒回覆的人，11/30 前在群組提醒</li>
+        </ul></li>
+    </ol>
+    <div class="note"><b>不要改表單題目。</b>報名頁是靠這五題（姓名、是否出席、飲食、忌口或過敏、備註）的內部編號送資料，題目一改就會送不進去；要改請先找 Will。</div>
+    <h3 style="margin:22px 0 4px;font-size:18px">來賓邀請狀態</h3>
     <div class="tw" id="guests"></div>
     <p class="lead" style="margin-top:8px;font-size:14px">贊助者的邀請與出席，跟上面 F 的贊助者確認清單同步（在試算表更新）；院長、執行長、CP 的狀態由 Will 更新。</p>
   </section>
@@ -301,6 +319,8 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
       <a href="https://docs.google.com/spreadsheets/d/15FwlsGfaR_P99yfXAM04LmkNV2QbzhuS/edit" target="_blank" rel="noopener"><b>交通住宿餐食 雲端總表</b><small>僅限四位工作人員</small></a>
       <a href="https://bao-ming.com/eb/content/7117#33620" target="_blank" rel="noopener"><b>大會活動網站</b><small>賽程、注意事項、大會公告</small></a>
       <a href="./#mine" target="_blank" rel="noopener"><b>我的安排（隊員查詢頁）</b><small>更新後可在這裡確認</small></a>
+      <a href="./party.html" target="_blank" rel="noopener"><b>慶功宴報名頁（對外）</b><small>貼到大群；11/30 截止</small></a>
+      <a href="https://docs.google.com/forms/d/1dujjf9UkY_GgAx5YG75SWlLdR-6E99ng3Atf__PrskY/edit#responses" target="_blank" rel="noopener"><b>慶功宴報名結果</b><small>Google 表單回覆（需權限）</small></a>
       <a href="https://docs.google.com/spreadsheets/d/1ntWdijm5v5y_6vZQcpgjFD96IYHUXS3KKzeyASMv3II/edit?gid=1907253911#gid=1907253911" target="_blank" rel="noopener"><b>留言牆後台</b><small>雅文・Will 審核打 V</small></a>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaWP_kPNKNbdd2Pi7sbd14v8uLPVDMb1G0-D0I5EG1Qj-VQw/viewform?usp=header" target="_blank" rel="noopener"><b>每週課表上傳表單</b><small>雅文・Will</small></a>
       <a href="https://forms.gle/3hHDK6gZJ1BGfTan6" target="_blank" rel="noopener"><b>贊助表單</b><small>給有意贊助的學長姐</small></a>
@@ -343,6 +363,7 @@ const BOARD = {
       { t: "隊員異動登記", s: "已上線", d: "總表已有 U、V、W 三欄，隊員有異動就照 A 登記。" }
     ] },
     { who: "Will", title: "處理進度", cards: [
+      { t: "慶功宴報名開跑，11/30 截止", s: "處理中", d: "報名頁已上線（見 G）；報名結果在 Google 表單「回覆」分頁。截止後統計人數與飲食，跟餐廳確認桌次。" },
       { t: "贊助者確認清單：分享＋發布 CSV", s: "待確認", d: "分享給三位，兩個分頁發布成 CSV 網址交給 Claude，F 的狀態就會即時更新。" },
     ] }
   ]
