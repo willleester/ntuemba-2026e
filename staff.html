@@ -79,6 +79,13 @@ td:first-child{font-weight:700;white-space:nowrap}
 .p-doing{background:#FFE3CC;color:#8A3B00}.p-plan{background:var(--surface);color:var(--muted);border:1px solid var(--line)}
 @media (max-width:1000px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.cols{grid-template-columns:1fr}}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:8px}
+.stats div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}
+.stats small{display:block;font-size:12px;color:var(--muted)}
+.stats b{font-family:var(--f-num);font-size:26px}
+.wait{margin-top:12px;font-size:14px;line-height:1.9}
+.wait b{display:inline-block;min-width:64px;color:var(--flame-ink)}
+@media (max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .tw{overflow-x:auto}
 table.spon{min-width:720px}
 table.spon td{white-space:nowrap}
@@ -265,6 +272,8 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
           <li>還沒回覆的人，11/30 前在群組提醒</li>
         </ul></li>
     </ol>
+    <h3 style="margin:22px 0 4px;font-size:18px">即時報名統計</h3>
+    <div id="rsvpStats"><p class="lead">讀取中…</p></div>
     <div class="note"><b>不要改表單題目。</b>報名頁是靠這五題（姓名、是否出席、飲食、忌口或過敏、備註）的內部編號送資料，題目一改就會送不進去；要改請先找 Will。</div>
     <h3 style="margin:22px 0 4px;font-size:18px">來賓邀請狀態</h3>
     <div class="tw" id="guests"></div>
@@ -425,6 +434,42 @@ async function spLoad(key) {
   }
   return [SPONSOR.fallback[key], false];
 }
+/* 慶功宴即時統計：讀報名回覆試算表「公開統計」分頁（發布到網路的 CSV，只有姓名、是否出席、飲食、時間；每人只留最後一次）。
+   ROSTER 與 party.html 的 NAMES 同一份名單，用來找出還沒回覆的人。 */
+const RSVP = { csv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5ljJW27fpJ5DcTzxVcs21ou_fNJjN7BKqQwTLNBNehtHn3KsXVKrNluM2FzrVm1WJh8S4rSe1GLl9/pub?gid=1905851737&single=true&output=csv" };
+const ROSTER = {
+  "全馬": ["蔡馥冲", "蔡博任", "許雅文", "孫明諒", "高福遙", "沈君芳", "江文興", "張慧豪", "徐嘉謙", "蘇炫旭", "洪芝晨"],
+  "半馬": ["連倩立", "王寶慶", "郭正哲", "王集祥", "黃張維", "王禎祥", "王凌卿", "林志文", "張振營", "劉恆宇", "杜正忠"],
+  "樂齡": ["盧靜足", "郭瑞祥", "林清暉", "杜孟郎", "張璁", "王嘉昇", "毛小薇", "陳輝川", "許富得", "白文仁", "林新德"],
+  "新生": ["吳素美", "歐士銘", "許哲豪", "陳柏宇", "陳柏凱", "錢敬絨", "郭耿豪", "呂昇燦", "陳田育", "陳彥甫", "廖苡嘉", "徐樹潭", "王光銳", "梁乃夫", "廖順彬"],
+  "共融": ["高介仲", "高紫萱"],
+  "工作人員": ["李明倫", "林芊吟"],
+  "師長・來賓": ["陳嘉麟院長", "何耕宇執行長", "陳秋萍（CP）"],
+  "贊助學長姐": ["Coco姐（堅持）", "蔡晉暉（安執）", "瑟宜學姐", "正大學長", "葉小瑜學姐", "Lindy學姐"]
+};
+(async function () {
+  const box = document.getElementById("rsvpStats");
+  if (!RSVP.csv) { box.innerHTML = '<p class="lead">報名試算表還沒發布，發布後這裡會顯示即時人數。</p>'; return; }
+  try {
+    const r = await fetch(RSVP.csv, { cache: "no-store" });
+    const rows = parseCSV(await r.text()).slice(1).filter(x => (x[0] || "").trim());
+    const by = Object.fromEntries(rows.map(x => [x[0].trim(), { a: (x[1] || "").trim(), d: (x[2] || "").trim() }]));
+    const n = f => rows.filter(f).length;
+    const yes = n(x => x[1] === "出席"), maybe = n(x => x[1] === "還不確定"), no = n(x => x[1] === "不克出席");
+    const veg = n(x => x[1] === "出席" && /素/.test(x[2] || ""));
+    const all = Object.values(ROSTER).flat();
+    const extra = Object.keys(by).filter(k => !all.includes(k));
+    box.innerHTML = `<div class="stats">
+        <div><small>出席</small><b>${yes}</b></div><div><small>還不確定</small><b>${maybe}</b></div>
+        <div><small>不克出席</small><b>${no}</b></div><div><small>出席中素食</small><b>${veg}</b></div>
+        <div><small>還沒回覆</small><b>${all.filter(k => !by[k]).length}</b></div></div>
+      <div class="wait"><p style="margin:10px 0 4px;font-weight:700">還沒回覆（截止前提醒）</p>${
+        Object.entries(ROSTER).map(([g, list]) => { const w = list.filter(k => !by[k]); return w.length ? `<div><b>${g}</b>${w.join("、")}</div>` : ""; }).join("") || "全部都回覆了 🎉"}
+        ${maybe ? `<p style="margin:10px 0 4px;font-weight:700">還不確定（私訊確認）</p><div>${Object.keys(by).filter(k => by[k].a === "還不確定").map(esc).join("、")}</div>` : ""}
+        ${extra.length ? `<p style="margin:10px 0 4px;font-weight:700">名單外自行填寫（確認身分）</p><div>${extra.map(esc).join("、")}</div>` : ""}
+        <p class="hint" style="margin-top:8px;font-size:12px;color:var(--muted)">桌數估算：出席 ${yes} 人＋還不確定 ${maybe} 人，約 ${[...new Set([Math.ceil(yes / 10), Math.ceil((yes + maybe) / 10)])].join("–")} 桌（每桌 10 人）。忌口與過敏請看報名結果。</p></div>`;
+  } catch (e) { box.innerHTML = '<p class="lead">統計暫時讀不到，請直接看報名結果。</p>'; }
+})();
 /* 慶功宴來賓：院長、執行長、CP 由 Will 更新這裡；贊助者從贊助清單帶入（同一份資料） */
 const GUESTS = [
   ["陳嘉麟院長", "台大管院院長", "待邀請", "待回覆", ""],
