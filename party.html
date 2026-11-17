@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>全國E馬慶功宴報名</title>
+<meta name="description" content="2026 全國E馬 台大EMBA代表隊 慶功宴暨感恩餐會 報名">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Anton&family=Oswald:wght@500;600;700&display=swap">
+<style>
+:root{
+  --navy:#0A1C3F; --blue:#1446A0; --flame:#FF5A1F; --flame-ink:#D2400A; --yellow:#FFD23F;
+  --bg:#F4F6FA; --card:#FFFFFF; --fg:#14213A; --muted:#5A6A84; --line:#DCE2EA; --sky:#E8EEF7;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; --f-num:"Oswald","Noto Sans TC",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1426; --card:#111E36; --fg:#E7EDF7; --muted:#9AAAC4; --line:#24324D; --sky:#16264A; --blue:#7EAAF5; --flame-ink:#FF8A5C}}
+:root[data-theme="dark"]{--bg:#0A1426; --card:#111E36; --fg:#E7EDF7; --muted:#9AAAC4; --line:#24324D; --sky:#16264A; --blue:#7EAAF5; --flame-ink:#FF8A5C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.7}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding-top:44px;padding-bottom:56px}
+.eyebrow{font-family:var(--f-num);letter-spacing:.22em;color:var(--yellow);font-size:14px;margin:0}
+.hero h1{margin:10px 0 0;font-size:44px;line-height:1.2;font-weight:900;letter-spacing:.02em}
+.hero h1 span{color:var(--flame)}
+.hero .lead{color:#C9D4E8;margin:14px 0 0;font-size:17px;max-width:520px}
+.when{display:flex;align-items:flex-end;gap:18px;margin-top:22px}
+.when .d{font-family:"Anton",var(--f-num);font-size:72px;line-height:.9;color:#fff;letter-spacing:.02em}
+.when .d small{font-size:.45em;color:var(--yellow);margin-left:6px}
+.when .t{border-left:3px solid var(--flame);padding-left:14px;font-size:15px;color:#C9D4E8;line-height:1.5}
+.when .t b{display:block;font-family:var(--f-num);font-size:28px;color:#fff;letter-spacing:.04em}
+.cta{display:inline-block;margin-top:26px;background:var(--flame);color:#fff;text-decoration:none;font-weight:900;font-size:17px;border-radius:999px;padding:12px 28px}
+.cta:hover{background:var(--flame-ink)}
+.photo{margin:0;position:relative}
+.photo img{width:100%;height:auto;display:block;border-radius:16px;border:3px solid rgba(255,255,255,.15)}
+.photo figcaption{font-size:12px;color:#9FB0CC;margin-top:6px;text-align:right}
+.stripe{height:10px;background:linear-gradient(90deg,var(--flame) 0 40%,var(--yellow) 40% 55%,#fff 55% 100%)}
+
+/* key info */
+.info{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:-28px;position:relative}
+.info div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.info small{display:block;font-size:12px;letter-spacing:.08em;color:var(--flame-ink);font-weight:700}
+.info b{display:block;font-size:17px;margin-top:2px;line-height:1.45}
+.info p{margin:4px 0 0;font-size:13px;color:var(--muted);line-height:1.6}
+.tbd{display:inline-block;font-size:12px;font-weight:700;background:#FFF2A8;color:#6B5200;border-radius:999px;padding:0 10px}
+
+/* form */
+main{padding:32px 0 56px}
+.layout{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
+.form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+.form h2{margin:0;font-size:24px;font-weight:900}
+.form .sub{margin:4px 0 0;color:var(--muted);font-size:15px}
+.field{margin-top:22px}
+.field>label,.field>.lb{display:block;font-weight:700;font-size:16px;margin-bottom:8px}
+.field>label em,.field>.lb em{font-style:normal;color:var(--flame-ink);margin-left:4px}
+.hint{font-size:13px;color:var(--muted);margin:6px 0 0}
+select,input[type=text],textarea{width:100%;font:inherit;font-size:16px;color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(20,70,160,.15)}
+textarea{min-height:84px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:9px 18px;font-weight:700;cursor:pointer;background:var(--bg);transition:background .15s,border-color .15s}
+.chips input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+:root[data-theme="dark"] .chips input:checked+span{background:var(--blue);border-color:var(--blue);color:#0A1426}
+.chips input:focus-visible+span{box-shadow:0 0 0 3px rgba(20,70,160,.3)}
+.err{color:#C0341B;font-size:13px;margin:6px 0 0;display:none}
+.field.bad .err{display:block}
+.field.bad select,.field.bad input[type=text]{border-color:#C0341B}
+.submit{margin-top:28px;width:100%;border:0;background:var(--flame);color:#fff;font:inherit;font-size:18px;font-weight:900;border-radius:14px;padding:15px;cursor:pointer}
+.submit:hover{background:var(--flame-ink)}
+.draft{margin-top:10px;text-align:center;font-size:13px;color:var(--muted)}
+#other{margin-top:10px;display:none}
+.done{display:none;text-align:center;padding:24px 8px}
+.done .ok{width:64px;height:64px;border-radius:50%;background:var(--navy);color:var(--yellow);font-size:34px;display:grid;place-items:center;margin:0 auto 12px}
+.done h3{margin:0;font-size:22px}
+.done dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;text-align:left;max-width:420px;margin:18px auto 0;font-size:15px}
+.done dt{color:var(--muted)}
+.done dd{margin:0;font-weight:700}
+
+/* side */
+.side{display:grid;gap:14px;position:sticky;top:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.box h3{margin:0 0 10px;font-size:16px}
+.box ul{margin:0;padding-left:18px;font-size:14px;line-height:1.8}
+.box .map{display:inline-block;margin-top:8px;font-weight:700;font-size:14px}
+.guests{display:flex;flex-wrap:wrap;gap:6px}
+.guests span{font-size:13px;background:var(--sky);border-radius:999px;padding:2px 10px}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:0 0 40px}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;padding-bottom:48px}
+  .hero h1{font-size:34px}
+  .info{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .layout{grid-template-columns:1fr}
+  .side{position:static}
+}
+@media (max-width:520px){
+  .when .d{font-size:56px}
+  .info{grid-template-columns:1fr}
+  .form{padding:20px}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">THANK-YOU PARTY・台大EMBA代表隊</p>
+      <h1>全國E馬<span>慶功宴</span><br>暨感恩餐會</h1>
+      <p class="lead">花蓮跑完，台北再聚一次。謝謝每一位隊員、工作人員，以及支持我們的師長與贊助學長姐。</p>
+      <div class="when">
+        <div class="d">12.21<small>MON</small></div>
+        <div class="t"><b>18:30</b>台北馬翌日・晚上 6:30</div>
+      </div>
+      <a class="cta" href="#rsvp">我要報名 ↓</a>
+    </div>
+    <figure class="photo">
+      <img src="img/party.jpg" alt="2025 全國E馬慶功宴台大EMBA全體合照" width="1200" height="675">
+      <figcaption>2025 慶功宴全體合照</figcaption>
+    </figure>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<div class="wrap">
+  <div class="info">
+    <div><small>時間</small><b>12/21（一）18:30</b><p>台北馬翌日晚上</p></div>
+    <div><small>地點</small><b>神旺潮品集・忠孝店</b><p>台北市大安區忠孝東路四段166號2樓</p></div>
+    <div><small>交通</small><b>捷運忠孝敦化站</b><p>5 號出口旁，步行約 3 分鐘</p></div>
+    <div><small>報名截止</small><b>11/30（一）</b><p>預計五桌（暫定），依報名人數訂桌</p></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="layout">
+    <form class="form" id="rsvp" novalidate>
+      <div id="formBody">
+        <h2>慶功宴報名</h2>
+        <p class="sub">為了先跟餐廳確認桌次，請在 <b>11/30（一）</b>前報名；還不確定也請先選「還不確定」。名字用選的，約 1 分鐘完成。</p>
+
+        <div class="field" id="fName">
+          <label for="name">你的名字<em>*</em></label>
+          <select id="name" required></select>
+          <input type="text" id="other" placeholder="請輸入姓名（例：王小明）" autocomplete="name">
+          <p class="err">請選擇或填寫你的名字</p>
+        </div>
+
+        <div class="field" id="fAttend">
+          <span class="lb">是否出席<em>*</em></span>
+          <div class="chips" role="radiogroup" aria-label="是否出席">
+            <label><input type="radio" name="attend" value="出席"><span>出席</span></label>
+            <label><input type="radio" name="attend" value="還不確定"><span>還不確定</span></label>
+            <label><input type="radio" name="attend" value="不克出席"><span>不克出席</span></label>
+          </div>
+          <p class="hint" id="unsureHint" style="display:none">先幫你記下來；確定後請回來再送出一次，以最後一次為準。</p>
+          <p class="err">請選擇是否出席</p>
+        </div>
+
+        <div class="field" id="fDiet">
+          <span class="lb">飲食<em>*</em></span>
+          <div class="chips" role="radiogroup" aria-label="飲食">
+            <label><input type="radio" name="diet" value="葷食"><span>葷食</span></label>
+            <label><input type="radio" name="diet" value="蛋奶素"><span>蛋奶素</span></label>
+            <label><input type="radio" name="diet" value="全素"><span>全素</span></label>
+          </div>
+          <p class="err">請選擇飲食</p>
+        </div>
+
+        <div class="field">
+          <label for="avoid">忌口或過敏</label>
+          <input type="text" id="avoid" placeholder="例：不吃牛、對蝦過敏；沒有可留空">
+        </div>
+
+        <div class="field">
+          <label for="note">備註</label>
+          <textarea id="note" placeholder="想跟工作人員說的話，例：會晚 30 分鐘到"></textarea>
+        </div>
+
+        <button class="submit" type="submit">送出報名</button>
+        <p class="draft" id="sendMsg">資料會送到工作人員的報名表；有異動重新送出即可，以最後一次為準。</p>
+      </div>
+
+      <div class="done" id="done" aria-live="polite">
+        <div class="ok">✓</div>
+        <h3 id="doneTitle">收到你的報名！</h3>
+        <p class="hint" id="doneSub">12/21 見！</p>
+        <dl id="doneList"></dl>
+        <button class="submit" type="button" id="again" style="max-width:280px">修改報名</button>
+      </div>
+    </form>
+
+    <aside class="side">
+      <div class="box">
+        <h3>重點資訊</h3>
+        <ul>
+          <li>12/21（一）18:30 入席</li>
+          <li><b>11/30（一）前報名</b>，為了先跟餐廳確認桌次</li>
+          <li>神旺潮品集・忠孝店（2 樓）</li>
+          <li>電話 <a href="tel:0227722699">02-2772-2699</a></li>
+          <li>報名後有異動，請重新送出一次，以最後一次為準</li>
+          <li>飲食與忌口會轉給餐廳，請盡量寫清楚</li>
+        </ul>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E6%97%BA%E6%BD%AE%E5%93%81%E9%9B%86%20%E5%BF%A0%E5%AD%9D%E5%BA%97%20%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B5166%E8%99%9F" target="_blank" rel="noopener">開啟地圖導航 ↗</a>
+      </div>
+      <div class="box">
+        <h3>邀請對象</h3>
+        <p class="hint" style="margin:0 0 8px">全體代表隊隊員、工作人員，以及師長與贊助的學長姐：</p>
+        <div class="guests" id="guestChips"></div>
+      </div>
+      <div class="box">
+        <h3>問題聯絡</h3>
+        <p class="hint" style="margin:0">晴天會長（Will）、雅文、芊芊、Grace</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>2026 第14屆全國EMBA校園馬拉松接力賽・台大EMBA代表隊</footer>
+
+<script>
+/* 名單：與隊員手冊「我的安排」同一份名單；來賓與贊助者另列。
+   送出接 Will 帳號的 Google 表單「全國E馬慶功宴報名」（編輯：docs.google.com/forms/d/1dujjf9UkY_GgAx5YG75SWlLdR-6E99ng3Atf__PrskY/edit），
+   回覆在該表單的「回覆」分頁。entry 編號對應：姓名、是否出席、飲食、忌口或過敏、備註。 */
+const FORM = { action: "https://docs.google.com/forms/d/e/1FAIpQLSdCzKcJAdgzWxt6rYFI7QjntsPUuLE_tpRCFktKseK0X52qGQ/formResponse",
+  name: "entry.1005852543", attend: "entry.1486009440", diet: "entry.1388626268", avoid: "entry.1217913880", note: "entry.999483870" };
+const NAMES = {
+  "全馬": ["蔡馥冲", "蔡博任", "許雅文", "孫明諒", "高福遙", "沈君芳", "江文興", "張慧豪", "徐嘉謙", "蘇炫旭", "洪芝晨"],
+  "半馬": ["連倩立", "王寶慶", "郭正哲", "王集祥", "黃張維", "王禎祥", "王凌卿", "林志文", "張振營", "劉恆宇", "杜正忠"],
+  "樂齡": ["盧靜足", "郭瑞祥", "林清暉", "杜孟郎", "張璁", "王嘉昇", "毛小薇", "陳輝川", "許富得", "白文仁", "林新德"],
+  "新生": ["吳素美", "歐士銘", "許哲豪", "陳柏宇", "陳柏凱", "錢敬絨", "郭耿豪", "呂昇燦", "陳田育", "陳彥甫", "廖苡嘉", "徐樹潭", "王光銳", "梁乃夫", "廖順彬"],
+  "共融": ["高介仲", "高紫萱"],
+  "工作人員": ["李明倫", "林芊吟"],
+  "師長・來賓": ["陳嘉麟院長", "何耕宇執行長", "陳秋萍（CP）"],
+  "贊助學長姐": ["Coco姐（堅持）", "蔡晉暉（安執）", "瑟宜學姐", "正大學長", "葉小瑜學姐", "Lindy學姐"]
+};
+const OTHER = "__other";
+const sel = document.getElementById("name"), other = document.getElementById("other");
+sel.innerHTML = `<option value="">請選擇…</option>` + Object.entries(NAMES).map(([g, list]) =>
+  `<optgroup label="${g}">${list.map(n => `<option>${n}</option>`).join("")}</optgroup>`).join("") +
+  `<optgroup label="其他"><option value="${OTHER}">名單上沒有我（自行填寫）</option></optgroup>`;
+document.getElementById("guestChips").innerHTML = [...NAMES["師長・來賓"], ...NAMES["贊助學長姐"]].map(n => `<span>${n}</span>`).join("");
+
+const field = id => document.getElementById(id);
+const clear = f => f.classList.remove("bad");
+sel.addEventListener("change", () => { other.style.display = sel.value === OTHER ? "block" : "none"; if (sel.value === OTHER) other.focus(); clear(field("fName")); });
+other.addEventListener("input", () => clear(field("fName")));
+document.querySelectorAll("input[name=attend]").forEach(r => r.addEventListener("change", () => {
+  clear(field("fAttend"));
+  const no = r.value === "不克出席" && r.checked;
+  field("fDiet").style.display = no ? "none" : "";
+  field("unsureHint").style.display = r.value === "還不確定" ? "block" : "none";
+  if (r.value !== "出席") clear(field("fDiet"));
+}));
+document.querySelectorAll("input[name=diet]").forEach(r => r.addEventListener("change", () => clear(field("fDiet"))));
+
+document.getElementById("rsvp").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = document.querySelector("#formBody .submit");
+  if (btn.disabled) return;
+  const name = sel.value === OTHER ? other.value.trim() : sel.value;
+  const attend = (document.querySelector("input[name=attend]:checked") || {}).value;
+  const diet = (document.querySelector("input[name=diet]:checked") || {}).value;
+  let ok = true;
+  if (!name) { field("fName").classList.add("bad"); ok = false; }
+  if (!attend) { field("fAttend").classList.add("bad"); ok = false; }
+  if (attend === "出席" && !diet) { field("fDiet").classList.add("bad"); ok = false; }
+  if (!ok) { document.querySelector(".field.bad").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+  const body = new URLSearchParams({ [FORM.name]: name, [FORM.attend]: attend, [FORM.diet]: attend === "不克出席" ? "" : (diet || ""),
+    [FORM.avoid]: attend === "不克出席" ? "" : field("avoid").value.trim(), [FORM.note]: field("note").value.trim() });
+  btn.disabled = true; btn.textContent = "送出中…";
+  try {
+    await fetch(FORM.action, { method: "POST", mode: "no-cors", body });
+  } catch (err) {
+    btn.disabled = false; btn.textContent = "送出報名";
+    field("sendMsg").innerHTML = '<b style="color:#C0341B">送出失敗，請檢查網路後再試一次；還是不行請在 LINE 告訴工作人員。</b>';
+    return;
+  }
+  btn.disabled = false; btn.textContent = "送出報名";
+  const rows = [["姓名", name], ["是否出席", attend]];
+  if (attend !== "不克出席" && diet) rows.push(["飲食", diet]);
+  if (attend !== "不克出席") rows.push(["忌口或過敏", field("avoid").value.trim() || "無"]);
+  if (field("note").value.trim()) rows.push(["備註", field("note").value.trim()]);
+  const msg = { "出席": [`${name}，收到你的報名！`, "12/21 晚上 18:30 神旺潮品集見！"],
+    "還不確定": [`${name}，先幫你記下來了`, "確定後請回來再送出一次，以最後一次為準。"],
+    "不克出席": [`${name}，謝謝你回覆`, "下次再一起跑！"] }[attend];
+  document.getElementById("doneTitle").textContent = msg[0];
+  document.getElementById("doneSub").textContent = msg[1];
+  document.getElementById("doneList").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c])}</dd>`).join("");
+  field("formBody").style.display = "none"; field("done").style.display = "block";
+  field("rsvp").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+document.getElementById("again").addEventListener("click", () => { field("done").style.display = "none"; field("formBody").style.display = ""; });
+</script>
+</body>
+</html>
