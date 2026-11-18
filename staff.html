@@ -79,6 +79,71 @@ td:first-child{font-weight:700;white-space:nowrap}
 .p-doing{background:#FFE3CC;color:#8A3B00}.p-plan{background:var(--surface);color:var(--muted);border:1px solid var(--line)}
 @media (max-width:1000px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.cols{grid-template-columns:1fr}}
+/* 視覺化分工 */
+:root{--c-will:#C2410C;--b-will:#FFEADB;--c-ya:#1D4ED8;--b-ya:#E5EDFC;--c-qian:#6D28D9;--b-qian:#EFE7FB;--c-grace:#0F766E;--b-grace:#DFF2EE}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--c-will:#FB923C;--b-will:#3A2414;--c-ya:#93B4FF;--b-ya:#17264A;--c-qian:#C4A8FF;--b-qian:#28194A;--c-grace:#5EEAD4;--b-grace:#0F2E2A}}
+:root[data-theme="dark"]{--c-will:#FB923C;--b-will:#3A2414;--c-ya:#93B4FF;--b-ya:#17264A;--c-qian:#C4A8FF;--b-qian:#28194A;--c-grace:#5EEAD4;--b-grace:#0F2E2A}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0 4px}
+.jump a{font-size:13px;font-weight:700;text-decoration:none;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+.jump a:hover{border-color:var(--flame);color:var(--flame-ink)}
+.kick{margin:0;color:var(--flame-ink);font-weight:700;font-size:14px;letter-spacing:.1em}
+.big{margin:2px 0 6px;font-size:28px;font-weight:900}
+.roles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
+.role{border-radius:14px;padding:16px 18px}
+.role h3{margin:0;font-size:20px;font-weight:900}
+.role .sub{margin:2px 0 8px;font-size:13px;font-weight:700}
+.role ul{margin:0;padding-left:18px;font-size:14px;line-height:1.8}
+.r-will{background:var(--b-will)}.r-will h3{color:var(--c-will)}
+.r-ya{background:var(--b-ya)}.r-ya h3{color:var(--c-ya)}
+.r-qian{background:var(--b-qian)}.r-qian h3{color:var(--c-qian)}
+.r-grace{background:var(--b-grace)}.r-grace h3{color:var(--c-grace)}
+.loop li.gate.g-grace{background:var(--b-grace)}
+.loop li.gate.g-grace .t-grace{background:var(--bg)}
+.loop{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.loop li{padding:14px;border-left:1px solid var(--line);position:relative}
+.loop li:first-child{border-left:0}
+.loop li.gate{outline:2px dashed var(--flame);outline-offset:-6px;background:var(--b-will)}
+.loop .n{display:block;font-family:var(--f-num);font-size:20px;color:var(--flame-ink);margin-bottom:6px}
+.loop p{margin:6px 0 0;font-size:14px;line-height:1.7}
+.who-tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:1px 8px;margin:0 4px 2px 0}
+.t-will{background:var(--b-will);color:var(--c-will)}.t-ya{background:var(--b-ya);color:var(--c-ya)}
+.t-qian{background:var(--b-qian);color:var(--c-qian)}.t-grace{background:var(--b-grace);color:var(--c-grace)}
+.loop li.gate .t-will{background:var(--bg)}
+.dash{display:inline-block;border:1.5px dashed var(--flame);border-radius:6px;padding:0 6px;font-size:13px}
+.mx-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:14px}
+.mx{border-collapse:separate;border-spacing:4px;min-width:1360px;font-size:13px}
+.mx thead th{background:var(--navy);color:#fff;border-radius:8px;padding:8px 4px;text-align:center;font-size:13px;line-height:1.35;vertical-align:middle}
+.mx thead th:first-child{background:transparent}
+.mx thead th a{color:#fff;text-decoration:none}
+:root[data-theme="dark"] .mx thead th{background:#24324D}
+.mx tbody th{text-align:left;font-size:15px;font-weight:900;padding:8px 6px;white-space:nowrap;vertical-align:top;border:0}
+.mx tbody th small{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+.mx td{border:0;border-radius:8px;padding:8px;vertical-align:top;line-height:1.5;width:80px;font-weight:400}
+.mx td:empty{background:repeating-linear-gradient(135deg,transparent 0 6px,var(--surface) 6px 8px)}
+.m-will th{color:var(--c-will)}.m-will td:not(:empty){background:var(--b-will)}
+.m-ya th{color:var(--c-ya)}.m-ya td:not(:empty){background:var(--b-ya)}
+.m-qian th{color:var(--c-qian)}.m-qian td:not(:empty){background:var(--b-qian)}
+.m-grace th{color:var(--c-grace)}.m-grace td:not(:empty){background:var(--b-grace)}
+.m-note td{background:var(--surface)}
+.mx td.gate{outline:2px dashed var(--flame);outline-offset:-2px;font-weight:700}
+.mx td.go-cell{cursor:pointer;position:relative;padding-bottom:20px;transition:transform .12s,box-shadow .12s}
+.mx td.go-cell::after{content:"↓ 看做法";position:absolute;left:8px;bottom:4px;font-size:11px;font-weight:700;color:var(--flame-ink);opacity:.55}
+.mx td.go-cell:hover,.mx td.go-cell:focus-visible{transform:translateY(-2px);box-shadow:0 4px 10px rgba(10,28,63,.15);outline-color:var(--flame)}
+.mx td.go-cell:hover::after{opacity:1}
+.agency{background:var(--b-grace);border-radius:12px;padding:12px 16px;margin:4px 0 14px}
+.agency b{color:var(--c-grace);font-size:16px}
+.agency p{margin:4px 0 0;font-size:14px}
+.tour{display:grid;grid-template-columns:260px 1fr;gap:16px;align-items:start;margin:16px 0 0;border:1px solid var(--line);border-radius:12px;padding:12px}
+.tour img{width:100%;height:auto;border-radius:8px;display:block}
+.tour figcaption{font-size:14px;line-height:1.8;color:var(--muted)}
+.tour figcaption b{display:block;color:var(--fg);font-size:16px}
+@media (max-width:600px){.tour{grid-template-columns:1fr}}
+.flash{animation:flash 2.4s ease-out}
+.back-mx{display:none;position:fixed;right:16px;bottom:16px;z-index:20;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:14px;border-radius:999px;padding:10px 16px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+:root[data-theme="dark"] .back-mx{background:var(--blue);color:#0A1426}
+@keyframes flash{0%,35%{background:#FFF2A8;box-shadow:0 0 0 4px #FFD23F}100%{box-shadow:0 0 0 4px transparent}}
+@media (max-width:900px){.roles{grid-template-columns:repeat(2,minmax(0,1fr))}.loop{grid-template-columns:1fr}.loop li{border-left:0;border-top:1px solid var(--line)}.loop li:first-child{border-top:0}}
+@media (max-width:520px){.roles{grid-template-columns:1fr}.big{font-size:23px}}
 .pay{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .pay>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .pay .tag-a{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--navy);color:#fff;font-family:var(--f-num);margin-right:8px}
@@ -122,10 +187,10 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
     <h1>2026 全國E馬・工作人員手冊</h1>
     <p>A–C 是交通、住宿、餐食的異動與對外待辦；D–F 是網站留言牆、每週課表、贊助的處理方式；G 是慶功宴來賓；H 是在校生記功；I 是比賽背心發放；J 是個資規則。每個步驟都附連結，點了直接開；有鎖權限的檔案只有負責的人打得開。</p>
     <div class="team">
-      <div><b>晴天 Will</b><small>會長・資料與網站・大會窗口・贊助・慶功宴</small></div>
-      <div><b>玉蝴蝶 雅文</b><small>總召・異動登記・遊覽車・留言審核・課表・記功</small></div>
-      <div><b>芊芊</b><small>副領隊・異動登記・隊員聯絡・背心發放</small></div>
-      <div><b>Grace</b><small>財務・台鐵・住宿・收退費</small></div>
+      <div><b>晴天 Will</b><small>會長・大會・網站・總表・贊助</small></div>
+      <div><b>玉蝴蝶 雅文</b><small>總召・選手確認・慶功宴人數・異動登記・遊覽車・記功</small></div>
+      <div><b>芊芊</b><small>副領隊・現場指揮・異動登記・背心發放</small></div>
+      <div><b>Grace</b><small>財務・旅行社結算付款・公費支出・收退費</small></div>
     </div>
   </div>
 </header>
@@ -136,6 +201,72 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
     <div class="flow"><span>LINE 上的資訊</span> → <b>Will 整理進看板</b> → <span>各自照下面流程處理</span>
       <p>以這個看板為準。看板上沒有的，代表還沒整理進來，請在 LINE 告訴 Will。</p></div>
     <div class="cols" id="boardCols"></div>
+  </section>
+
+  <nav class="jump" aria-label="快速跳到">
+    <a href="#roles">分工</a><a href="#loop">異動流程</a><a href="#matrix">一張表</a>
+    <a href="#a">A 登記</a><a href="#b">B 更新</a><a href="#c">C 對外</a><a href="#e">D 留言</a><a href="#f">E 課表</a>
+    <a href="#g">F 贊助</a><a href="#party">G 慶功宴</a><a href="#merit">H 記功</a><a href="#h">I 背心</a><a href="#links">網址</a><a href="#d">J 個資</a>
+  </nav>
+
+  <section id="roles">
+    <p class="kick">分工</p>
+    <h2 class="big">四個人各做什麼</h2>
+    <p class="lead">原則：<b>誰負責就誰處理，其他人先登記、再告訴負責的人</b>。改總表和網站統一由 Will 做，避免兩個人改到同一格；牽涉到錢的，一定通知 Grace。</p>
+    <div class="roles">
+      <div class="role r-will"><h3>Will 晴天</h3><p class="sub">大會・網站・總表</p>
+        <ul><li>總表：確認異動、改資料</li><li>網站：我的安排、手冊、贊助曝光</li><li>大會：送件、修改報名、選手之夜</li><li>大會物資：收件、分給各隊隊長</li><li>贊助洽談、邀請師長與贊助者</li><li>留言審核、課表上傳（與雅文）</li></ul></div>
+      <div class="role r-ya"><h3>雅文 玉蝴蝶</h3><p class="sub">總召・選手與人數</p>
+        <ul><li>選手確認：誰跑、候補</li><li>觀光行程：最後拍板定案</li><li>慶功宴人數確認、訂桌</li><li>協助檢查大會物資（背心、號碼布）</li><li>隊員異動登記（U、V 欄）</li><li>遊覽車分車、輪椅確認</li><li>午餐桌數、便當數量（與 Will）</li><li>留言審核、課表上傳</li><li>記功：問 E 辦雅惠格式</li></ul></div>
+      <div class="role r-qian"><h3>芊芊</h3><p class="sub">副領隊・現場指揮・背心</p>
+        <ul><li>12/5–6 現場指揮隊員</li><li>出發前檢查台鐵、遊覽車、住宿、餐食、報到的執行細節</li><li>12/5 觀光行程現場協助</li><li>協助檢查大會物資（背心、號碼布）</li><li>隊員異動登記（U、V 欄）</li><li>隊員聯絡、提醒</li><li>背心：11/25 收男背心、發放、打 v</li><li>物資贊助的物品確認</li></ul></div>
+      <div class="role r-grace"><h3>Grace</h3><p class="sub">財務・金流・旅行社結算</p>
+        <ul><li>異動後和旅行社結算、付款</li><li>確認公費要支出多少</li><li>台鐵退票、優待票換票</li><li>住宿多訂房間退訂</li><li>收退費、公費補差價</li><li>贊助入帳、抵稅憑證</li><li>管院補助：保管憑證</li></ul></div>
+    </div>
+    <p class="hint" style="margin-top:10px">Claude：協助 Will 讀總表、整理名單、更新網站與這份手冊。</p>
+  </section>
+
+  <section id="loop">
+    <p class="kick">流程</p>
+    <h2 class="big">隊員有異動時，六步走完</h2>
+    <p class="lead">最常出錯的是「直接改資料、沒有登記」，以及改完沒通知 Grace。照這六步，每一筆都有紀錄、錢也算得清楚。</p>
+    <ol class="loop">
+      <li><span class="n">01</span><span class="who-tag t-ya">雅文</span><span class="who-tag t-qian">芊芊</span><p>隊員來說要改什麼（交通、餐食、住宿、室友、不去）</p></li>
+      <li><span class="n">02</span><span class="who-tag t-ya">雅文</span><span class="who-tag t-qian">芊芊</span><p>在總表那一列寫 <b>U 異動內容</b>、<b>V 登記人＋日期</b>；<b>不改左邊</b></p></li>
+      <li><span class="n">03</span><span class="who-tag t-ya">雅文</span><span class="who-tag t-qian">芊芊</span><p>四人群組說一聲「總表有新異動」</p></li>
+      <li class="gate"><span class="n">04</span><span class="who-tag t-will">Will</span><p>檢查連動：室友、統計、分車、房數、旅行社、退費</p></li>
+      <li><span class="n">05</span><span class="who-tag t-will">Will</span><p>改總表、更新網站，在 <b>W 處理狀態</b>填「已更新 日期」</p></li>
+      <li class="gate g-grace"><span class="n">06</span><span class="who-tag t-grace">Grace</span><p>和旅行社結算、付款；確認公費要多支出或可退多少</p></li>
+    </ol>
+    <p class="hint" style="margin-top:8px"><span class="dash">虛線框</span>＝要人判斷、確認的關卡。詳細步驟見 <a href="#a">A</a>、<a href="#b">B</a>。</p>
+  </section>
+
+  <section id="matrix">
+    <p class="kick">附表</p>
+    <h2 class="big">一張表看完分工</h2>
+    <p class="lead">橫向是工作項目，直向是人。順著一列看自己要做哪些事，順著一欄看某件事誰做、要注意什麼。<span class="dash">虛線框</span>＝要判斷或確認的地方。<b>點任一格，會跳到下面對應的操作說明並標亮。</b></p>
+    <div class="mx-wrap"><table class="mx">
+      <thead><tr><th></th>
+        <th><a href="#a">異動<br>登記</a></th><th><a href="#c">台鐵</a></th><th><a href="#c">遊覽車</a></th><th><a href="#c">住宿</a></th><th><a href="#c">午餐<br>便當</a></th><th><a href="#c">觀光<br>行程</a></th><th><a href="#c">大會<br>報名</a></th><th><a href="#c">大會<br>物資</a></th>
+        <th><a href="#e">留言牆</a></th><th><a href="#f">課表</a></th><th><a href="#g">贊助</a></th><th><a href="#g">管院<br>補助</a></th><th><a href="#party">慶功宴</a></th><th><a href="#merit">記功</a></th><th><a href="#h">背心</a></th></tr></thead>
+      <tbody>
+        <tr class="m-will"><th>Will<small>大會・網站・總表</small></th>
+          <td class="gate">確認連動、改總表、更新網站</td><td></td><td></td><td>單住雙人房：公費補差價</td><td>和旅行社確認</td><td></td><td>對大會：送件、修改報名、選手之夜</td><td class="gate">收件、分給各隊隊長</td>
+          <td>審核打 V</td><td>上傳課表</td><td class="gate">確認稱呼、logo、上網站、邀請</td><td>整理活動資料送件</td><td>邀請師長、贊助者</td><td>整理在校生名單</td><td></td></tr>
+        <tr class="m-ya"><th>雅文<small>總召</small></th>
+          <td>登記 U、V</td><td></td><td>分車、確認輪椅</td><td></td><td>午餐桌數、便當數量</td><td class="gate">最後拍板定案</td><td class="gate">選手確認：誰跑、候補</td><td>協助檢查背心、號碼布</td>
+          <td>審核打 V</td><td>上傳課表</td><td></td><td></td><td class="gate">人數確認、訂桌</td><td class="gate">問 E 辦雅惠格式</td><td></td></tr>
+        <tr class="m-qian"><th>芊芊<small>副領隊・現場</small></th>
+          <td>登記 U、V</td><td class="gate">12/5 集合點名、上車指揮</td><td class="gate">現場分車點名、指揮上下車</td><td class="gate">入住現場協助</td><td>現場人數、發便當</td><td class="gate">12/5 現場帶隊</td><td>12/6 指揮隊員集合報到</td><td>協助檢查背心、號碼布</td>
+          <td></td><td></td><td>物資確認</td><td></td><td></td><td></td><td class="gate">11/25 收男背心、發放、打 v</td></tr>
+        <tr class="m-grace"><th>Grace<small>財務</small></th>
+          <td class="gate">旅行社結算、付款；公費支出</td><td class="gate">退票、優待票換票</td><td></td><td class="gate">多訂房間退訂</td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td class="gate">入帳、抵稅憑證</td><td>保管憑證、確認入帳</td><td></td><td></td><td></td></tr>
+        <tr class="m-note"><th>注意<small>品質關卡</small></th>
+          <td>不直接改左邊欄</td><td>敬老／幼兒票要提早換</td><td>2 號車要能上下輪椅</td><td>房數以「房間分配」為準</td><td>依總表統計人數</td><td>吉安慶修院、張家樹屋、午餐；13:30 前往理想大地</td><td>競賽隊員都送選手之夜，多出正常</td><td>核對名單、尺寸、號碼，有錯馬上跟大會反映</td>
+          <td>不改欄名、不刪列</td><td>貼 LINE 整段原文</td><td>不寫金額</td><td>最多 2 萬、附憑證</td><td>11/30 截止、以最後一次為準</td><td>賽後附成績證明</td><td>12/5 出發前發完</td></tr>
+      </tbody>
+    </table></div>
   </section>
 
   <section id="a">
@@ -168,6 +299,7 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
           <li>「房間分配」間數，多出或不足</li>
           <li>要不要通知旅行社（台鐵、遊覽車、房間、餐廳、便當）</li>
           <li>要不要通知大會、要不要收退費（告訴 Grace）</li>
+          <li>通知 Grace：和旅行社結算、付款，確認公費支出</li>
         </ul></li>
       <li><b>改總表資料，重新產生網站「我的安排」，上傳 GitHub</b><p>網站只放公開範圍的欄位，資料更新日期會一起換。</p></li>
       <li><b>填 <span class="cell">W 處理狀態</span>，在群組回覆</b>
@@ -182,6 +314,10 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
   <section id="c">
     <div class="sh"><span class="k">C</span><h2>對外待辦（旅行社・大會）</h2></div>
     <span class="who">分工如下表</span>
+    <div class="agency">
+      <b>旅行社窗口：五福旅行社 李家翰（Jackal Li）</b>
+      <p>台鐵、遊覽車、住宿、午餐、便當、觀光行程，都找家翰。他在 LINE 群組「台大EMBA馬拉松 12／5～6」裡；之前的行程檔「台大EMBA-馬拉松活動二日0916.pdf」也在那個群組（LINE 檔案已過期，需要時請他重傳）。</p>
+    </div>
     <table>
       <thead><tr><th>項目</th><th>要處理的事</th><th>建議負責</th></tr></thead>
       <tbody>
@@ -191,10 +327,19 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
         <tr><td>12/5 午餐</td><td>和旅行社確認餐廳、桌數</td><td>雅文・Will</td></tr>
         <tr><td>12/6 便當</td><td>和旅行社確認數量</td><td>雅文・Will</td></tr>
         <tr><td>選手之夜</td><td>報名競賽的每人都送選手之夜，位置多出來是正常的；眷屬是否加購再確認</td><td>Will</td></tr>
-        <tr><td>報名異動</td><td>大會報名資料的修改、候補替換</td><td>Will</td></tr>
+        <tr><td>選手確認</td><td>確認誰跑、候補是否上場；有變動交給 Will 處理大會報名</td><td>雅文</td></tr>
+        <tr><td>觀光行程</td><td>12/5 吉安慶修院、張家樹屋、午餐，13:30 前往理想大地；最後拍板定案</td><td>雅文定案・芊芊現場</td></tr>
+        <tr><td>大會物資</td><td>大會寄給 Will 的物資，檢查背心、號碼布有沒有錯（名單、尺寸、號碼），再分給各隊隊長</td><td>Will・雅文・芊芊</td></tr>
+        <tr><td>現場執行</td><td>出發前檢查台鐵、遊覽車、住宿、餐食、報到的細節是否還有問題；12/5–6 現場指揮隊員</td><td>芊芊</td></tr>
+        <tr><td>報名異動</td><td>大會報名資料的修改、候補替換（對大會窗口）</td><td>Will</td></tr>
+        <tr><td>旅行社結算</td><td>隊員異動後和旅行社結算、付款；確認公費要支出多少</td><td>Grace</td></tr>
         <tr><td>收退費</td><td>眷屬費用、取消者退費、公費補差價</td><td>Grace</td></tr>
       </tbody>
     </table>
+    <figure class="tour" id="tour">
+      <img src="img/tour-morning.jpg" alt="旅行社提供的花蓮景點推薦：張家樹屋＋吉安慶修院（上午）" loading="lazy" width="496" height="358">
+      <figcaption><b>12/5 上午觀光（旅行社提供）</b>張家樹屋＋吉安慶修院：日式主題休閒園區，門票內含免費和服體驗、近距離萌寵互動。最後行程由雅文拍板，12/5 現場由芊芊協助。</figcaption>
+    </figure>
     <p class="lead" style="margin-top:12px">詳細的待確認事項在雲端總表的「待確認」分頁。</p>
     <a class="go" href="https://docs.google.com/spreadsheets/d/15FwlsGfaR_P99yfXAM04LmkNV2QbzhuS/edit" target="_blank" rel="noopener">開啟總表（看「待確認」分頁）↗</a>
   </section>
@@ -273,7 +418,7 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 
   <section id="party">
     <div class="sh"><span class="k">G</span><h2>慶功宴來賓確認</h2></div>
-    <span class="who">Will</span>
+    <span class="who">雅文（人數確認、訂桌）・Will（邀請師長與贊助者）</span>
     <p class="lead">12/21（一）18:30・神旺潮品集 忠孝店（忠孝敦化站 5 號出口），預計五桌（暫定）。<b>11/30（一）報名截止</b>，為了先跟餐廳確認桌次。</p>
     <h3 style="margin:18px 0 4px;font-size:18px">報名（對外）與統計</h3>
     <ol class="steps">
@@ -316,9 +461,9 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 
   <section id="h">
     <div class="sh"><span class="k">I</span><h2>比賽背心發放</h2></div>
-    <span class="who">芊芊（男生背心由 Will 交接）</span>
+    <span class="who">芊芊</span>
     <ol class="steps">
-      <li><b>男生背心：小羊趕工中，預計 11/25 前交給 Will</b><p>Will 拿到後交給芊芊。</p></li>
+      <li><b>男生背心：小羊趕工中，預計 11/25 前到</b><p>到貨後交給芊芊。</p></li>
       <li><b>芊芊發給還沒拿到的隊員</b><p>發完在雲端總表「背心」分頁的 <span class="cell">衣服已領</span> 欄打 v，有狀況寫在備註。</p>
         <a class="go" href="https://docs.google.com/spreadsheets/d/15FwlsGfaR_P99yfXAM04LmkNV2QbzhuS/edit" target="_blank" rel="noopener">開啟總表（看「背心」分頁）↗</a><span class="lock">需權限</span></li>
       <li><b>12/5 出發前全部發完</b><p>來不及的人，出發日在臺北車站集合時發。</p></li>
@@ -383,15 +528,18 @@ const BOARD = {
     { who: "雅文", title: "隊員與候補", cards: [
       { t: "祥哥（王禎祥）確定不能參加", s: "已完成", d: "個人因素確定不能參加；總表與網站已標「本次不同行」。" },
       { t: "緊急候補：強哥（王嘉昇，樂齡）", s: "備案", d: "只有樂齡有人受傷無法出賽時才會去，目前不訂交通住宿。雅文 11/15 河濱跟他跑，配速 4:45 沒問題；他可以跟老闆商量能否改晚班機出差來支援。希望用不到。" },
-      { t: "在校生記功：問 E 辦雅惠", s: "待確認", d: "申請方式、截止日、檔案格式（見 H）。" }
+      { t: "在校生記功：問 E 辦雅惠", s: "待確認", d: "申請方式、截止日、檔案格式（見 H）。" },
+      { t: "觀光行程最後拍板", s: "待確認", d: "吉安慶修院、張家樹屋、午餐、13:30 前往理想大地；定案後告訴芊芊，12/5 現場由芊芊協助。" },
+      { t: "慶功宴人數確認，11/30 截止", s: "處理中", d: "報名頁已上線；看 G 的即時統計，提醒還沒回覆的人，截止後確認人數與飲食、跟餐廳訂桌。" }
     ] },
     { who: "芊芊", title: "背心與異動", cards: [
-      { t: "男生背心 11/25 前到", s: "處理中", d: "Will 拿到後交給芊芊，發給還沒領的 5 位男生（見 I）。" },
+      { t: "男生背心 11/25 前到", s: "處理中", d: "到貨後交給芊芊，發給還沒領的 5 位男生（見 I）。" },
       { t: "洪芝晨女 XS、芊芊自己的尺寸", s: "待確認", d: "女生背心能否先發給洪芝晨；芊芊的尺寸要補在總表「背心」分頁。" },
-      { t: "隊員異動登記", s: "已上線", d: "總表已有 U、V、W 三欄，隊員有異動就照 A 登記。" }
+      { t: "隊員異動登記", s: "已上線", d: "總表已有 U、V、W 三欄，隊員有異動就照 A 登記。" },
+      { t: "12/5–6 現場執行檢查", s: "待確認", d: "出發前檢查台鐵、遊覽車、住宿、餐食、觀光、報到還有沒有問題；12/5 現場指揮隊員。" }
     ] },
     { who: "Will", title: "處理進度", cards: [
-      { t: "慶功宴報名開跑，11/30 截止", s: "處理中", d: "報名頁已上線（見 G）；報名結果在 Google 表單「回覆」分頁。截止後統計人數與飲食，跟餐廳確認桌次。" },
+      { t: "大會物資到了要檢查再分發", s: "待確認", d: "大會寄給 Will；雅文、芊芊一起檢查背心、號碼布（名單、尺寸、號碼），沒問題再分給各隊隊長。" },
       { t: "贊助者確認清單：分享＋發布 CSV", s: "待確認", d: "分享給三位，兩個分頁發布成 CSV 網址交給 Claude，F 的狀態就會即時更新。" },
     ] }
   ]
@@ -401,6 +549,38 @@ const BOARD = {
   document.getElementById("boardDate").textContent = BOARD.date;
   document.getElementById("boardCols").innerHTML = BOARD.cols.map(c => `<div class="col"><h3><i>${c.who}</i>${c.title}</h3>${
     c.cards.map(k => `<div class="card"><div class="ct"><b>${k.t}</b><span class="pill ${cls(k.s)}">${k.s}</span></div><p>${k.d}</p></div>`).join("")}</div>`).join("");
+})();
+/* 一張表：點格子跳到下面對應的操作。預設跳到欄位標題的段落；有更精準的位置（C 段某一列、某人的步驟）就跳那裡並標亮。 */
+(function () {
+  const cRow = label => [...document.querySelectorAll("#c tbody tr")].find(tr => tr.cells[0] && tr.cells[0].textContent.trim() === label);
+  const COL_C = { "台鐵": "台鐵", "遊覽車": "遊覽車", "住宿": "住宿", "午餐便當": "12/5 午餐", "觀光行程": "觀光行程", "大會報名": "選手確認", "大會物資": "大會物資" };
+  const PERSON = {   // [row class, column] → C 段列名或元素
+    "m-will|異動登記": "#b", "m-ya|異動登記": "#a", "m-qian|異動登記": "#a", "m-grace|異動登記": "旅行社結算",
+    "m-will|大會報名": "報名異動", "m-will|住宿": "住宿", "m-grace|管院補助": "#g", "m-will|慶功宴": "#guests", "m-ya|慶功宴": "#rsvpStats"
+  };
+  const ONSITE = ["台鐵", "遊覽車", "住宿", "午餐便當", "觀光行程", "大會報名"];
+  const back = document.createElement("a");
+  back.href = "#matrix"; back.className = "back-mx"; back.textContent = "↑ 回一張表";
+  back.addEventListener("click", () => { back.style.display = "none"; });
+  document.body.appendChild(back);
+  const heads = [...document.querySelectorAll(".mx thead th")].map(th => th.textContent.replace(/\s+/g, ""));
+  const hrefs = [...document.querySelectorAll(".mx thead th")].map(th => th.querySelector("a")?.getAttribute("href") || null);
+  document.querySelectorAll(".mx tbody tr").forEach(tr => {
+    const rc = tr.className;
+    [...tr.cells].forEach((td, i) => {   // cells[0] is the row header <th>; heads/hrefs share the same index
+      if (i === 0 || !td.textContent.trim()) return;
+      const col = heads[i], key = `${rc}|${col}`;
+      let ref = PERSON[key] || (rc === "m-qian" && ONSITE.includes(col) ? "現場執行" : COL_C[col]) || hrefs[i];
+      const target = () => ref && ref.startsWith("#") ? document.querySelector(ref) : cRow(ref);
+      if (!target()) ref = hrefs[i];
+      td.classList.add("go-cell"); td.tabIndex = 0; td.setAttribute("role", "link");
+      td.title = `看「${col}」的做法`;
+      const go = () => { const t = target(); if (!t) return; t.scrollIntoView({ behavior: "smooth", block: "center" });
+        t.classList.remove("flash"); void t.offsetWidth; t.classList.add("flash"); back.style.display = "block"; };
+      td.addEventListener("click", go);
+      td.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    });
+  });
 })();
 /* 贊助者確認清單：讀 Google 試算表「發布到網路」的 CSV。
    cash／goods 填各分頁的 CSV 網址（檔案 → 共用 → 發布到網路 → 選分頁 → 逗號分隔值）；
