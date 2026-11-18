@@ -176,8 +176,22 @@ ul.rules{margin:6px 0 0;padding-left:20px}
 ul.rules li{margin:4px 0}
 footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 @media (max-width:760px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}.chk,.links{grid-template-columns:1fr}header h1{font-size:24px}
-  table:not(.spon) thead{display:none}table:not(.spon),table:not(.spon) tbody,table:not(.spon) tr,table:not(.spon) td{display:block}
-  table:not(.spon) tr{border-top:1px solid var(--line);padding:8px 0}table:not(.spon) td{border:0;padding:2px 0}}
+  table:not(.spon):not(.mx) thead{display:none}table:not(.spon):not(.mx),table:not(.spon):not(.mx) tbody,table:not(.spon):not(.mx) tr,table:not(.spon):not(.mx) td{display:block}
+  table:not(.spon):not(.mx) tr{border-top:1px solid var(--line);padding:8px 0}table:not(.spon):not(.mx) td{border:0;padding:2px 0}
+  /* 一張表在手機：改成「每人一張卡」，每個任務前面標欄位名稱，空格不顯示 */
+  .mx-wrap{border:0;overflow:visible}
+  .mx{min-width:0;width:100%;border-spacing:0;display:block}
+  .mx thead{display:none}
+  .mx tbody{display:grid;gap:14px}
+  .mx tr{display:grid;grid-template-columns:1fr 1fr;gap:8px;border:1px solid var(--line);border-radius:14px;padding:12px}
+  .mx tbody th{grid-column:1 / -1;font-size:18px;padding:0 2px 2px}
+  .mx tbody th small{display:inline;margin-left:8px;font-size:12px}
+  .mx td{width:auto;display:block;padding:8px 10px 24px;font-size:14px}
+  .mx td:empty{display:none}
+  .mx td::before{content:attr(data-col);display:block;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--muted);margin-bottom:2px}
+  .mx td.gate::before{color:var(--flame-ink)}
+  .m-note td{padding-bottom:8px}}
+@media (max-width:400px){.mx tr{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -570,7 +584,9 @@ const BOARD = {
   document.querySelectorAll(".mx tbody tr").forEach(tr => {
     const rc = tr.className;
     [...tr.cells].forEach((td, i) => {   // cells[0] is the row header <th>; heads/hrefs share the same index
-      if (i === 0 || !td.textContent.trim()) return;
+      if (i === 0) return;
+      td.dataset.col = heads[i];   // shown as a label on phones, where the header row is hidden
+      if (!td.textContent.trim()) return;
       const col = heads[i], key = `${rc}|${col}`;
       let ref = PERSON[key] || (rc === "m-qian" && ONSITE.includes(col) ? "現場執行" : COL_C[col]) || hrefs[i];
       const target = () => ref && ref.startsWith("#") ? document.querySelector(ref) : cRow(ref);
