@@ -130,6 +130,15 @@ td:first-child{font-weight:700;white-space:nowrap}
 .mx td.go-cell::after{content:"↓ 看做法";position:absolute;left:8px;bottom:4px;font-size:11px;font-weight:700;color:var(--flame-ink);opacity:.55}
 .mx td.go-cell:hover,.mx td.go-cell:focus-visible{transform:translateY(-2px);box-shadow:0 4px 10px rgba(10,28,63,.15);outline-color:var(--flame)}
 .mx td.go-cell:hover::after{opacity:1}
+.sched{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0 0}
+.sched h3{margin:0 0 8px;font-size:17px}
+.sched-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sched-grid b{display:block;color:var(--flame-ink);margin-bottom:4px}
+.sched-grid ol{list-style:none;margin:0;padding:0;font-size:14px}
+.sched-grid li{padding:4px 0;border-top:1px solid var(--line)}
+.sched-grid li span{display:inline-block;min-width:52px;font-family:var(--f-num);font-weight:600;color:var(--blue)}
+.sched-grid li.tbd-row{outline:1.5px dashed var(--flame);outline-offset:-1px;border-radius:6px;padding-left:6px}
+@media (max-width:600px){.sched-grid{grid-template-columns:1fr}}
 .agency{background:var(--b-grace);border-radius:12px;padding:12px 16px;margin:4px 0 14px}
 .agency b{color:var(--c-grace);font-size:16px}
 .agency p{margin:4px 0 0;font-size:14px}
@@ -277,7 +286,7 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
           <td class="gate">旅行社結算、付款；公費支出</td><td class="gate">退票、優待票換票</td><td></td><td class="gate">多訂房間退訂</td><td></td><td></td><td></td><td></td>
           <td></td><td></td><td class="gate">入帳、抵稅憑證</td><td>保管憑證、確認入帳</td><td></td><td></td><td></td></tr>
         <tr class="m-note"><th>注意<small>品質關卡</small></th>
-          <td>不直接改左邊欄</td><td>敬老／幼兒票要提早換</td><td>2 號車要能上下輪椅；東華 12/6 離校前掃大會 QR Code 免費停車，12/5 試跑停車要付費</td><td>房數以「房間分配」為準</td><td>依總表統計人數</td><td>吉安慶修院、張家樹屋、午餐；13:30 前往理想大地</td><td>競賽隊員都送選手之夜，多出正常</td><td>核對名單、尺寸、號碼，有錯馬上跟大會反映</td>
+          <td>不直接改左邊欄</td><td>去 52、回 53；敬老／幼兒票要提早換</td><td>2 號車要能上下輪椅；東華 12/6 離校前掃大會 QR Code 免費停車，12/5 試跑停車要付費</td><td>房數以「房間分配」為準</td><td>12/5 午餐 55 人；12/6 便當 58 個（雞腿、豬排各 29）</td><td>10:00 張家樹屋、11:00 吉安慶修院、12:30 櫻之田野午餐、14:30 理想大地</td><td>競賽隊員都送選手之夜，多出正常</td><td>核對名單、尺寸、號碼，有錯馬上跟大會反映</td>
           <td>不改欄名、不刪列</td><td>貼 LINE 整段原文</td><td>不寫金額</td><td>最多 2 萬、附憑證</td><td>11/30 截止、以最後一次為準</td><td>賽後附成績證明</td><td>12/5 出發前發完</td></tr>
       </tbody>
     </table></div>
@@ -335,14 +344,16 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
     <table>
       <thead><tr><th>項目</th><th>要處理的事</th><th>建議負責</th></tr></thead>
       <tbody>
-        <tr><td>台鐵</td><td>依名單人數請旅行社退多訂的票；敬老、幼兒等優待票要提早到車站換票</td><td>Grace</td></tr>
-        <tr><td>遊覽車</td><td>2 台：1 號車 全馬、半馬、工作人員；2 號車 樂齡、新生、共融。確認 2 號車可上下輪椅、放輪椅</td><td>雅文</td></tr>
-        <tr><td>住宿</td><td>確認實際房數，多訂的房間請旅行社確認怎麼退；單獨入住雙人房的差價由公費補</td><td>Grace</td></tr>
-        <tr><td>12/5 午餐</td><td>和旅行社確認餐廳、桌數</td><td>雅文・Will</td></tr>
-        <tr><td>12/6 便當</td><td>和旅行社確認數量</td><td>雅文・Will</td></tr>
+        <tr><td>台鐵</td><td><b>去程 52、回程 53</b>（含 5 敬老＋3 幼童，11/19 強哥加入後）；敬老、幼兒票要提早到車站換；備用 2 張來回全票（當日可退）待決定</td><td>Grace</td></tr>
+        <tr><td>遊覽車</td><td>每天 2 台：1 號車 全馬、半馬、工作人員；2 號車 樂齡、新生、共融（強哥搭 2 號車）。<b>待確認：2 號車可上下輪椅、放輪椅</b></td><td>雅文</td></tr>
+        <tr><td>住宿</td><td><b>雙人 20、單人 8＋預留 1</b>（Grace 11/19 統計）；家庭房 3 間自行安排（廖苡嘉、王光銳、陳田育）。預留那間給誰用或 11/27 前退；單獨入住雙人房的差價由公費補</td><td>Grace</td></tr>
+        <tr><td>12/5 午餐</td><td>櫻之田野 12:30，<b>55 人</b>，每桌 3,300，5～6 桌待定（費用表原抓 5 桌×4,400 要一起改）</td><td>雅文・Will</td></tr>
+        <tr><td>12/6 早餐</td><td>飯店簡易餐盒（三明治＋飲品），統一製作不能客製。<b>待確認：05:00 前拿得到嗎、是否現做、要不要另外訂</b></td><td>芊芊問家翰</td></tr>
+        <tr><td>12/6 便當</td><td>食七街炭烤便當，當日現做，<b>58 個</b>：碳烤香酥雞腿飯、碳烤豬排飯各 29 個；12:20 送到理想大地</td><td>雅文・Will</td></tr>
+        <tr><td>寄物到飯店</td><td>974 花蓮縣壽豐鄉理想路1號 理想大地渡假飯店 收（03-865-6688），備註「五福旅遊／台大EMBA」；大廳收件後通知旅行社；<b>12/3 前送到</b>。寄件單入住日要寫 <b>12/5</b>（家翰原寫 12/4，請確認）</td><td>芊芊</td></tr>
         <tr><td>選手之夜</td><td>報名競賽的每人都送選手之夜，位置多出來是正常的；眷屬是否加購再確認</td><td>Will</td></tr>
         <tr><td>選手確認</td><td>確認誰跑、候補是否上場；有變動交給 Will 處理大會報名</td><td>雅文</td></tr>
-        <tr><td>觀光行程</td><td>12/5 吉安慶修院、張家樹屋、午餐，13:30 前往理想大地；最後拍板定案</td><td>雅文定案・芊芊現場</td></tr>
+        <tr><td>觀光行程</td><td>12/5 旅行社版：09:35 花蓮車站 → 10:00 張家樹屋 → 11:00 吉安慶修院 → 12:30 櫻之田野午餐 → 14:30 理想大地 → 17:00 東華試跑 → 選手之夜 → 回飯店</td><td>雅文定案・芊芊現場</td></tr>
         <tr><td>大會物資</td><td>大會寄給 Will 的物資，檢查背心、號碼布有沒有錯（名單、尺寸、號碼），再分給各隊隊長</td><td>Will・雅文・芊芊</td></tr>
         <tr><td>東華停車</td><td><b>12/6 比賽日免費</b>（含遊覽車）：入校車牌辨識；<b>離校前到繳費機掃大會的 QR Code 折扣碼</b>；折扣碼只在 12/6 當天向大會索取、使用；不需事先給車牌。<br><b>12/5 試跑要付費</b>：第一小時免費，超過每 30 分鐘 10 元，每日上限 100 元（隔日另計），請旅行社確認遊覽車 12/5 試跑的停車費。要提醒遊覽車司機和自駕隊員</td><td>Will 向大會索取・芊芊現場提醒</td></tr>
         <tr><td>現場執行</td><td>出發前檢查台鐵、遊覽車、住宿、餐食、報到的細節是否還有問題；12/5–6 現場指揮隊員</td><td>芊芊</td></tr>
@@ -351,6 +362,16 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
         <tr><td>收退費</td><td>眷屬費用、取消者退費、公費補差價</td><td>Grace</td></tr>
       </tbody>
     </table>
+    <div class="sched" id="sched">
+      <h3>兩天時間表（旅行社＋四人小組，11/19）</h3>
+      <div class="sched-grid">
+        <div><b>12/5（六）</b>
+          <ol><li><span>07:20</span>臺鐵 408 臺北出發</li><li><span>09:35</span>花蓮車站，上遊覽車</li><li><span>10:00</span>張家樹屋</li><li><span>11:00</span>吉安慶修院</li><li><span>12:30</span>櫻之田野午餐</li><li><span>14:30</span>理想大地</li><li><span>17:00</span>東華大學試跑</li><li><span>晚上</span>選手之夜，回飯店</li></ol></div>
+        <div><b>12/6（日）</b>
+          <ol><li class="tbd-row"><span>05:10</span>理想大地出發（待家翰確認）</li><li><span>05:30</span>東華選手集結報到（～06:20）</li><li><span>11:30</span>離開賽場</li><li><span>12:00</span>回飯店盥洗</li><li><span>12:20</span>便當送到</li><li class="tbd-row"><span>13:00</span>退房、出發去車站（退房延到 13:00 待確認）</li><li><span>13:53</span>臺鐵 419 回臺北</li></ol></div>
+      </div>
+      <p class="hint">芊芊整理、Will 附議；旅行社原寫 12/6 07:00 到東華、12:30 回飯店，已請家翰改成上表。<span class="dash">虛線</span>＝還在等家翰確認。</p>
+    </div>
     <figure class="tour" id="tour">
       <img src="img/tour-morning.jpg" alt="旅行社提供的花蓮景點推薦：張家樹屋＋吉安慶修院（上午）" loading="lazy" width="496" height="358">
       <figcaption><b>12/5 上午觀光（旅行社提供）</b>張家樹屋＋吉安慶修院：日式主題休閒園區，門票內含免費和服體驗、近距離萌寵互動。最後行程由雅文拍板，12/5 現場由芊芊協助。</figcaption>
@@ -532,24 +553,26 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 /* 四方同步看板：Will 把 LINE 上的資訊整理成卡片。s＝狀態（待確認／處理中／已回覆／已完成／備案），
    不寫病情、金額、證件等個資。 */
 const BOARD = {
-  date: "2026/11/17",
+  date: "2026/11/19",
   cols: [
     { who: "Grace", title: "交通住宿統計", cards: [
-      { t: "誰去、誰不去，要不要補人（Grace 11/17 提問）", s: "待確認",
-        d: "祥哥（王禎祥）開刀不去；強哥（王嘉昇）不去，但真的缺人可以商量。<br><b>要不要補人的重點：</b>兩位都以候補報名，報名費每人 3,000 已繳、不能退；台鐵、住宿應該可以退，<b>待旅行社確認</b>。目前沒有人可補。若之後補人，住宿由選手自費，團隊只多台鐵＋餐費，每人約 1,500，影響有限。" },
-      { t: "台鐵：多訂的票退票、優待票提早換票", s: "處理中", d: "照名單人數請旅行社退票；敬老、幼兒等優待票要提早到車站換。" },
-      { t: "住宿：多訂的房間怎麼退", s: "待確認", d: "旅行社訂 15 單＋20 雙；實際用量以總表「房間分配」為準，多的請旅行社確認退訂方式。" }
+      { t: "誰去、誰不去（11/19 更新）", s: "已回覆",
+        d: "祥哥（王禎祥）開刀不去；<b>強哥（王嘉昇）可以去了</b>，交通、住宿、用餐都算回來。" },
+      { t: "台鐵：去程 52、回程 53", s: "處理中", d: "含 5 敬老＋3 幼童（強哥加入後）；優待票要提早到車站換。備用 2 張來回全票（當日可退）要不要買，待決定。" },
+      { t: "住宿：雙人 20、單人 8＋預留 1", s: "處理中", d: "Grace 11/19 統計；家庭房 3 間自行安排。預留那間給誰用，或 11/27 前請旅行社退。" }
     ] },
     { who: "雅文", title: "隊員與候補", cards: [
       { t: "祥哥（王禎祥）確定不能參加", s: "已完成", d: "個人因素確定不能參加；總表與網站已標「本次不同行」。" },
-      { t: "緊急候補：強哥（王嘉昇，樂齡）", s: "備案", d: "只有樂齡有人受傷無法出賽時才會去，目前不訂交通住宿。雅文 11/15 河濱跟他跑，配速 4:45 沒問題；他可以跟老闆商量能否改晚班機出差來支援。希望用不到。" },
+      { t: "強哥（王嘉昇）歸隊", s: "已完成", d: "11/19 確定可以去：樂齡候補，搭 2 號車，與林清暉同房。" },
       { t: "在校生記功：問 E 辦雅惠", s: "待確認", d: "申請方式、截止日、檔案格式（見 H）。" },
-      { t: "觀光行程最後拍板", s: "待確認", d: "吉安慶修院、張家樹屋、午餐、13:30 前往理想大地；定案後告訴芊芊，12/5 現場由芊芊協助。" },
+      { t: "12/5 行程（旅行社版）", s: "處理中", d: "10:00 張家樹屋 → 11:00 吉安慶修院 → 12:30 櫻之田野午餐（55 人、5～6 桌）→ 14:30 理想大地 → 17:00 東華試跑 → 選手之夜（見 C 時間表）。" },
       { t: "慶功宴人數確認，11/30 截止", s: "處理中", d: "報名頁已上線；看 G 的即時統計，提醒還沒回覆的人，截止後確認人數與飲食、跟餐廳訂桌。" }
     ] },
     { who: "芊芊", title: "背心與異動", cards: [
       { t: "男生背心 11/25 前到", s: "處理中", d: "到貨後交給芊芊，發給還沒領的 5 位男生（見 I）。" },
       { t: "洪芝晨女 XS、芊芊自己的尺寸", s: "待確認", d: "女生背心能否先發給洪芝晨；芊芊的尺寸要補在總表「背心」分頁。" },
+      { t: "跟家翰確認 12/6 時間與便當", s: "處理中", d: "05:10 出發；11:30 離場 → 12:00 回飯店 → 12:20 便當（雞腿、豬排各 29，共 58）→ 13:00 退房出發。台鐵 52／53、午餐 55 人一起更新。" },
+      { t: "還要問家翰的", s: "待確認", d: "12/6 早餐 05:00 前拿得到嗎、是否現做；2 號車可上下輪椅；寄件單入住日寫 12/5（12/3 前送到）；12/5 東華試跑停車費誰付。" },
       { t: "隊員異動登記", s: "已上線", d: "總表已有 U、V、W 三欄，隊員有異動就照 A 登記。" },
       { t: "12/5–6 現場執行檢查", s: "待確認", d: "出發前檢查台鐵、遊覽車、住宿、餐食、觀光、報到還有沒有問題；12/5 現場指揮隊員。" }
     ] },
