@@ -262,7 +262,6 @@ h3.sub{font-size:19px;font-weight:900;margin:40px 0 14px}
 .crew .m .r{font-size:12px;color:var(--muted);letter-spacing:.06em}
 .crew .m .nm{font-weight:900;font-size:17px;margin-top:4px}
 .sponsors .m{display:grid;justify-items:center;gap:6px}
-@media (min-width:901px){#crew{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .sponsors .face{width:96px;height:96px;border-radius:50%;object-fit:cover;display:block}
 .sponsors .face.ph{display:grid;place-items:center;background:var(--surface);border:1px dashed var(--line);color:var(--muted);font-size:12px}
 .sp-note{margin:14px 0 0;color:var(--muted);font-size:15px}
@@ -904,7 +903,7 @@ const DATA = {
     { day: "12/6（日）", name: "比賽日", looks: [
       { title: "競賽組", who: "全馬・半馬・樂齡・新生等競賽隊員",
         garments: [ { name: "賽衣E馬背心", sub: "內著，號碼布別妥", img: "img/vest.png" }, { name: "藍白外套", sub: "外穿，起跑前寄物", img: "img/jacket.png" } ],
-        rules: ["內著賽衣E馬背心，確認號碼布已別妥", "外穿藍白外套，起跑前可脫下寄物"] },
+        rules: ["內著賽衣E馬背心，確認號碼布已別妥", "外穿藍白外套，起跑前可脫下寄物", "E馬背心由<b>小羊</b>設計"] },
       { title: "共融組", who: "高介仲・高紫萱（F 組・共行・無礙戰隊）",
         garments: [ { name: "藍白外套", sub: "代表隊外套", img: "img/jacket.png" } ],
         rules: ["藍白外套", `比賽服裝 <span class="tbd">${TBD}</span>`, "輔具須符合大會安全規範，不得使用動力裝置"] }
@@ -983,7 +982,8 @@ const DATA = {
     { r: "領隊／總召集人", nm: "許雅文<br>（玉蝴蝶）", img: "img/crew-hsu.jpg" }, { r: "副領隊", nm: "林芊吟<br>（芊芊）", img: "img/crew-lin.jpg" },
     { r: "財務", nm: "盧靜足<br>（飛躍芙蓉）", img: "img/crew-lu.jpg" }, { r: "戈友會會長", nm: "李明倫<br>（晴天）", img: "img/crew-will.jpg" },
     /* 門外社兩位：第二行是英文名（不是花名），所以不加括號 */
-    { r: "門外社社長", nm: "蔡馥冲<br>ET", img: "img/crew-et.jpg" }, { r: "門外社賽事長", nm: "蔡博任<br>Eason", img: "img/crew-eason.jpg" }
+    { r: "門外社社長", nm: "蔡馥冲<br>ET", img: "img/crew-et.jpg" }, { r: "門外社賽事長", nm: "蔡博任<br>Eason", img: "img/crew-eason.jpg" },
+    { r: "全國E馬背心設計師", nm: "小羊", img: "img/crew-song.jpg" }
   ],
   /* 依「2026全國馬討論名單」試算表「名單」分頁（2026/10/23 讀取）；人數含候補 */
   /* 依棒次排列：全馬 10 棒，第 3、6 棒必須是女生（women: [3, 6]）；其他組每隊 5 棒，第 1 棒為女生（未設 women 即預設第 1 棒）。女生棒次圓圈為橘色 */
