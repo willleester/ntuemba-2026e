@@ -541,6 +541,57 @@ body::before{background:var(--flame)}
   .intro{grid-template-columns:minmax(0,1fr)}.intro .itext{grid-column:auto}
   .garments{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+/* ===== 手機版（≤760px）：日系資訊型，和電腦版脫鉤。電腦版不受影響 ===== */
+.m-only{display:none}
+@media (min-width:761px){.mbody{display:contents}}
+@media (max-width:760px){
+  .m-only{display:block}
+  .bento,.intro,.facts,.bhead{display:none}
+  .mhome{padding-top:22px;padding-bottom:8px}
+  .mhome .eyebrow-m{margin:0;font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .mhome h1{margin:6px 0 0;font-size:26px;line-height:1.3;font-weight:900;color:var(--fg)}
+  .mhome h1 span{font-size:15px;font-weight:700;color:var(--muted)}
+  .m-date{display:flex;align-items:baseline;gap:6px;margin:14px 0 2px;font-family:var(--f-num);color:var(--fg)}
+  .m-date b{font-size:42px;line-height:1;font-weight:400}
+  .m-date small{font-size:12px;letter-spacing:.12em;color:var(--flame-ink);margin-right:4px}
+  .m-date i{font-style:normal;color:var(--muted);margin:0 2px}
+  .m-place{margin:4px 0 0;font-size:13px;color:var(--muted)}
+  .m-count{margin:14px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:13px;color:var(--muted)}
+  .m-count .lbl{flex-basis:100%;font-size:12px}
+  .m-count .u b{font-family:var(--f-num);font-size:24px;font-weight:400;color:var(--fg)}
+  .m-count .u small{font-size:12px;margin-left:2px}
+  .m-count .done{color:var(--fg);font-weight:700}
+  .m-key{list-style:none;margin:16px 0 0;padding:0;border-top:2px solid var(--fg)}
+  .m-key li{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .m-key span{font-family:var(--f-num);color:var(--flame-ink);font-size:15px;letter-spacing:.02em}
+  .m-key b{font-weight:700;color:var(--fg)}
+  .m-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:18px 0 0}
+  .m-grid a{display:block;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+  .m-grid a:active{background:var(--sky)}
+  .m-grid i{display:block;font-style:normal;font-family:var(--f-num);font-size:12px;color:var(--flame-ink);letter-spacing:.08em}
+  .m-grid b{display:block;font-size:15px;font-weight:900;margin-top:2px}
+  .m-grid small{display:block;font-size:12px;color:var(--muted);line-height:1.4;margin-top:2px}
+  .m-sep{margin:28px 16px 0;padding:0 0 6px;font-size:12px;font-weight:900;letter-spacing:.2em;color:var(--fg);border-bottom:2px solid var(--fg)}
+  .m-sep span{color:var(--muted);font-weight:700;letter-spacing:.06em;margin-left:8px}
+  main > section.block{padding:0;margin:0 16px;border-bottom:1px solid var(--line)}
+  main > section.block > .sec-head{position:relative;margin:0;padding:14px 36px 14px 0;cursor:pointer;display:grid;grid-template-columns:40px minmax(0,1fr);text-align:left;-webkit-tap-highlight-color:transparent}
+  main > section.block > .sec-head::before{content:attr(data-n);grid-row:1 / span 2;font-family:var(--f-num);font-size:20px;line-height:1.3;color:var(--flame-ink)}
+  main > section.block > .sec-head::after{content:"＋";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--muted)}
+  main > section.block.m-open > .sec-head::after{content:"－";color:var(--flame-ink)}
+  main > section.block > .sec-head .no{display:none}
+  main > section.block > .sec-head h2{grid-column:2;margin:0;font-size:18px;line-height:1.35;font-weight:900}
+  main > section.block > .sec-head h2 br{display:none}
+  main > section.block > .sec-head p{grid-column:2;margin:2px 0 0;font-size:13px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  main > section.block.m-open > .sec-head p{display:block}
+  main > section.block > .mbody{display:none;padding:2px 0 26px}
+  main > section.block.m-open > .mbody{display:block}
+  .closing{margin-top:32px}
+  .mhub{margin:0 16px;padding:6px 0 4px}
+  .mhub .m-key{margin-top:18px}
+  #planSum{display:none}          /* 全隊人數小卡：隊員用手機看不需要，電腦版保留 */
+  #mine .plan{margin-top:6px;padding:14px;border-radius:12px}
+  #mine .plan select{max-width:none}
+}
 </style>
 </head>
 <body>
@@ -551,6 +602,13 @@ body::before{background:var(--flame)}
   <img class="logo-img" src="img/logo.jpg" alt="台大EMBA 戈友會 Logo" width="420" height="280">
   <div class="bt"><b>2026 全國E馬</b><span>台大EMBA代表隊 隊員手冊</span></div>
 </header>
+<section class="mhome wrap m-only" id="mtop" aria-label="手機版首頁">
+  <p class="eyebrow-m">2026 全國EMBA校園馬拉松接力賽</p>
+  <h1>台大EMBA代表隊<br><span>隊員手冊</span></h1>
+  <div class="m-date"><b>12.05</b><small>SAT</small><i>–</i><b>12.06</b><small>SUN</small></div>
+  <p class="m-place">花蓮・國立東華大學（壽豐校區）・住理想大地</p>
+  <div class="m-count" id="mCount" aria-live="off"></div>
+</section>
 <section class="bento wrap" aria-label="首頁重點">
   <a class="tile main" href="#schedule" style="--img:url(img/hero.jpg)">
     <h1>一起出發<br>一起到達</h1>
@@ -622,6 +680,28 @@ body::before{background:var(--flame)}
     <div class="plan-sum" id="planSum"></div>
     <div class="plan" id="plan"></div>
   </section>
+  <!-- 手機版：我的安排下面接三個關鍵時間＋快速選單（電腦版不顯示） -->
+  <div class="mhub m-only">
+    <ol class="m-key">
+      <li><span>12/5 07:20</span><b>臺北車站 408 出發</b></li>
+      <li><span>12/6 07:30</span><b>A 組（全馬）起跑</b></li>
+      <li><span>12/6 13:53</span><b>花蓮 419 回臺北</b></li>
+    </ol>
+    <nav class="m-grid" aria-label="手機版快速選單">
+      <a href="#schedule"><i>02</i><b>兩天行程</b><small>時間軸</small></a>
+      <a href="#raceinfo"><i>03</i><b>競賽資訊</b><small>大會流程</small></a>
+      <a href="#travel"><i>04</i><b>交通住宿</b><small>臺鐵・遊覽車・飯店</small></a>
+      <a href="#dress"><i>05</i><b>團隊服裝</b><small>選手之夜・比賽日</small></a>
+      <a href="#route"><i>06</i><b>競賽路線</b><small>單圈約 4.2 公里</small></a>
+      <a href="#team"><i>07</i><b>團隊名單</b><small>各隊棒次・隊長</small></a>
+      <a href="#party"><i>08</i><b>慶功宴</b><small>12/21 報名</small></a>
+      <a href="#training"><i>09</i><b>週二團練</b><small>門外社</small></a>
+      <a href="#prep"><i>10</i><b>行前準備</b><small>清單打勾</small></a>
+      <a href="#links"><i>11</i><b>常用連結</b><small>大會網站・地圖</small></a>
+      <a href="#history"><i>12</i><b>回顧與故事</b><small>歷屆戰績・榮耀</small></a>
+      <a href="#mtop"><i>↑</i><b>回到最上面</b><small>倒數・日期</small></a>
+    </nav>
+  </div>
 
   <section class="block wrap" id="schedule">
     <div class="sec-head">
@@ -1666,6 +1746,61 @@ document.getElementById("linkList").innerHTML = DATA.links.map(l => `<a href="${
 const btn = document.getElementById("menuBtn"), menu = document.getElementById("menu");
 btn.addEventListener("click", () => { const o = menu.classList.toggle("open"); btn.setAttribute("aria-expanded", o); });
 menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); } });
+/* ---- 手機版（≤760px）：每個章節收成一列，點標題展開；電腦版 .mbody 是 display:contents，畫面不變 ---- */
+(function mobileLayout() {
+  const MQ = matchMedia("(max-width:760px)");
+  const secs = [...document.querySelectorAll("main > section.block")];
+  secs.forEach((sec, i) => {
+    const head = sec.querySelector(":scope > .sec-head");
+    if (!head) return;
+    const body = document.createElement("div");
+    body.className = "mbody";
+    [...sec.children].filter(c => c !== head).forEach(c => body.appendChild(c));
+    sec.appendChild(body);
+    head.dataset.n = String(i + 1).padStart(2, "0");   // 手機版依頁面順序編號，和首頁按鈕的編號一致
+    head.setAttribute("role", "button");
+    head.tabIndex = 0;
+    head.setAttribute("aria-expanded", "false");
+    const toggle = () => {
+      if (!MQ.matches) return;
+      const o = sec.classList.toggle("m-open");
+      head.setAttribute("aria-expanded", o);
+    };
+    head.addEventListener("click", toggle);
+    head.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+  // 分組標題（只在手機顯示）
+  const sep = (id, t, s) => {
+    const el = document.getElementById(id);
+    if (el) el.insertAdjacentHTML("beforebegin", `<div class="m-sep m-only">${t}<span>${s}</span></div>`);
+  };
+  sep("mine", "先看這裡", "選你的名字，下次打開會記得");
+  sep("schedule", "出發必看", "行程・交通・服裝・比賽");
+  sep("team", "團隊與活動", "名單・慶功宴・團練・連結");
+  sep("history", "回顧與故事", "歷屆戰績與大家的話");
+  // 點到站內連結時，先把目標所在的章節打開，瀏覽器再捲過去
+  const openFor = hash => {
+    if (!MQ.matches || !hash || hash.length < 2) return;
+    const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+    const sec = el && el.closest("main > section.block");
+    if (sec && !sec.classList.contains("m-open")) {
+      sec.classList.add("m-open");
+      sec.querySelector(":scope > .sec-head").setAttribute("aria-expanded", "true");
+    }
+  };
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (a) openFor(a.getAttribute("href"));
+  }, true);
+  // 「我的安排」在手機上預設打開：一打開網站就看得到自己的安排
+  openFor("#mine");
+  if (location.hash) { openFor(location.hash); setTimeout(() => { const t = document.getElementById(location.hash.slice(1)); t && t.scrollIntoView(); }, 0); }
+  // 手機首頁的倒數：沿用電腦版倒數的內容
+  const src = document.getElementById("countdown"), dst = document.getElementById("mCount");
+  const copy = () => { dst.innerHTML = src.innerHTML; };
+  copy();
+  setInterval(copy, 1000);
+})();
 </script>
 
 
