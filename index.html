@@ -591,12 +591,9 @@ body::before{background:var(--flame)}
   #planSum{display:none}          /* 全隊人數小卡：隊員用手機看不需要，電腦版保留 */
   #mine .plan{margin-top:6px;padding:14px;border-radius:12px}
   #mine .plan select{max-width:none}
-  /* 兩天行程：12/5・12/6 分頁，手機不放照片 */
-  .m-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:4px 0 14px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-  .m-tabs button{font:inherit;font-size:15px;font-weight:900;padding:10px 6px;border:0;background:var(--bg);color:var(--muted);cursor:pointer}
-  .m-tabs button small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em}
-  .m-tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
-  .tl.m-day-5 .step[data-day="6"],.tl.m-day-6 .step[data-day="5"]{display:none}
+  /* 兩天行程：手機不放照片（分頁樣式在下方，手機和電腦共用） */
+  .m-tabs{margin:4px 0 14px}
+  .m-tabs button{font-size:15px;padding:10px 6px}
   .tl .step .pic{display:none}
   .tl .step .dot{display:none}
   .tl::before{display:none}
@@ -613,7 +610,15 @@ body::before{background:var(--flame)}
   .m-sub.open > .m-sub-b{display:block}
   #team .duo{display:none}
 }
-@media (min-width:761px){.m-sub,.m-sub-b{display:contents}.m-tabs,.m-cnt{display:none}}
+@media (min-width:761px){.m-sub,.m-sub-b{display:contents}.m-cnt{display:none}}
+/* 兩天行程 12/5・12/6 分頁：手機和電腦都用，一次只顯示一天 */
+.m-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:560px;margin:8px 0 24px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.m-tabs button{font:inherit;font-size:16px;font-weight:900;padding:12px 8px;border:0;background:var(--bg);color:var(--muted);cursor:pointer}
+.m-tabs button + button{border-left:1px solid var(--line)}
+.m-tabs button small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em}
+.m-tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+.m-tabs button:focus-visible{outline:2px solid var(--flame);outline-offset:-2px}
+.tl.m-day-5 .step[data-day="6"],.tl.m-day-6 .step[data-day="5"]{display:none}
 </style>
 </head>
 <body>
@@ -1802,8 +1807,11 @@ menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.class
   sep("history", "回顧與故事", "歷屆戰績與大家的話");
   // 點到站內連結時，先把目標所在的章節打開，瀏覽器再捲過去
   const openFor = hash => {
-    if (!MQ.matches || !hash || hash.length < 2) return;
+    if (!hash || hash.length < 2) return;
     const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+    const day = el && el.closest(".step[data-day]");         // 行程分頁電腦也有：連到 #race 要切到 12/6
+    if (day && tl) setDay(day.dataset.day);
+    if (!MQ.matches) return;
     const sec = el && el.closest("main > section.block");
     if (sec && !sec.classList.contains("m-open")) {
       sec.classList.add("m-open");
@@ -1818,7 +1826,7 @@ menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.class
     const a = e.target.closest('a[href^="#"]');
     if (a) openFor(a.getAttribute("href"));
   }, true);
-  // 兩天行程：12/5・12/6 分頁（電腦版看不到分頁，兩天照常全部顯示）
+  // 兩天行程：12/5・12/6 分頁（手機和電腦都用）
   const tl = document.getElementById("timeline");
   const setDay = d => {
     tl.classList.remove("m-day-5", "m-day-6");
