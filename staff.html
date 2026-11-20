@@ -172,6 +172,30 @@ td:first-child{font-weight:700;white-space:nowrap}
 .wait b{display:inline-block;min-width:64px;color:var(--flame-ink)}
 @media (max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .tw{overflow-x:auto}
+/* 人數總覽：選手／工作人員／眷屬 × 交通・餐食・住宿 */
+.tally{margin:22px 0 8px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.tally-hd{background:var(--navy);color:#fff;padding:16px 18px 18px}
+.tally-hd h3{margin:0;font-size:19px;font-weight:900}
+.tally-hd p{margin:2px 0 0;font-size:13px;color:#C9D4E8}
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+.kpi div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:8px 12px}
+.kpi b{display:block;font-family:var(--f-num);font-size:34px;line-height:1.15}
+.kpi span{font-size:13px;color:#C9D4E8}
+.kpi .sum{background:var(--flame);border-color:var(--flame)}
+.kpi .sum span{color:#fff}
+table.tl{font-size:15px}
+table.tl th,table.tl td{padding:9px 14px}
+table.tl th.n,table.tl td.n{text-align:right;width:15%}
+table.tl td.n{font-family:var(--f-num);font-size:19px;font-weight:500}
+table.tl td.z{color:var(--muted);opacity:.55}
+table.tl td.t,table.tl th.t{background:var(--sky);color:var(--fg);font-weight:700}
+table.tl td.t{color:var(--flame-ink);font-weight:600}
+table.tl tr.g td{font-family:var(--f-body);font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--flame-ink);padding:14px 14px 2px;border-top:2px solid var(--line)}
+table.tl td small{display:block;font-weight:400;font-size:12px;color:var(--muted);line-height:1.4}
+.tally-ft{margin:0;padding:12px 18px 14px;background:var(--surface);font-size:13px;color:var(--muted);line-height:1.8}
+.tally-ft b{color:var(--fg)}
+@media (max-width:760px){.kpi{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi b{font-size:28px}
+  table.tl th,table.tl td{padding:8px 6px}table.tl td.n{font-size:17px}table.tl th{font-size:12px}}
 table.spon{min-width:720px}
 table.spon td{white-space:nowrap}
 table.spon td small,table.spon th small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
@@ -185,8 +209,8 @@ ul.rules{margin:6px 0 0;padding-left:20px}
 ul.rules li{margin:4px 0}
 footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 @media (max-width:760px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}.chk,.links{grid-template-columns:1fr}header h1{font-size:24px}
-  table:not(.spon):not(.mx) thead{display:none}table:not(.spon):not(.mx),table:not(.spon):not(.mx) tbody,table:not(.spon):not(.mx) tr,table:not(.spon):not(.mx) td{display:block}
-  table:not(.spon):not(.mx) tr{border-top:1px solid var(--line);padding:8px 0}table:not(.spon):not(.mx) td{border:0;padding:2px 0}
+  table:not(.spon):not(.mx):not(.tl) thead{display:none}table:not(.spon):not(.mx):not(.tl),table:not(.spon):not(.mx):not(.tl) tbody,table:not(.spon):not(.mx):not(.tl) tr,table:not(.spon):not(.mx):not(.tl) td{display:block}
+  table:not(.spon):not(.mx):not(.tl) tr{border-top:1px solid var(--line);padding:8px 0}table:not(.spon):not(.mx):not(.tl) td{border:0;padding:2px 0}
   /* 一張表在手機：改成「每人一張卡」，每個任務前面標欄位名稱，空格不顯示 */
   .mx-wrap{border:0;overflow:visible}
   .mx{min-width:0;width:100%;border-spacing:0;display:block}
@@ -341,6 +365,39 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
       <b>旅行社窗口：五福旅行社 李家翰（Jackal Li）</b>
       <p>台鐵、遊覽車、住宿、午餐、便當、觀光行程，都找家翰。他在 LINE 群組「台大EMBA馬拉松 12／5～6」裡；之前的行程檔「台大EMBA-馬拉松活動二日0916.pdf」也在那個群組（LINE 檔案已過期，需要時請他重傳）。</p>
     </div>
+    <div class="tally" id="tally">
+      <div class="tally-hd">
+        <h3>人數總覽</h3>
+        <p>2026/11/20・跟雲端總表「總覽」分頁同一套算法（總表一改，那邊會自動更新）</p>
+        <div class="kpi">
+          <div><b>49</b><span>選手</span></div>
+          <div><b>2</b><span>工作人員</span></div>
+          <div><b>10</b><span>眷屬</span></div>
+          <div class="sum"><b>61</b><span>合計</span></div>
+        </div>
+      </div>
+      <div class="tw"><table class="tl">
+        <thead><tr><th>項目</th><th class="n">選手</th><th class="n">工作人員</th><th class="n">眷屬</th><th class="n t">合計</th></tr></thead>
+        <tbody>
+          <tr class="g"><td colspan="5">交通</td></tr>
+          <tr><td>台鐵 12/5 去程</td><td class="n">40</td><td class="n">2</td><td class="n">10</td><td class="n t">52</td></tr>
+          <tr><td>台鐵 12/6 回程</td><td class="n">42</td><td class="n">1</td><td class="n">10</td><td class="n t">53</td></tr>
+          <tr><td>遊覽車 12/5</td><td class="n">43</td><td class="n">2</td><td class="n">10</td><td class="n t">55</td></tr>
+          <tr><td>遊覽車 12/6</td><td class="n">46</td><td class="n">1</td><td class="n">10</td><td class="n t">57</td></tr>
+          <tr class="g"><td colspan="5">餐食</td></tr>
+          <tr><td>12/5 午餐</td><td class="n">43</td><td class="n">2</td><td class="n">10</td><td class="n t">55</td></tr>
+          <tr><td>12/5 選手之夜</td><td class="n">44</td><td class="n">2</td><td class="n">2</td><td class="n t">48</td></tr>
+          <tr><td>12/6 早餐<small>飯店餐盒</small></td><td class="n">42</td><td class="n">2</td><td class="n">3</td><td class="n t">47</td></tr>
+          <tr><td>12/6 便當<small>另 1 位眷屬待確認</small></td><td class="n">47</td><td class="n">1</td><td class="n">1</td><td class="n t">49</td></tr>
+          <tr class="g"><td colspan="5">住宿（人數）</td></tr>
+          <tr><td>單人房<small>8 間</small></td><td class="n">8</td><td class="n z">0</td><td class="n z">0</td><td class="n t">8</td></tr>
+          <tr><td>雙人房<small>20 間，1 間單獨入住</small></td><td class="n">34</td><td class="n">2</td><td class="n">3</td><td class="n t">39</td></tr>
+          <tr><td>自訂理想大地<small>3 家自己訂房</small></td><td class="n">3</td><td class="n z">0</td><td class="n">7</td><td class="n t">10</td></tr>
+          <tr><td>自行安排・民宿</td><td class="n">4</td><td class="n z">0</td><td class="n z">0</td><td class="n t">4</td></tr>
+        </tbody>
+      </table></div>
+      <p class="tally-ft"><b>怎麼算：</b>選手含候補和共融組，祥哥不同行不算；雅文、Grace 算在選手。遊覽車＝接駁車搭乘人數。早餐只算住旅行社訂的房間，自訂房的 3 家跟自己的訂房走。便當 11/20 依 Grace：眷屬多數不去會場，<b>原本給家翰的 58 個要改成 49 個</b>（待確認那位要的話是 50）。</p>
+    </div>
     <table>
       <thead><tr><th>項目</th><th>要處理的事</th><th>建議負責</th></tr></thead>
       <tbody>
@@ -351,8 +408,8 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
         <tr><td>遊覽車</td><td>每天 2 台：1 號車 全馬、半馬、工作人員；2 號車 樂齡、新生、共融（強哥搭 2 號車）。<b>待確認：2 號車可上下輪椅、放輪椅</b></td><td>雅文</td></tr>
         <tr><td>住宿</td><td><b>雙人 20、單人 8＋預留 1</b>（Grace 11/19 統計）；家庭房 3 間自行安排（廖苡嘉、王光銳、陳田育）。預留那間給誰用或 11/27 前退；單獨入住雙人房的差價由公費補</td><td>Grace</td></tr>
         <tr><td>12/5 午餐</td><td>櫻之田野 12:30，<b>55 人</b>，每桌 3,300，5～6 桌待定（費用表原抓 5 桌×4,400 要一起改）</td><td>雅文・Will</td></tr>
-        <tr><td>12/6 早餐</td><td>飯店簡易餐盒（三明治＋飲品），統一製作不能客製。<b>待確認：05:00 前拿得到嗎、是否現做、要不要另外訂</b></td><td>芊芊問家翰</td></tr>
-        <tr><td>12/6 便當</td><td>食七街炭烤便當，當日現做，<b>58 個</b>：碳烤香酥雞腿飯、碳烤豬排飯各 29 個；12:20 送到理想大地</td><td>雅文・Will</td></tr>
+        <tr><td>12/6 早餐</td><td>飯店簡易餐盒（三明治＋飲品），統一製作不能客製，<b>47 份</b>（住旅行社房間的人；自訂房 3 家自理）。<b>待確認：05:00 前拿得到嗎、是否現做、要不要另外訂</b></td><td>芊芊問家翰</td></tr>
+        <tr><td>12/6 便當</td><td>食七街炭烤便當，當日現做，12:20 送到理想大地。原訂 58 個（雞腿、豬排各 29），<b>11/20 改為 49 個</b>（眷屬多數不去會場；1 位待確認），請家翰改量、雞腿／豬排重新分配</td><td>雅文・Will</td></tr>
         <tr><td>旅遊保險名冊</td><td>旅行社的「名冊.xlsx」（保險用）。<b>隊員的資料 Will 已有；眷屬的由 Grace 問</b>，問到後交給 Will 彙整，再交給家翰。眷屬：許雅文兒子、高紫萱媽媽、杜正忠同行家屬、廖苡嘉家 1 大 2 小、王光銳家 3 大 1 小；陳田育家人自駕，要不要保再確認。<b>身分證、生日請一對一私訊給 Will，不貼群組、不放網站或雲端總表</b></td><td>Grace 收眷屬・Will 彙整</td></tr>
         <tr><td>寄物到飯店</td><td>974 花蓮縣壽豐鄉理想路1號 理想大地渡假飯店 收（03-865-6688），備註「五福旅遊／台大EMBA」；大廳收件後通知旅行社；<b>12/3 前送到</b>。寄件單入住日要寫 <b>12/5</b>（家翰原寫 12/4，請確認）</td><td>芊芊</td></tr>
         <tr><td>選手之夜</td><td>報名競賽的每人都送選手之夜，位置多出來是正常的；眷屬是否加購再確認</td><td>Will</td></tr>
