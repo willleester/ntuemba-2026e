@@ -499,7 +499,8 @@ body::before{background:var(--flame)}
 .lead .nm{font-size:20px;font-weight:900;line-height:1.2;margin-top:6px;letter-spacing:.04em}
 .lead .nick{font-size:14px;font-weight:700;color:#FFE7A0;letter-spacing:.06em}
 @media (max-width:700px){.leaders{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.lead figcaption{padding:30px 8px 10px}.lead .nm{font-size:16px}.lead .nick{font-size:12px}.lead .r{font-size:11px;padding:1px 7px}}
-.honor{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.honor{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:1100px) and (min-width:901px){.honor{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .hon{position:relative;border-radius:12px;overflow:hidden;background:var(--navy);color:#fff;padding:30px 22px 24px;display:grid;justify-items:center;text-align:center;gap:10px;min-width:0}
 .hon::before{content:"";position:absolute;inset:0 0 auto;height:6px;background:linear-gradient(90deg,#C9932E,#FFE7A0,#F5C451,#C9932E)}
 .hon .medal{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#FFE7A0,#F5C451 55%,#B7831F);color:#3A2600;box-shadow:0 0 0 6px rgba(245,196,81,.22)}
@@ -1515,7 +1516,8 @@ Rest = 完全休息` },
   honors: [
     { nm: "王寶慶", nick: "寶兒", g: "半馬", img: "img/honor-wbq.jpg" },
     { nm: "郭正哲", nick: "沙無澀", g: "半馬", img: "img/honor-gzz.jpg" },
-    { nm: "王集祥", nick: "飛毛腿", g: "半馬", img: "img/honor-wjx.jpg" }
+    { nm: "王集祥", nick: "飛毛腿", g: "半馬", img: "img/honor-wjx.jpg" },
+    { nm: "郭瑞祥 院長", nick: "小飛俠", g: "樂齡", img: "img/honor-grx.jpg" }
   ],
   /* SECTION 08 */
   links: [
