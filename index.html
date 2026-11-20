@@ -591,7 +591,29 @@ body::before{background:var(--flame)}
   #planSum{display:none}          /* 全隊人數小卡：隊員用手機看不需要，電腦版保留 */
   #mine .plan{margin-top:6px;padding:14px;border-radius:12px}
   #mine .plan select{max-width:none}
+  /* 兩天行程：12/5・12/6 分頁，手機不放照片 */
+  .m-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:4px 0 14px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .m-tabs button{font:inherit;font-size:15px;font-weight:900;padding:10px 6px;border:0;background:var(--bg);color:var(--muted);cursor:pointer}
+  .m-tabs button small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em}
+  .m-tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+  .tl.m-day-5 .step[data-day="6"],.tl.m-day-6 .step[data-day="5"]{display:none}
+  .tl .step .pic{display:none}
+  .tl .step .dot{display:none}
+  .tl::before{display:none}
+  .tl .step{display:block}
+  .tl .step + .step{margin-top:12px}
+  /* 團隊：每個小標題各自收合 */
+  .m-sub{border-top:1px solid var(--line)}
+  .m-sub:first-of-type{border-top:0}
+  .m-sub > h3.sub{position:relative;margin:0;padding:12px 32px 12px 0;font-size:16px;cursor:pointer}
+  .m-sub > h3.sub small{font-weight:700;color:var(--muted);font-size:12px;margin-left:6px}
+  .m-sub > h3.sub::after{content:"＋";position:absolute;right:4px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:400}
+  .m-sub.open > h3.sub::after{content:"－";color:var(--flame-ink)}
+  .m-sub > .m-sub-b{display:none;padding:0 0 16px}
+  .m-sub.open > .m-sub-b{display:block}
+  #team .duo{display:none}
 }
+@media (min-width:761px){.m-sub,.m-sub-b{display:contents}.m-tabs,.m-cnt{display:none}}
 </style>
 </head>
 <body>
@@ -1787,11 +1809,53 @@ menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.class
       sec.classList.add("m-open");
       sec.querySelector(":scope > .sec-head").setAttribute("aria-expanded", "true");
     }
+    const step = el && el.closest(".step[data-day]");      // 例如 #race 在 12/6 那一頁
+    if (step && tl) setDay(step.dataset.day);
+    const sub = el && el.closest(".m-sub");
+    if (sub) sub.classList.add("open");
   };
   document.addEventListener("click", e => {
     const a = e.target.closest('a[href^="#"]');
     if (a) openFor(a.getAttribute("href"));
   }, true);
+  // 兩天行程：12/5・12/6 分頁（電腦版看不到分頁，兩天照常全部顯示）
+  const tl = document.getElementById("timeline");
+  const setDay = d => {
+    tl.classList.remove("m-day-5", "m-day-6");
+    tl.classList.add("m-day-" + d);
+    document.querySelectorAll(".m-tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.day === d));
+  };
+  if (tl) {
+    tl.querySelectorAll(".step").forEach(s => { s.dataset.day = /12\/6/.test(s.querySelector(".date")?.textContent || "") ? "6" : "5"; });
+    tl.insertAdjacentHTML("beforebegin", `<div class="m-tabs" role="tablist" aria-label="選擇日期">
+      <button type="button" role="tab" data-day="5">12/5（六）<small>出發・選手之夜</small></button>
+      <button type="button" role="tab" data-day="6">12/6（日）<small>比賽・返程</small></button></div>`);
+    document.querySelectorAll(".m-tabs button").forEach(b => b.addEventListener("click", () => setDay(b.dataset.day)));
+    // 12/6 當天（台灣時間）起預設顯示 12/6，之前顯示 12/5
+    setDay(Date.now() >= new Date("2026-12-06T00:00:00+08:00").getTime() ? "6" : "5");
+  }
+  // 團隊：每個小標題（執行團隊、各隊隊長、贊助夥伴、各組人數與隊員）各自收成一列
+  const teamBody = document.querySelector("#team > .mbody");
+  if (teamBody) {
+    let grp = null;
+    [...teamBody.children].forEach(c => {
+      if (c.matches("h3.sub")) {
+        const g = document.createElement("div");
+        g.className = "m-sub";
+        const b = document.createElement("div");
+        b.className = "m-sub-b";
+        teamBody.insertBefore(g, c);
+        g.append(c, b);
+        c.addEventListener("click", () => { if (MQ.matches) g.classList.toggle("open"); });
+        grp = b;
+      } else if (grp) grp.appendChild(c);
+    });
+    // 小標題後面加人數，讓人不用點開就知道裡面有多少
+    teamBody.querySelectorAll(".m-sub").forEach(g => {
+      const h = g.querySelector("h3.sub"), crew = g.querySelector(".crew");
+      if (crew && crew.children.length) h.insertAdjacentHTML("beforeend", `<small class="m-cnt">${crew.children.length} 位</small>`);
+    });
+  }
   // 「我的安排」在手機上預設打開：一打開網站就看得到自己的安排
   openFor("#mine");
   if (location.hash) { openFor(location.hash); setTimeout(() => { const t = document.getElementById(location.hash.slice(1)); t && t.scrollIntoView(); }, 0); }
