@@ -281,6 +281,18 @@ h3.sub{font-size:19px;font-weight:900;margin:40px 0 14px}
 .plan dd{margin:0;font-weight:700;text-align:right}
 .plan dd.no{color:#C0341B}
 .plan .hint{font-size:13px;color:var(--muted);margin:12px 0 0}
+/* 我的安排：榮譽標記、慶功宴提醒、優惠票提醒 */
+.plan .chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.plan .chip{font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--sky);color:var(--fg);line-height:1.6}
+.plan .chip.gold{background:#FFF1C2;color:#6B4700;border:1px solid #E8C25A}
+.plan .chip.cap{background:#FFE6DA;color:#A8360A;border:1px solid #F5A27F}
+.plan .chip.staff{background:#E3ECFF;color:#123E8C;border:1px solid #9DB8EE}
+.plan .chip.fam{background:var(--bg);color:var(--fg);border:1px solid var(--line)}
+.plan .alert{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:4px 0 12px;padding:12px 14px;border-radius:10px;background:#FFF1E8;border:1.5px solid var(--flame);color:#7A2505;font-weight:700;font-size:15px}
+.plan .alert .btn{background:var(--flame);color:#fff}
+.plan dd.ok{color:#1B7A3E}
+.plan dd.muted{color:var(--muted);font-weight:400}
+.plan .tip{margin:12px 0 0;padding:10px 12px;border-left:3px solid var(--blue);background:var(--bg);border-radius:0 8px 8px 0;font-size:14px;line-height:1.6}
 @media (max-width:900px){.plan-sum{grid-template-columns:repeat(3,minmax(0,1fr))}.plan dl{grid-template-columns:1fr}}
 .gift .who{font-size:18px;margin-bottom:8px}
 .gift .head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -1598,11 +1610,42 @@ if (DATA.plan) {
   const rows = [["臺鐵 12/5 去程", "go"], ["臺鐵 12/6 回程", "back"], ["遊覽車 12/5", "bus5"], ["遊覽車 12/6", "bus6"],
     ["12/5 午餐", "lunch"], ["12/5 選手之夜", "night"], ["12/6 便當", "box"], ["12/5 住宿", "stay"]];
   const sel = document.getElementById("planWho");
+  // 榮譽標記：十年跑者、隊長、工作人員（名字從各自的名單取，<br> 前面是本名）
+  const bare = s => String(s).split("<br>")[0].replace(/\s*院長$/, "").trim();
+  const HON = new Set(DATA.honors.map(h => bare(h.nm)));
+  const CAPS = Object.fromEntries(DATA.captains.map(c => [bare(c.nm), c.r]));
+  const CREW = Object.fromEntries(DATA.crew.map(c => [bare(c.nm), c.r]));
+  // 慶功宴報名狀況：讀報名表「公開統計」分頁（只有姓名、出席與否，沒有個資）
+  const PARTY = { csv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5ljJW27fpJ5DcTzxVcs21ou_fNJjN7BKqQwTLNBNehtHn3KsXVKrNluM2FzrVm1WJh8S4rSe1GLl9/pub?gid=1905851737&single=true&output=csv", url: "party.html", due: "11/30（一）" };
+  let rsvp = null, rsvpErr = false;
+  fetch(PARTY.csv, { cache: "no-store" }).then(r => r.text()).then(t => {
+    rsvp = Object.fromEntries(parseCSV(t).slice(1).filter(x => (x[0] || "").trim()).map(x => [x[0].trim(), (x[1] || "").trim()]));
+    sel.onchange();
+  }).catch(() => { rsvpErr = true; sel.onchange(); });
   sel.onchange = () => {
     const p = P.people[sel.value];
-    document.getElementById("planCard").innerHTML = !p ? "" : `<div class="who">${p.n}<span>${p.team}${p.fam ? `・同行家屬 ${p.fam}` : ""}</span></div><dl>${
-      rows.map(([k, f]) => `<div><dt>${k}</dt><dd${NO.test(p[f]) ? ' class="no"' : ""}>${p[f]}</dd></div>`).join("")}</dl>`;
-    try { localStorage.setItem("planWho", p ? p.n : ""); } catch (e) {}
+    const card = document.getElementById("planCard");
+    if (!p) { card.innerHTML = ""; return; }
+    const chips = [];
+    if (HON.has(p.n)) chips.push(`<span class="chip gold">🏅 十年跑者・榮耀10年獎</span>`);
+    if (CAPS[p.n]) chips.push(`<span class="chip cap">⭐ ${CAPS[p.n]}</span>`);
+    if (CREW[p.n]) chips.push(`<span class="chip staff">🙏 工作人員・${CREW[p.n]}</span>`);
+    else if (p.g === "工作人員") chips.push(`<span class="chip staff">🙏 工作人員</span>`);
+    if (p.fam) chips.push(`<span class="chip fam">👨‍👩‍👧 同行家屬 ${p.fam}</span>`);
+    const st = rsvp ? (rsvp[p.n] || "") : null;
+    const rsvpCell = rsvpErr ? `<dd><a href="${PARTY.url}">查看報名 →</a></dd>`
+      : st === null ? `<dd class="muted">讀取中…</dd>`
+      : st === "出席" ? `<dd class="ok">✓ 已報名出席</dd>`
+      : st === "不克出席" ? `<dd>已回覆不克出席</dd>`
+      : st === "還不確定" ? `<dd class="no">還不確定</dd>`
+      : `<dd class="no">尚未報名</dd>`;
+    const alert = (st === "" || st === "還不確定")
+      ? `<div class="alert"><span>⚠ ${st === "" ? "你還沒報名慶功宴！" : "慶功宴還沒確定要不要來？"}請在 <b>${PARTY.due}前</b>回覆，方便先跟餐廳確認桌次。</span><a class="btn" href="${PARTY.url}">馬上報名 →</a></div>` : "";
+    const byTrain = /團體搭乘/.test(p.go + p.back);
+    card.innerHTML = `<div class="who">${p.n}<span>${p.team}</span></div>${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}${alert}<dl>${
+      rows.map(([k, f]) => `<div><dt>${k}</dt><dd${NO.test(p[f]) ? ' class="no"' : ""}>${p[f]}</dd></div>`).join("")
+    }<div><dt>12/21 慶功宴</dt>${rsvpCell}</div></dl>${byTrain ? `<p class="tip">🎫 <b>滿 65 歲（敬老）或帶 6–11 歲孩童的學長姐</b>：出發當天請<b>帶身分證件正本、提早到</b>，交給旅行社換臺鐵優惠票。</p>` : ""}`;
+    try { localStorage.setItem("planWho", p.n); } catch (e) {}
   };
   try { const i = P.people.findIndex(p => p.n === localStorage.getItem("planWho")); if (i >= 0) { sel.value = i; sel.onchange(); } } catch (e) {}
 }
