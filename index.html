@@ -1613,6 +1613,12 @@ if (DATA.plan) {
   const BF = { "徐嘉謙": "不需要", "許哲豪": "不需要", "郭耿豪": "不需要", "梁乃夫": "不需要",
     "陳田育": "自訂房，請自行跟飯店確認", "廖苡嘉": "自訂房，請自行跟飯店確認", "王光銳": "自訂房，請自行跟飯店確認" };
   P.people.forEach(p => { p.bf = /不同行/.test(p.stay) ? "本次不同行" : (BF[p.n] || "需要"); });
+  // 大會贈送 T 恤：報名匯入檔 v8「衣服尺寸」欄（11/23 讀取）；只列有報名大會的選手，空白＝報名時沒填
+  const TEE = { "蔡馥冲":"M","蔡博任":"S","許雅文":"XS","孫明諒":"M","高福遙":"M","沈君芳":"S","江文興":"M","張慧豪":"L","徐嘉謙":"M","蘇炫旭":"S",
+    "洪芝晨":"XS","連倩立":"XS","王寶慶":"M","郭正哲":"M","王集祥":"M","黃張維":"M","王禎祥":"L","王凌卿":"S","林志文":"M","張振營":"M",
+    "劉恆宇":"M","杜正忠":"M","盧靜足":"S","郭瑞祥":"M","林清暉":"S","杜孟郎":"M","張璁":"M","王嘉昇":"S","毛小薇":"S","陳輝川":"M",
+    "許富得":"L","白文仁":"XL","林新德":"M","吳素美":"S","歐士銘":"M","許哲豪":"L","陳柏宇":"M","陳柏凱":"L","錢敬絨":"XS","郭耿豪":"M",
+    "呂昇燦":"L","陳田育":"L","陳彥甫":"M","廖苡嘉":"S","徐樹潭":"L","王光銳":"XL","梁乃夫":"L","廖順彬":"" };
   const sel = document.getElementById("planWho");
   // 榮譽標記：十年跑者、隊長、工作人員（名字從各自的名單取，<br> 前面是本名）
   const bare = s => String(s).split("<br>")[0].replace(/\s*院長$/, "").trim();
@@ -1656,7 +1662,7 @@ if (DATA.plan) {
     const byTrain = /團體搭乘/.test(p.go + p.back);
     card.innerHTML = `<div class="who">${p.n}<span>${p.team}</span></div>${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}${alert}<dl>${
       rows.map(([k, f]) => `<div><dt>${k}</dt><dd${NO.test(p[f]) ? ' class="no"' : ""}>${p[f]}</dd></div>`).join("")
-    }<div><dt>12/21 慶功宴</dt>${rsvpCell}</div></dl>${byTrain ? `<p class="tip">🎫 <b>滿 65 歲（敬老）或帶 6–11 歲孩童的學長姐</b>：出發當天請<b>帶身分證件正本、提早到</b>，交給旅行社換臺鐵優惠票。</p>` : ""}`;
+    }${p.n in TEE ? `<div><dt>大會贈送 T 恤（報名登記）</dt>${TEE[p.n] ? `<dd>${TEE[p.n]}</dd>` : `<dd class="no">報名時沒填，請找雅文</dd>`}</div>` : ""}<div><dt>12/21 慶功宴</dt>${rsvpCell}</div></dl>${byTrain ? `<p class="tip">🎫 <b>滿 65 歲（敬老）或帶 6–11 歲孩童的學長姐</b>：出發當天請<b>帶身分證件正本、提早到</b>，交給旅行社換臺鐵優惠票。</p>` : ""}`;
     try { localStorage.setItem("planWho", p.n); } catch (e) {}
   };
   try { const i = P.people.findIndex(p => p.n === localStorage.getItem("planWho")); if (i >= 0) { sel.value = i; sel.onchange(); } } catch (e) {}
