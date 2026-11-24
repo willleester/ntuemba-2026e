@@ -1607,8 +1607,22 @@ if (DATA.plan) {
   const P = DATA.plan, NO = /不|自行|待確認/;
   document.getElementById("planSum").innerHTML = P.sum.map(([k, v]) => `<div><small>${k}</small><b>${v}</b></div>`).join("");
   const groups = [...new Set(P.people.map(p => p.g))];
+  // 隊伍與棒次以網站「團隊名單」（DATA.groups，11/20 後調整的最新分隊）為準：選單照隊伍→棒次→候補排序，
+  // 卡片上的「隊名 第 N 棒」也依它重算（總表的半馬分隊是舊的）。隊名取該隊第 1 棒在總表的隊名。
+  const plain = s => String(s).replace(/<span class="cap">.*?<\/span>/g, "").replace(/<[^>]+>/g, "").trim();
+  const byName = Object.fromEntries(P.people.map(p => [p.n, p]));
+  const ORDER = [];
+  DATA.groups.forEach(g => (g.teams || []).forEach(t => {
+    if (!t.legs) return;
+    const legs = t.legs.map(plain), alt = t.alt ? plain(t.alt) : null;
+    const tn = (byName[legs[0]] ? byName[legs[0]].team : "").split(/\s*第|・/)[0];
+    legs.forEach((n, k) => { ORDER.push(n); if (byName[n] && tn) byName[n].team = `${tn} 第 ${k + 1} 棒`; });
+    if (alt) { ORDER.push(alt); if (byName[alt] && tn) byName[alt].team = `${tn}・候補`; }
+  }));
+  const rank = n => { const k = ORDER.indexOf(n); return k < 0 ? 999 : k; };
   document.getElementById("plan").innerHTML = `<select id="planWho" aria-label="選擇姓名"><option value="">選擇你的名字…</option>${
-    groups.map(g => `<optgroup label="${g}">${P.people.map((p, i) => p.g === g ? `<option value="${i}">${p.n}</option>` : "").join("")}</optgroup>`).join("")
+    groups.map(g => `<optgroup label="${g}">${P.people.map((p, i) => [p, i]).filter(([p]) => p.g === g)
+      .sort((a, b) => rank(a[0].n) - rank(b[0].n)).map(([p, i]) => `<option value="${i}">${p.n}</option>`).join("")}</optgroup>`).join("")
   }</select><div id="planCard"></div><p class="hint">資料更新：${P.updated}。有異動請找雅文或芊芊。</p>`;
   const rows = [["臺鐵 12/5 去程", "go"], ["臺鐵 12/6 回程", "back"], ["遊覽車 12/5", "bus5"], ["遊覽車 12/6", "bus6"],
     ["12/5 午餐", "lunch"], ["12/5 選手之夜", "night"], ["12/6 早餐（飯店早餐改餐盒）", "bf"], ["12/6 午餐（便當）", "box"], ["12/5 住宿", "stay"]];
