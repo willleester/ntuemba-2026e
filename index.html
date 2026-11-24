@@ -2035,6 +2035,30 @@ menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.class
   copy();
   setInterval(copy, 1000);
 })();
+/* GA 單元曝光：某一段在畫面上（佔畫面一半以上，或整段的一半以上）連續 3 秒，記一次 section_view（每段每次開頁只記一次）。
+   手機版收合的段落要點開才算。電腦、手機同一套算法；裝置別由 GA 自動區分。不送任何個資。 */
+(function sectionViews() {
+  if (!("IntersectionObserver" in window)) return;
+  const MQ = matchMedia("(max-width:760px)");
+  const seen = new Set(), timers = new Map();
+  const visible = e => e.isIntersecting && (e.intersectionRatio >= 0.5 || e.intersectionRect.height >= innerHeight * 0.5);
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    const id = e.target.id;
+    if (seen.has(id)) return;
+    if (visible(e) && !(MQ.matches && !e.target.classList.contains("m-open"))) {
+      if (!timers.has(id)) timers.set(id, setTimeout(() => {
+        seen.add(id); timers.delete(id); io.unobserve(e.target);
+        track("section_view", { section: id, view: MQ.matches ? "mobile" : "desktop" });
+      }, 3000));
+    } else if (timers.has(id)) { clearTimeout(timers.get(id)); timers.delete(id); }
+  }), { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+  document.querySelectorAll("main section.block[id]").forEach(s => io.observe(s));
+  // 手機版點開段落時，class 改變不會觸發 IntersectionObserver，重新觀察一次讓它重新判斷
+  document.addEventListener("click", e => {
+    const s = e.target.closest("main section.block[id]");
+    if (s && !seen.has(s.id)) setTimeout(() => { io.unobserve(s); io.observe(s); }, 50);
+  });
+})();
 </script>
 
 
