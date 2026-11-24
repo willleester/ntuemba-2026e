@@ -645,6 +645,7 @@ body::before{background:var(--flame)}
   .ds-day li{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:9px 6px;border-top:1px solid var(--line);font-size:16px;line-height:1.5}
   .ds-day li span{font-family:var(--f-num);color:var(--blue);font-size:17px}
   .ds-day li.q{border:1.5px dashed var(--flame);border-radius:8px;margin:3px 0}
+  .ds-day li .thx{display:block;margin-top:2px;font-size:13px;font-weight:700;color:var(--flame-ink)}
   .ds-day li.q + li{border-top:0}
   /* 橫的大合照放在時間表下方整排，只裁上下（人在畫面中下段），不再擠成直的 */
   .ds-pic{grid-column:1 / -1;margin:4px 0 0}
@@ -999,7 +1000,7 @@ const DATA = {
     days: [
       { label: "12/5（六）", sub: "出發日・選手之夜", items: [
         ["07:20", "臺鐵 408 臺北出發"], ["09:35", "花蓮火車站，上遊覽車"], ["10:00", "張家樹屋"], ["11:00", "吉安慶修院"],
-        ["12:30", "櫻之田野午餐（桌菜）"], ["14:30", "理想大地渡假飯店・逛星巴克花蓮理想門市（園區內，約 1 小時）"], ["16:30", "東華大學試跑"], ["18:00", "夜市旁選手之夜"], ["晚上", "回飯店"] ] },
+        ["12:30", "櫻之田野午餐（桌菜）"], ["14:30", "理想大地渡假飯店・逛星巴克花蓮理想門市（園區內，約 1 小時）<small class=\"thx\">特別感謝 戈20 草上飛 協助安排</small>"], ["16:30", "東華大學試跑"], ["18:00", "夜市旁選手之夜"], ["晚上", "回飯店"] ] },
       { label: "12/6（日）", sub: "比賽日・返程", items: [
         ["05:10", "理想大地出發（待旅行社確認）", true], ["05:30", "東華大學選手集結報到"], ["07:30", "A 組（全馬）起跑"], ["07:35", "B／C／D 組起跑"],
         ["07:40", "E 組起跑"], ["11:30", "離開賽場"], ["12:00", "回飯店盥洗"], ["12:20", "便當送到飯店"],
@@ -1017,7 +1018,7 @@ const DATA = {
         { t: "11:00", d: "吉安慶修院" },
         { t: "12:30", d: "櫻之田野午餐", s: "桌菜" },
         { t: "14:30", d: "抵達理想大地渡假飯店", s: `可入住時間 <span class="tbd">${TBD}</span>` },
-        { t: "14:30", d: "參觀星巴克花蓮理想門市", s: "就在理想大地園區內，湖邊童話小屋，約 1 小時" }
+        { t: "14:30", d: "參觀星巴克花蓮理想門市", s: "就在理想大地園區內，湖邊童話小屋，約 1 小時。特別感謝 戈20 草上飛 協助安排" }
       ] },
     /* 11/20 Will 更正第一天：16:30 東華大學、18:00 夜市旁選手之夜、回飯店 */
     { date: "12/5（六）", title: "下午活動與選手之夜", src: "both", img: "img/night.jpg", alt: "2025 選手之夜台大EMBA團隊合照", cap: "2025 選手之夜",
@@ -1553,7 +1554,7 @@ const tbd = v => v === TBD ? `<span class="tbd">${TBD}</span>` : v;
 const srcTag = s => s === "ntu" ? '<span class="tag ntu">台大安排</span>' : s === "org" ? '<span class="tag org">大會公告</span>' : '<span class="tag ntu">台大安排</span><span class="tag org">大會公告</span>';
 document.getElementById("facts").innerHTML = DATA.facts.map(f => `<div class="fact"><div class="k">${f.k}</div><div class="v">${f.v}</div></div>`).join("");
 document.getElementById("dsched").innerHTML = `<div class="ds-days">${DATA.sched.days.map(d => `
-  <div class="ds-day"><h3>${d.label}<small>${d.sub}</small></h3><ol>${d.items.map(([t, x, q]) => `<li${q ? ' class="q"' : ""}><span>${t}</span>${x}</li>`).join("")}</ol></div>`).join("")}</div>
+  <div class="ds-day"><h3>${d.label}<small>${d.sub}</small></h3><ol>${d.items.map(([t, x, q]) => `<li${q ? ' class="q"' : ""}><span>${t}</span><div>${x}</div></li>`).join("")}</ol></div>`).join("")}</div>
   <figure class="ds-pic"><img src="${DATA.sched.img}" alt="${DATA.sched.alt}" loading="lazy" width="1200" height="800"><figcaption>${DATA.sched.cap}</figcaption></figure>`;
 document.getElementById("timeline").innerHTML = DATA.timeline.map((s, i) => `
   <article class="step"${s.id ? ` id="${s.id}"` : ""}>
@@ -1623,7 +1624,7 @@ if (DATA.plan) {
     "呂昇燦":"L","陳田育":"L","陳彥甫":"M","廖苡嘉":"S","徐樹潭":"L","王光銳":"XL","梁乃夫":"L","廖順彬":"" };
   // 戈幾・花名：「戈5-20戈友花名.xlsx」＋2026 戈壁感恩餐會名單（戈21）＋Will 11/24 補充；查不到的不顯示
   const GOBI = { "洪芝晨":"戈21・蜜桃隊長","劉恆宇":"戈21・漁夫","杜正忠":"戈21・阿杜","林芊吟":"戈21・芊芊",
-    "許雅文":"戈20・玉蝴蝶","高福遙":"戈20・飆戈","沈君芳":"戈20・未來","蘇炫旭":"戈20・草上飛","王禎祥":"戈20・祥戈",
+    "許雅文":"戈20・玉蝴蝶","高福遙":"戈20・飆戈","沈君芳":"戈19・未來","蘇炫旭":"戈20・草上飛","王禎祥":"戈20・祥戈",
     "李明倫":"戈19・晴天","盧靜足":"戈19・飛躍芙蓉","林志文":"戈19・林大阿戈","張璁":"戈19・璁神","王凌卿":"戈19・晨星",
     "王嘉昇":"戈14・強戈","連倩立":"戈13・小倩","杜孟郎":"戈13・猛狼","王寶慶":"戈11・寶兒","黃張維":"戈11・海膽","林清暉":"戈11・青蜂俠",
     "白文仁":"戈9・鋼鐵人","張振營":"戈8、戈11・寒天","郭正哲":"戈7・沙無澀","王集祥":"戈7・飛毛腿","陳輝川":"戈7・山羊",
