@@ -275,6 +275,7 @@ h3.sub{font-size:19px;font-weight:900;margin:40px 0 14px}
 .plan select{width:100%;max-width:360px;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg,#fff);color:inherit}
 .plan .who{margin:16px 0 6px;font-weight:900;font-size:20px}
 .plan .who span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
+.plan .who .gobi{display:inline-block;vertical-align:3px;margin-left:10px;font-style:normal;font-size:14px;font-weight:700;color:var(--flame-ink);background:var(--sky);border-radius:999px;padding:1px 12px}
 .plan dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:0}
 .plan dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
 .plan dt{color:var(--muted)}
@@ -1620,6 +1621,12 @@ if (DATA.plan) {
     "劉恆宇":"M","杜正忠":"M","盧靜足":"S","郭瑞祥":"M","林清暉":"S","杜孟郎":"M","張璁":"M","王嘉昇":"S","毛小薇":"S","陳輝川":"M",
     "許富得":"L","白文仁":"XL","林新德":"M","吳素美":"S","歐士銘":"M","許哲豪":"L","陳柏宇":"M","陳柏凱":"L","錢敬絨":"XS","郭耿豪":"M",
     "呂昇燦":"L","陳田育":"L","陳彥甫":"M","廖苡嘉":"S","徐樹潭":"L","王光銳":"XL","梁乃夫":"L","廖順彬":"" };
+  // 戈幾・花名：「戈5-20戈友花名.xlsx」＋戈友會網站名單（11/24 對照）；查不到的不顯示
+  const GOBI = { "許雅文":"戈20・玉蝴蝶","高福遙":"戈20・飆戈","沈君芳":"戈20・未來","蘇炫旭":"戈20・草上飛","王禎祥":"戈20・祥戈",
+    "李明倫":"戈19・晴天","盧靜足":"戈19・飛躍芙蓉","林志文":"戈19・林大阿戈","張璁":"戈19",
+    "王嘉昇":"戈14・強戈","連倩立":"戈13・小倩","杜孟郎":"戈13・猛郎","王寶慶":"戈11・寶兒","黃張維":"戈11・海膽","林清暉":"戈11・青蜂俠",
+    "白文仁":"戈9・鋼鐵人","張振營":"戈8・寒天","郭正哲":"戈7・沙無澀","王集祥":"戈7・飛毛腿","陳輝川":"戈7・山羊","郭瑞祥":"戈7・小飛俠",
+    "毛小薇":"戈6・小薇","許富得":"戈6・藥頭","林新德":"戈6・輕如燕","王凌卿":"晨星" };
   const sel = document.getElementById("planWho");
   // 榮譽標記：十年跑者、隊長、工作人員（名字從各自的名單取，<br> 前面是本名）
   const bare = s => String(s).split("<br>")[0].replace(/\s*院長$/, "").trim();
@@ -1661,7 +1668,7 @@ if (DATA.plan) {
     const alert = (st === "" || st === "還不確定")
       ? `<div class="alert"><span>⚠ ${st === "" ? "你還沒報名慶功宴！" : "慶功宴還沒確定要不要來？"}請在 <b>${PARTY.due}前</b>回覆，方便先跟餐廳確認桌次。</span><a class="btn" href="${PARTY.url}">馬上報名 →</a></div>` : "";
     const byTrain = /團體搭乘/.test(p.go + p.back);
-    card.innerHTML = `<div class="who">${p.n}<span>${p.team}</span></div>${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}${alert}<dl>${
+    card.innerHTML = `<div class="who">${p.n}${GOBI[p.n] ? `<em class="gobi">${GOBI[p.n]}</em>` : ""}<span>${p.team}</span></div>${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}${alert}<dl>${
       rows.map(([k, f]) => `<div><dt>${k}</dt><dd${NO.test(p[f]) ? ' class="no"' : ""}>${p[f]}</dd></div>`).join("")
     }${p.n in TEE ? `<div><dt>大會贈送 T 恤（報名登記）</dt>${TEE[p.n] ? `<dd>${TEE[p.n]}</dd>` : `<dd class="no">報名時沒填，請找雅文</dd>`}</div>` : ""}<div><dt>12/21 慶功宴</dt>${rsvpCell}</div></dl>${byTrain ? `<p class="tip">🎫 <b>滿 65 歲（敬老）或帶 6–11 歲孩童的學長姐</b>：出發當天請<b>帶身分證件正本、提早到</b>，交給旅行社換臺鐵優惠票。</p>` : ""}`;
     try { localStorage.setItem("planWho", p.n); } catch (e) {}
