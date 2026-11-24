@@ -106,6 +106,20 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:0 0 40px}
   .form{padding:20px}
 }
 </style>
+<!-- Google Analytics 4：只記錄頁面瀏覽與送出報名（出席／不克出席），不送姓名或飲食等個資。GA_ID 空白時完全不載入。 -->
+<script>
+  window.GA_ID = "GTM-WVFZTT4Q";   // 和隊員網站同一個 Google 代碼；也可填 G- 開頭的評估 ID
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.track = function (name, params) { if (window.GA_ID) gtag("event", name, params || {}); };
+  if (window.GA_ID && !/^(localhost|127\.)/.test(location.hostname)) {   // 本機預覽不送資料
+    var s = document.createElement("script"); s.async = true;
+    s.src = "https://www.googletagmanager.com/" + (/^GTM-/.test(window.GA_ID) ? "gtm.js" : "gtag/js") + "?id=" + window.GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date());
+    if (!/^GTM-/.test(window.GA_ID)) gtag("config", window.GA_ID);
+  }
+</script>
 </head>
 <body>
 <header class="hero">
@@ -281,6 +295,7 @@ document.getElementById("rsvp").addEventListener("submit", async e => {
     field("sendMsg").innerHTML = '<b style="color:#C0341B">送出失敗，請檢查網路後再試一次；還是不行請在 LINE 告訴工作人員。</b>';
     return;
   }
+  track("rsvp_submit", { attend });
   btn.disabled = false; btn.textContent = "送出報名";
   const rows = [["姓名", name], ["是否出席", attend]];
   if (attend !== "不克出席" && diet) rows.push(["飲食", diet]);

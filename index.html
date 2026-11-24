@@ -658,6 +658,21 @@ body::before{background:var(--flame)}
 .side-stack .pic img{height:auto;aspect-ratio:2 / 1;object-fit:cover}
 @media (max-width:760px){.side-stack .pic.more{display:none}}
 </style>
+<!-- Google Analytics 4：只記錄頁面瀏覽與幾個關鍵動作（查我的安排的組別、展開哪一段、加入行事曆、點慶功宴報名），
+     不送姓名或任何個資。GA_ID 空白時完全不載入、不追蹤。 -->
+<script>
+  window.GA_ID = "GTM-WVFZTT4Q";   // Google 代碼（GA4「2026全國E馬網站」，11/24 Will 建立）；也可填 G- 開頭的評估 ID
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.track = function (name, params) { if (window.GA_ID) gtag("event", name, params || {}); };
+  if (window.GA_ID && !/^(localhost|127\.)/.test(location.hostname)) {   // 本機預覽不送資料
+    var s = document.createElement("script"); s.async = true;
+    s.src = "https://www.googletagmanager.com/" + (/^GTM-/.test(window.GA_ID) ? "gtm.js" : "gtag/js") + "?id=" + window.GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date());
+    if (!/^GTM-/.test(window.GA_ID)) gtag("config", window.GA_ID);
+  }
+</script>
 </head>
 <body>
 
@@ -1663,6 +1678,11 @@ if (DATA.plan) {
     rsvp = Object.fromEntries(parseCSV(t).slice(1).filter(x => (x[0] || "").trim()).map(x => [x[0].trim(), (x[1] || "").trim()]));
     sel.onchange();
   }).catch(() => { rsvpErr = true; sel.onchange(); });
+  // GA：只在使用者自己選名字時記一次，只送組別（全馬／半馬…），不送姓名
+  sel.addEventListener("change", () => {
+    const o = sel.selectedOptions[0];
+    if (o && o.value) track("plan_lookup", { team_group: o.parentElement.label || "" });
+  });
   sel.onchange = () => {
     const p = P.people[sel.value];
     const card = document.getElementById("planCard");
@@ -1754,11 +1774,21 @@ document.getElementById("leaderList").innerHTML = DATA.leaders.map(l => `<figure
     <a href="${gcal(e)}" target="_blank" rel="noopener">＋ 加入 Google 行事曆</a></div>`).join("");
   const fab = document.getElementById("calFab"), panel = document.getElementById("calPanel");
   const toggle = open => { panel.hidden = !open; fab.setAttribute("aria-expanded", open); };
-  fab.onclick = () => toggle(panel.hidden);
+  fab.onclick = () => { if (panel.hidden) track("calendar_open"); toggle(panel.hidden); };
+  document.getElementById("calList").addEventListener("click", e => {
+    const a = e.target.closest("a"); if (!a) return;
+    track("calendar_add", { event_title: a.closest(".cal-ev").querySelector("h4").textContent });
+  });
   document.getElementById("calClose").onclick = () => toggle(false);
   document.addEventListener("keydown", e => { if (e.key === "Escape") toggle(false); });
   document.addEventListener("click", e => { if (!panel.hidden && !panel.contains(e.target) && !fab.contains(e.target)) toggle(false); });
 })();
+// GA：點慶功宴報名（記從哪一段點的），站外連結由 GA4 加強型評估自動記錄
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href*="party.html"]'); if (!a) return;
+  const sec = a.closest("section, .mhub, .plan");
+  track("party_link_click", { from: (sec && (sec.id || sec.className.split(" ")[0])) || "page" });
+});
 // ---- 加油留言牆 ----
 const escHTML = s => String(s).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
 function parseCSV(text) {  // handles quoted fields, commas and line breaks inside quotes
@@ -1923,6 +1953,7 @@ menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.class
       if (!MQ.matches) return;
       const o = sec.classList.toggle("m-open");
       head.setAttribute("aria-expanded", o);
+      if (o) track("section_open", { section: sec.id || head.textContent.trim().slice(0, 20) });
     };
     head.addEventListener("click", toggle);
     head.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
