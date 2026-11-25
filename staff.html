@@ -196,6 +196,19 @@ table.tl td small{display:block;font-weight:400;font-size:12px;color:var(--muted
 .tally-ft b{color:var(--fg)}
 @media (max-width:760px){.kpi{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi b{font-size:28px}
   table.tl th,table.tl td{padding:8px 6px}table.tl td.n{font-size:17px}table.tl th{font-size:12px}}
+/* 交給旅行社的保險名冊（不含個資） */
+.ins{margin:18px 0 6px;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.ins summary{cursor:pointer;list-style:none}
+.ins summary::-webkit-details-marker{display:none}
+.ins summary b{font-size:16px}
+.ins summary b::after{content:"＋";margin-left:8px;color:var(--flame-ink)}
+.ins[open] summary b::after{content:"－"}
+.ins summary span{display:block;font-size:13px;color:var(--muted)}
+table.ins-t{font-size:14px;min-width:460px}
+table.ins-t td,table.ins-t th{padding:6px 8px}
+table.ins-t td:first-child{font-family:var(--f-num);color:var(--muted);width:36px}
+table.ins-t td.fam{color:var(--muted)}
+table.ins-t tr.no-train td:last-child{color:var(--flame-ink);font-weight:700}
 table.spon{min-width:720px}
 table.spon td{white-space:nowrap}
 table.spon td small,table.spon th small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
@@ -209,8 +222,8 @@ ul.rules{margin:6px 0 0;padding-left:20px}
 ul.rules li{margin:4px 0}
 footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
 @media (max-width:760px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}.chk,.links{grid-template-columns:1fr}header h1{font-size:24px}
-  table:not(.spon):not(.mx):not(.tl) thead{display:none}table:not(.spon):not(.mx):not(.tl),table:not(.spon):not(.mx):not(.tl) tbody,table:not(.spon):not(.mx):not(.tl) tr,table:not(.spon):not(.mx):not(.tl) td{display:block}
-  table:not(.spon):not(.mx):not(.tl) tr{border-top:1px solid var(--line);padding:8px 0}table:not(.spon):not(.mx):not(.tl) td{border:0;padding:2px 0}
+  table:not(.spon):not(.mx):not(.tl):not(.ins-t) thead{display:none}table:not(.spon):not(.mx):not(.tl):not(.ins-t),table:not(.spon):not(.mx):not(.tl):not(.ins-t) tbody,table:not(.spon):not(.mx):not(.tl):not(.ins-t) tr,table:not(.spon):not(.mx):not(.tl):not(.ins-t) td{display:block}
+  table:not(.spon):not(.mx):not(.tl):not(.ins-t) tr{border-top:1px solid var(--line);padding:8px 0}table:not(.spon):not(.mx):not(.tl):not(.ins-t) td{border:0;padding:2px 0}
   /* 一張表在手機：改成「每人一張卡」，每個任務前面標欄位名稱，空格不顯示 */
   .mx-wrap{border:0;overflow:visible}
   .mx{min-width:0;width:100%;border-spacing:0;display:block}
@@ -452,9 +465,9 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
         <tr><td>遊覽車</td><td>每天 2 台：1 號車 全馬、半馬、工作人員；2 號車 樂齡、新生、共融（強哥搭 2 號車）。<b>待確認：2 號車可上下輪椅、放輪椅</b></td><td>雅文</td></tr>
         <tr><td>住宿</td><td><b>雙人 20、單人 8＋預留 1</b>（Grace 11/19 統計）；家庭房 3 間自行安排（廖苡嘉、王光銳、陳田育）。預留那間給誰用或 11/27 前退；單獨入住雙人房的差價由公費補</td><td>Grace</td></tr>
         <tr><td>12/5 午餐</td><td>櫻之田野 12:30，<b>55 人</b>，每桌 3,300，5～6 桌待定（費用表原抓 5 桌×4,400 要一起改）</td><td>雅文・Will</td></tr>
-        <tr><td>12/6 早餐</td><td>飯店簡易餐盒（三明治＋飲品），統一製作不能客製，<b>46 份</b>（11/24 總表，芊芊建議拿 48 盒）：原 47 份，高紫萱、歐士銘、劉淑卿、戴君翰改不需要（−4），自訂房的陳田育、廖苡嘉、王光銳本人改需要（＋3）；自訂房的眷屬不算。<b>請家翰改成 46 份</b>。<b>待確認：05:00 前拿得到嗎、是否現做、要不要另外訂</b></td><td>芊芊問家翰</td></tr>
+        <tr><td>12/6 早餐</td><td>飯店簡易餐盒（三明治＋飲品），統一製作不能客製，<b>46 份</b>（11/24 總表，芊芊建議拿 48 盒）：原 47 份，高紫萱、歐士銘、高紫萱的家人、許雅文的家人改不需要（−4），自訂房的陳田育、廖苡嘉、王光銳本人改需要（＋3）；自訂房的眷屬不算。<b>請家翰改成 46 份</b>。<b>待確認：05:00 前拿得到嗎、是否現做、要不要另外訂</b></td><td>芊芊問家翰</td></tr>
         <tr><td>12/6 便當</td><td>食七街炭烤便當，當日現做，12:20 送到理想大地。原訂 58 個（雞腿、豬排各 29），<b>11/20 改為 49 個</b>（眷屬多數不去會場；1 位待確認），請家翰改量、雞腿／豬排重新分配</td><td>雅文・Will</td></tr>
-        <tr><td>旅遊保險名冊</td><td>旅行社的「名冊.xlsx」（保險用）。<b>隊員的資料 Will 已有；眷屬的由 Grace 問</b>，問到後交給 Will 彙整，再交給家翰。眷屬：許雅文兒子、高紫萱媽媽、杜正忠同行家屬、廖苡嘉家 1 大 2 小、王光銳家 3 大 1 小；陳田育家人自駕，要不要保再確認。<b>身分證、生日請一對一私訊給 Will，不貼群組、不放網站或雲端總表</b></td><td>Grace 收眷屬・Will 彙整</td></tr>
+        <tr><td>旅遊保險名冊</td><td><b>11/25 已整理 61 人（參加者 51＋眷屬 10），加密檔交家翰</b>（檔案和密碼分開傳）。交出去的內容（不含個資）見下方「交給旅行社的保險名冊」，有異動要通知家翰更新。陳田育家人自駕，不在名冊內。<b>身分證、生日只在加密檔裡，不貼群組、不放網站或雲端總表</b></td><td>Will 彙整・Grace 收眷屬</td></tr>
         <tr><td>寄物到飯店</td><td>974 花蓮縣壽豐鄉理想路1號 理想大地渡假飯店 收（03-865-6688），備註「五福旅遊／台大EMBA」；大廳收件後通知旅行社；<b>12/3 前送到</b>。寄件單入住日要寫 <b>12/5</b>（家翰原寫 12/4，請確認）</td><td>芊芊</td></tr>
         <tr><td>選手之夜</td><td>報名競賽的每人都送選手之夜，位置多出來是正常的；眷屬是否加購再確認</td><td>Will</td></tr>
         <tr><td>選手確認</td><td>確認誰跑、候補是否上場；有變動交給 Will 處理大會報名</td><td>雅文</td></tr>
@@ -467,6 +480,12 @@ footer{color:var(--muted);font-size:13px;padding:22px 0 40px}
         <tr><td>收退費</td><td>眷屬費用、取消者退費、公費補差價</td><td>Grace</td></tr>
       </tbody>
     </table>
+    <details class="ins" id="insurance">
+      <summary><b>交給旅行社的保險名冊（11/25 版・61 人）</b><span>只列姓名、房型、台鐵；身分證、生日只在 Will 給家翰的加密檔。點開看全部</span></summary>
+      <p class="lead" style="margin:10px 0 8px;font-size:14px">眷屬姓名不放在這頁（這頁雖不公開索引，但有網址的人都看得到），以「某某的家人」表示。名冊有任何異動（換人、換房、改搭車），通知 Will 更新加密檔再交家翰。</p>
+      <div class="tw"><table class="ins-t" id="insTable"></table></div>
+      <p class="lead" id="insSum" style="margin-top:8px;font-size:13px"></p>
+    </details>
     <div class="sched" id="sched">
       <h3>兩天時間表（旅行社＋四人小組，11/19）</h3>
       <div class="sched-grid">
@@ -698,6 +717,39 @@ const BOARD = {
   document.getElementById("boardDate").textContent = BOARD.date;
   document.getElementById("boardCols").innerHTML = BOARD.cols.map(c => `<div class="col"><h3><i>${c.who}</i>${c.title}</h3>${
     c.cards.map(k => `<div class="card"><div class="ct"><b>${k.t}</b><span class="pill ${cls(k.s)}">${k.s}</span></div><p>${k.d}</p></div>`).join("")}</div>`).join("");
+})();
+/* 交給旅行社的保險名冊：11/25 Will 交家翰的版本，只放姓名、房型、台鐵（身分證、生日只在加密檔）。
+   眷屬不寫姓名（含未成年），寫「某某的家人」；同住家人的隊員房型寫「與家人同住」。 */
+(function () {
+  const D = n => `雙人房（室友：${n}）`, FAMD = "雙人房（與家人同住）", S = "單人房", X = "自行安排";
+  const H = (who, k) => `自訂理想大地家庭房（${who}家，${k}）`;
+  const R = "來回", GO = "去程（回程自行）", BK = "回程（去程自行）", NO = "不搭（自行前往）";
+  const L = [
+    ["蔡馥冲", D("蔡博任"), R], ["蔡博任", D("蔡馥冲"), R], ["許雅文", FAMD, R], ["許雅文的家人", "雙人房（與許雅文同住）", R, 1],
+    ["孫明諒", D("張慧豪"), R], ["高福遙", D("黃張維"), R], ["沈君芳", D("王凌卿"), R], ["江文興", S, R], ["張慧豪", D("孫明諒"), R],
+    ["徐嘉謙", X, NO], ["蘇炫旭", S, R], ["洪芝晨", S, R],
+    ["連倩立", S, R], ["王寶慶", D("王集祥"), R], ["郭正哲", S, R], ["王集祥", D("王寶慶"), R], ["黃張維", D("高福遙"), BK],
+    ["王凌卿", D("沈君芳"), R], ["林志文", S, NO], ["張振營", D("郭瑞祥"), R], ["劉恆宇", D("廖順彬"), R],
+    ["杜正忠", FAMD, R], ["杜正忠的家人", "雙人房（與杜正忠同住）", R, 1],
+    ["盧靜足", D("林芊吟"), R], ["郭瑞祥", D("張振營"), R], ["林清暉", D("王嘉昇"), R], ["杜孟郎", D("張璁"), NO], ["張璁", D("杜孟郎"), R],
+    ["王嘉昇", D("林清暉"), R], ["毛小薇", "雙人房（單獨入住）", R], ["陳輝川", D("許富得"), R], ["許富得", D("陳輝川"), R],
+    ["白文仁", D("林新德"), R], ["林新德", D("白文仁"), R],
+    ["吳素美", D("錢敬絨"), R], ["歐士銘", D("呂昇燦"), BK], ["許哲豪", X, NO], ["陳柏宇", D("陳彥甫"), R], ["陳柏凱", S, R],
+    ["錢敬絨", D("吳素美"), R], ["郭耿豪", X, NO], ["呂昇燦", D("歐士銘"), R], ["陳田育", "自訂理想大地家庭房（陳田育家，家人自駕另計）", NO],
+    ["陳彥甫", D("陳柏宇"), R],
+    ["廖苡嘉", H("廖苡嘉", "4 人"), R], ["廖苡嘉的家人（大人）", H("廖苡嘉", "4 人"), R, 1], ["廖苡嘉的家人（小孩）", H("廖苡嘉", "4 人"), R, 1],
+    ["廖苡嘉的家人（小孩）", H("廖苡嘉", "4 人"), R, 1], ["徐樹潭", S, R],
+    ["王光銳", H("王光銳", "5 人"), R], ["王光銳的家人（大人）", H("王光銳", "5 人"), R, 1], ["王光銳的家人（大人）", H("王光銳", "5 人"), R, 1],
+    ["王光銳的家人（大人）", H("王光銳", "5 人"), R, 1], ["王光銳的家人（小孩）", H("王光銳", "5 人"), R, 1],
+    ["梁乃夫", X, NO], ["廖順彬", D("劉恆宇"), R],
+    ["高介仲", D("李明倫"), R], ["高紫萱", FAMD, R], ["高紫萱的家人", "雙人房（與高紫萱同住）", R, 1],
+    ["李明倫", D("高介仲"), R], ["林芊吟", D("盧靜足"), GO]
+  ];
+  document.getElementById("insTable").innerHTML = `<thead><tr><th>#</th><th>姓名</th><th>房型</th><th>台鐵</th></tr></thead><tbody>${
+    L.map(([n, room, t, fam], i) => `<tr${t === NO ? ' class="no-train"' : ""}><td>${i + 1}</td><td${fam ? ' class="fam"' : ""}>${n}</td><td>${room}</td><td>${t}</td></tr>`).join("")}</tbody>`;
+  const c = (f) => L.filter(f).length;
+  document.getElementById("insSum").textContent =
+    `共 ${L.length} 人（參加者 ${c(r => !r[3])}、眷屬 ${c(r => r[3])}）｜雙人房 ${c(r => /^雙人房/.test(r[1]))}、單人房 ${c(r => r[1] === S)}、家庭房 ${c(r => /家庭房/.test(r[1]))}、自行安排 ${c(r => r[1] === X)}｜台鐵去程 ${c(r => r[2] === R || r[2] === GO)}、回程 ${c(r => r[2] === R || r[2] === BK)}`;
 })();
 /* 一張表：點格子跳到下面對應的操作。預設跳到欄位標題的段落；有更精準的位置（C 段某一列、某人的步驟）就跳那裡並標亮。 */
 (function () {
