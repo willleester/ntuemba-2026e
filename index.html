@@ -261,6 +261,8 @@ h3.sub{font-size:19px;font-weight:900;margin:40px 0 14px}
 .crew .m{border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
 .crew .m .r{font-size:12px;color:var(--muted);letter-spacing:.06em}
 .crew .m .nm{font-weight:900;font-size:17px;margin-top:4px}
+.crew .m .call{display:none}
+@media (max-width:760px){.crew .m .call{display:block;width:100%;margin-top:10px;background:#1E8A4C;color:#fff;text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap;border-radius:999px;padding:9px 0}}
 .sponsors .m{display:grid;justify-items:center;gap:6px}
 .sponsors .face{width:96px;height:96px;border-radius:50%;object-fit:cover;display:block}
 .sponsors .face.ph{display:grid;place-items:center;background:var(--surface);border:1px dashed var(--line);color:var(--muted);font-size:12px}
@@ -1729,7 +1731,19 @@ document.getElementById("routeBox").innerHTML = (DATA.route.video
      <div class="route-steps"><div class="start">${DATA.route.start}</div><ol>${DATA.route.steps.map(x => `<li>${x}</li>`).join("")}</ol>
      <div class="panel">${DATA.route.notes.map(x => `<p>${x}</p>`).join("")}</div></div></div>`
   : `<div class="route-ph"><b>大會官方賽道圖 <span class="tbd">${TBD}</span></b>取得 2026 大會公告的東華大學賽道圖後放上，會保留完整路線、方向箭頭、起終點及補給站圖例。</div>`);
-document.getElementById("crew").innerHTML = DATA.crew.map(c => `<div class="m">${c.img ? `<img class="face" loading="lazy" src="${c.img}" alt="${c.nm.replace(/<br>/g, " ")}">` : ""}<div class="r">${c.r}</div><div class="nm">${tbd(c.nm)}</div></div>`).join("");
+/* 比賽兩天的「一鍵撥號」：只在 2026/12/5～12/6（台灣時間）顯示，平常看不到；只在手機版顯示（CSS）。
+   號碼放在 CALL（本人同意才加）。示意用：網址加 ?call=demo 會用假號碼顯示按鈕，不會打給任何人。 */
+const CALL = { "李明倫": "0937042034" };   // 11/27 晴天同意放；其他人本人同意後再加，例：{ "林芊吟": "09xxxxxxxx" }
+const callOn = (() => {
+  const d = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);   // 台灣日期
+  return (d >= "2026-12-05" && d <= "2026-12-06") || /[?&]call=demo\b/.test(location.search);
+})();
+const callNo = n => CALL[n] || (/[?&]call=demo\b/.test(location.search) && ["許雅文", "林芊吟", "盧靜足", "李明倫"].includes(n) ? "0900000000" : "");
+document.getElementById("crew").innerHTML = DATA.crew.map(c => {
+  const n = c.nm.split("<br>")[0].trim(), tel = callOn ? callNo(n) : "";
+  return `<div class="m">${c.img ? `<img class="face" loading="lazy" src="${c.img}" alt="${c.nm.replace(/<br>/g, " ")}">` : ""}<div class="r">${c.r}</div><div class="nm">${tbd(c.nm)}</div>${
+    tel ? `<a class="call" href="tel:${tel}" aria-label="撥打電話給${n}">📞 撥打電話</a>` : ""}</div>`;
+}).join("");
 document.getElementById("captains").innerHTML = DATA.captains.map(s => `<div class="m">${s.img ? `<img class="face" loading="lazy" src="${s.img}" alt="${s.nm.replace(/<br>/g, "")}">` : `<div class="face ph">照片待補</div>`}<div class="r">${s.r}</div><div class="nm">${s.nm}</div></div>`).join("");
 document.getElementById("sponsors").innerHTML =DATA.sponsors.map(s => `<div class="m">${s.img ? `<img class="face" loading="lazy" src="${s.img}" alt="${s.nm.replace(/<br>/g, "")}">` : `<div class="face ph">照片待補</div>`}<div class="r">${s.r}</div><div class="nm">${s.nm}</div></div>`).join("");
 document.getElementById("gifts").innerHTML = DATA.gifts.map(g => `<div class="gift"><img class="shot" loading="lazy" src="${g.img}" alt="${g.alt}"><div><div class="head"><div class="who">感謝 <b>${g.who}</b> 贊助<span>${g.whoSub}</span></div>${g.logo ? `<img class="logo" loading="lazy" src="${g.logo}" alt="${g.alt.split(" ")[0]}">` : ""}</div><span class="tag">${g.tag}</span>${g.items ? `<p class="gitems"><b>贊助商品：</b>${g.items}</p>` : ""}<p>${g.text}</p>${g.url ? `<a class="more" href="${g.url}" target="_blank" rel="noopener">品牌官網 →</a>` : ""}</div></div>`).join("");
