@@ -1734,11 +1734,12 @@ document.getElementById("routeBox").innerHTML = (DATA.route.video
 /* 比賽兩天的「一鍵撥號」：只在 2026/12/5～12/6（台灣時間）顯示，平常看不到；只在手機版顯示（CSS）。
    號碼放在 CALL（本人同意才加）。示意用：網址加 ?call=demo 會用假號碼顯示按鈕，不會打給任何人。 */
 const CALL = { "李明倫": "0937042034" };   // 11/27 晴天同意放；其他人本人同意後再加，例：{ "林芊吟": "09xxxxxxxx" }
+// 11/27 Will：先只放晴天、現在就顯示（不等 12/5）；只在手機版出現。賽後（12/7 起）自動隱藏
 const callOn = (() => {
   const d = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);   // 台灣日期
-  return (d >= "2026-12-05" && d <= "2026-12-06") || /[?&]call=demo\b/.test(location.search);
+  return d <= "2026-12-06";
 })();
-const callNo = n => CALL[n] || (/[?&]call=demo\b/.test(location.search) && ["許雅文", "林芊吟", "盧靜足", "李明倫"].includes(n) ? "0900000000" : "");
+const callNo = n => CALL[n] || "";
 document.getElementById("crew").innerHTML = DATA.crew.map(c => {
   const n = c.nm.split("<br>")[0].trim(), tel = callOn ? callNo(n) : "";
   return `<div class="m">${c.img ? `<img class="face" loading="lazy" src="${c.img}" alt="${c.nm.replace(/<br>/g, " ")}">` : ""}<div class="r">${c.r}</div><div class="nm">${tbd(c.nm)}</div>${
